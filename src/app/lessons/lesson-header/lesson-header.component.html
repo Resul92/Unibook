@@ -1,0 +1,60 @@
+<div class="lesson-top">
+	<div>
+		<ul class="lesson-main-nav">
+			<li><a class="nav-btn accent-nav-btn" href="lesson-about.php" (click)="navSelect('lesson-about'); false" [class.active-btn]="currentState == 'lesson-about'">ESAS</a></li>
+			<li><a class="nav-btn accent-nav-btn" href="/members.php" (click)="navSelect('members-list'); false" [class.active-btn]="currentState == 'members-list'">ISTIRAKCILAR</a></li>
+			<li><a class="nav-btn accent-nav-btn" href="/meetings.php" (click)="navSelect('meeting'); false" [class.active-btn]="currentState == 'meeting'">GORUSHLER</a></li>
+			<li><a class="nav-btn accent-nav-btn" href="/e-journal.php" (click)="navSelect('e-journal'); false" [class.active-btn]="currentState == 'e-journal'">e-JURNAL</a></li>
+		</ul>
+	</div>
+	<img src="assets/img/icons/subject.svg" alt="" class="lesson-img">
+	<div class="main-text">
+		<h4>Kompyuter muhendesliyi</h4>
+	</div>
+
+	<!-- only in the journal add -->
+	<div class="profile-main-nav" *ngIf="currentState == 'journal-edit'">
+		<div class="journal-edit-btn">
+			<button class="danger-btn">
+				<a href="e-journal.php">Geriyə</a>
+			</button>
+			<button class="rounded-btn">
+				<a href="#">Yadda saxla</a>
+			</button>
+		</div>
+	</div>
+	<!-- only in the e-journal page -->
+	<div class="profile-main-nav" *ngIf="currentState == 'e-journal' || currentState == 'final-journal'">
+		<a href="e-journal.php" class="nav-btn active-btn">Aktivlik</a>
+		<a href="e-journal.php" class="nav-btn">Sərbəst iş</a>
+		<a href="e-journal.php" class="nav-btn">Kurs işi</a>
+		<a href="final-journal.php" class="nav-btn">Yekun jurnal</a>
+
+		<a href="journal-add.php" class="add-journal">
+			<img src="assets/img/icons/add-blue.svg" alt="">
+		</a>
+	</div>
+
+	<!-- only in the meetings page -->
+	<div class="profile-main-nav" *ngIf="currentState == 'meeting'  ||currentState == 'meeting-files'">
+		<a href="meetings.php" class="nav-btn active-btn" (click)="navSelect('meeting'); false" [class.active-btn]="currentState == 'meetings'">Movzular</a>
+		<a href="meetings-files.php" class="nav-btn" (click)="navSelect('meeting-files'); false" [class.active-btn]="currentState == 'meeting-files'">Materiallar</a>
+
+		<div class="more-icon-x">
+			<a href="#" class="more-icon icon-btn open-popup" data-popup="more-icon-x-popup">
+				<img src="assets/img/icons/more-x.svg" alt="">
+			</a>
+			<!-- more-icon popup -->
+			<div id="more-icon-x-popup" class="popup more-icon-popup">
+				<div class="popup-content">
+					<ul class="icons-list">
+						<li><a href="#" class="icon-btn" title="add"><img src="assets/img/icons/add-blue.svg"></a></li>
+						<li><a href="#" class="icon-btn" title="edit"><img src="assets/img/icons/edit.svg"></a></li>
+						<li><a href="#" class="icon-btn" title="delete"><img src="assets/img/icons/delete.svg"></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- popup end -->
+		</div>
+	</div>
+</div>

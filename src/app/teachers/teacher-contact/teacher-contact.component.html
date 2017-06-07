@@ -1,0 +1,41 @@
+<div class="blocks-grid">	
+	<div class="grid-item">
+		<div class="adress-info-left">
+			<ul>
+				<li class="info-head">Unvan</li>
+				<hr class="har">
+				<li class="info-head">Anadan oldugu unvan <p>{{teacher.birthAddress}}</p></li>
+				<hr class="har">
+				<li class="info-head">Daimi yashadigi unvan<p>{{teacher.currentAddress}}</p></li>
+				<hr class="har">
+				<li class="info-head">Muveqqeti yashadigi unvan<p>{{teacher.temporaryAddress}}</p></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="grid-item">
+		<div class="mob-info">
+			<ul>
+				<li class="info-head">Ev ve mobil telefonleri</li>
+				<div *ngFor="let number of teacher.phoneNumbers">
+					<hr class="har">
+					<li>{{number}}</li>
+				</div>
+			</ul>
+		</div>
+	</div>
+
+	<div class="grid-item">
+		<div class="adress-info-right">
+			<ul>
+				<li class="info-head">Elektron elaqe</li>
+				<hr class="har">
+				<li class="info-head">Facebook <p>{{teacher.facebook}}</p></li>
+				<hr class="har">
+				<li class="info-head">Google+<p>{{teacher.google}}</p></li>
+				<hr class="har">
+				<li class="info-head">E-mail<p>{{teacher.email}}</p></li>
+			</ul>
+		</div>
+	</div>
+</div>

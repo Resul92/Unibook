@@ -1,0 +1,99 @@
+<!-- main content structure-->
+<student-charts [university]='university'></student-charts>
+<!--<custom-masonry *ngIf="students"></custom-masonry>-->
+
+<main class="main-content">
+
+<div class="main-container st-block-style">
+	<div class="content-header">
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">
+				<canvas id="studentTypeChart" width="200" height="100"></canvas>
+			</div>
+			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">
+				
+				<canvas id="studentGradeChart" width="200" height="100"></canvas>
+			</div>
+			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">
+				
+				<canvas id="studentgenderChart" width="200" height="100"></canvas>
+			</div>
+		</div><hr>
+	</div>
+	<!-- students profile -->
+
+	<div class="content students-profile">
+	<!-- Structure sort -->
+
+		<div class="structure-inner-sort">
+			<student-search 
+			[allStudents]='allStudents' 
+			(update)="search($event)"
+			[students]="students"></student-search> -
+			<student-sort
+				(select)="onSortChange($event)"
+				[students]="students"
+			></student-sort>
+			<student-university-filter></student-university-filter>
+		</div>
+		
+		<custom-loader *ngIf="loading"></custom-loader>
+
+		<div class="row grid grid-4">
+			<div class="grid-sizer"></div>
+			<div class="grid-item" *ngFor="let student of students">
+				<div class="students-grid-block">
+					<div class="student-grid-inner">
+						<a href="#" class="more-btn">
+							<img src="assets/img/icons/more.svg" alt="">
+						</a>
+						<img class="student-grid-img" [src]="student.imgUrl" default="assets/images/user.png" alt="">
+						<ul>
+							<li>
+								<p>{{student.name}}</p>
+							</li>
+							<li class="grades">
+								<span class="active-grades"></span>
+								<span></span>
+								<span></span>
+								<span></span>
+							</li>
+							<li>
+								<p>{{student.grade}}/{{student.status}}</p>
+							</li>
+						</ul>
+						<div class="short-info-students st-block-style">
+							<div class="short-info-students-top">
+								<div class="short-info-students-top-image">
+									<img [src]="student.imgUrl" default="assets/images/user.png" alt="">
+								</div>
+								<p>{{student.name}}</p>
+								<!-- <img class="cancel-img" src="img/cancel.svg" alt=""> -->
+							</div>
+							<div class="short-info-students-bottom">
+								<div class="grades">
+									<span class="active-grades"></span>
+									<span class="active-grades"></span>
+									<span class="active-grades"></span>
+									<span></span>
+								</div>
+								<h5>{{university.name}}</h5>
+								<h6>{{student.profession}}</h6>
+								<a routerLink="/student/{{student.id}}" routerLinkActive="active" class="button rounded-btn
+								hvr-btn">profile kec</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button (click)="loadMoreStuds()">Load More:</button>
+	</div>
+</div>
+
+
+
+</main>
+
+
+<!-- Footer -->

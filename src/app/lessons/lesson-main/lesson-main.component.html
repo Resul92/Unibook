@@ -1,0 +1,27 @@
+<custom-header></custom-header>
+<!-- main content second -->
+<main class="main-content main-content-second">
+	<div class="container-fluid main-container-second">
+		<lesson-header 
+		[currentState] = 'currentState'
+		[states]='states'
+		(select)="setCurrentState($event)"></lesson-header>
+
+		<final-journal 
+		*ngIf="currentState == 'final-journal'"
+		[lesson] = 'lesson'></final-journal>
+
+		<final-journal 
+		*ngIf="currentState == 'e-journal'"
+		[lesson] = 'lesson'></final-journal>
+
+	</div>
+
+	<journal-edit *ngIf="currentState == 'journal-edit'" [lesson] = 'lesson'></journal-edit>
+	<lesson-about *ngIf="currentState == 'lesson-about'" [lesson] = 'lesson'></lesson-about>
+	<meeting *ngIf="currentState == 'meeting'" [lesson] = 'lesson'></meeting>
+	<meeting-files *ngIf="currentState == 'meeting-files'" [lesson] = 'lesson'></meeting-files>
+	<members-list *ngIf="currentState == 'members-list'" [lesson] = 'lesson'></members-list>
+
+</main>
+

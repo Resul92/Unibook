@@ -1,0 +1,18 @@
+<div class="profile-main">
+	<div class="profile-img"><img [src]="teacher.imgUrl" default="assets/images/user.png" alt=""></div>
+
+	<div class="profile-text">
+		<h4>{{teacher.name}}</h4>
+		<div class="grades">
+			<span class="active-grades"></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<!-- wait for university to be loaded -->
+		<h5 class="profile-university" *ngIf="university">{{university.name}}</h5>
+		<h5 class="profile-fakulity">{{teacher.faculty}}</h5>
+		<h5>{{teacher.status}}</h5>
+	</div>
+</div>
+

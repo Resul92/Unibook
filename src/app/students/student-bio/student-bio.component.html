@@ -1,0 +1,17 @@
+<!-- profile main text content -->
+<div class="profile-content">
+	<div class="profile-content-main-text">
+		<h3 >{{student.title}}</h3>
+		<h6>
+		{{student.bio}}
+		</h6>
+	</div>
+	<div class="profile-content-main-img">
+		<img [src]="student.coverImgUrl" alt="">
+	</div>
+	<hr>
+	<div class="text-bottom" *ngFor="let fact of student.history">
+ 		<h6>{{fact.date}}</h6>
+		<h6>{{fact.text}}</h6>
+	</div>
+</div>

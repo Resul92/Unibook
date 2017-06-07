@@ -1,0 +1,44 @@
+<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 side-bar">
+	<ul class="side-btns st-block-style">
+		<li>
+			<a href="#" class="simple-btn active-btn" 
+			(click)="goto('bio'); false"
+			[class.active-btn]="
+				currentState == 'bio'">Bioqrafiya</a>
+		</li>
+		<li>
+			<a href="#" class="simple-btn" 
+			(click)="goto('main-info'); false"
+			[class.active-btn]="
+				currentState == 'main-info'">Əsas məlumatlar</a>
+		</li>
+		<li>
+			<a href="#" class="simple-btn" 
+			(click)="goto('contact'); false"
+			[class.active-btn]="
+				currentState == 'contact'">Əlaqə</a>
+		</li>
+		<li>
+			<a href="#" class="simple-btn" 
+			(click)="goto('docs'); false"
+			[class.active-btn]="
+				currentState == 'docs'">Sənədlər</a>
+		</li>
+	</ul>
+</div>
+<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+	<div *ngIf="currentState == 'bio'">
+		<teacher-bio [teacher]='teacher'></teacher-bio>
+	</div>	
+	<div *ngIf="currentState == 'main-info'">
+		<teacher-main-info [teacher]='teacher'></teacher-main-info>
+	</div>	
+	<div *ngIf="currentState == 'contact'">
+		<teacher-contact [teacher]='teacher'></teacher-contact>
+	</div>					
+	<div *ngIf="currentState == 'docs'">
+		<teacher-docs [teacher]='teacher'></teacher-docs>
+	</div>					
+				
+</div>
+

@@ -1,0 +1,5 @@
+<select #sel (change)="onChange(sel.value)" name="filter" id="filter" class="filter" placeholder="Acar sozunu daxil edin">
+	<option 
+	*ngFor="let property of teacherFilterProperties"
+	value="{{property.value}}">{{property.name}}</option>
+</select>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.540000021">
+        <g id="DataTable/HeaderColumn" transform="translate(-834.000000, -23.000000)" fill="#010101">
+            <g transform="translate(1.000000, 20.000000)" id="Columns">
+                <g transform="translate(14.000000, 0.000000)">
+                    <g id="6" transform="translate(817.000000, 0.000000)">
+                        <g id="ic_arrow_downward-copy-2">
+                            <polygon id="Icon" points="13.3333333 9 12.3933333 8.06 8.66666667 11.78 8.66666667 3.66666667 7.33333333 3.66666667 7.33333333 11.78 3.61333333 8.05333333 2.66666667 9 8 14.3333333"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

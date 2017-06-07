@@ -1,0 +1,45 @@
+<custom-header></custom-header>
+<!--<custom-jquery></custom-jquery>-->
+<!-- main content -->
+<main class="main-content" *ngIf="teacher">
+	<div class="main-profile-container container">
+		<div class="top-profile">
+			<teacher-header 
+				[teacher]='teacher'
+				[university]='university'
+				[currentState]='currentState'
+				></teacher-header>
+			<div class="profile-main-nav">
+				<a href="#" class="nav-btn active-btn" 
+				(click)="goto('about'); false" 
+				[class.active-btn]="
+				currentState == 'about' || 
+				currentState == 'bio' || 
+				currentState == 'contact' || 
+				currentState == 'docs' || 
+				currentState == 'main-info'">Haqqinda</a>
+				<a href="#" class="nav-btn" 
+				(click)="goto('tedris'); false"
+				[class.active-btn]="
+				currentState == 'tedris' || 
+				currentState == 'plan' || 
+				currentState == 'grades'">Tədris</a>
+			</div>
+		</div>
+		<div class="bottom-section">
+			<div class="row">
+				<div *ngIf="currentState=='about'">
+					<teacher-about 
+						[teacher]='teacher'
+						></teacher-about>			
+				</div>
+				<div *ngIf="currentState=='tedris'">
+					<teacher-tedris 
+					[teacher]='teacher'
+					></teacher-tedris>		
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+

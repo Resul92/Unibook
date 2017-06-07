@@ -1,0 +1,21 @@
+<div class="blocks-grid">	
+	<div class="grid-item" *ngFor="let doc of user.documents">
+		<div class="user-document-block">
+			<ul>
+				<li class="info-head">{{doc.name}}</li>
+				<hr class="har">
+				<li>Senedin novu</li>
+				<li class="second-text">{{doc.type}}</li>
+				<hr class="har">
+				<li>Senedin seriyasi</li>
+				<li class="second-text">{{doc.series}}</li>
+				<hr class="har">
+				<li>Senedin nomresi</li>
+				<li class="second-text">{{doc.id}}</li>
+				<hr class="har">
+				<li>Senedin verilme tarixi</li>
+				<li class="second-text">{{doc.date}}</li>
+			</ul>
+		</div>
+	</div>
+</div>

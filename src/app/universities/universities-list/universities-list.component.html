@@ -1,0 +1,29 @@
+<custom-loader *ngIf="loading"></custom-loader>
+<div class="content university-list">
+	<div class="row grid grid-4">
+		<div class="grid-sizer"></div>
+		<div class="grid-item" *ngFor="let university of universities"
+			(click)="goInfo(university)">
+			<div class="university-block">
+				<div class="university-block-top">
+					<div class="university-block-text">
+						<p class="university-block-top-caption">Telebelerin sayi</p>
+						<p class="university-block-top-count">{{university.studentCount}}</p>
+					</div>
+					<div class="university-block-text">
+						<img [src]="university.imgUrl" default="assets/images/university-default.jpeg" class="university-block-top-logo" alt="">
+					</div>
+					<div class="university-block-text">
+						<p class="university-block-top-caption">Muellimlerin sayi</p>
+						<p class="university-block-top-count">{{university.teacherCount}}</p>
+					</div>
+				</div>
+				<div class="university-block-bottom">
+					<h5>{{university.name}}</h5>
+					<p>{{university.street}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button (click)="loadMoreUnis()">Load More:</button>
+</div>

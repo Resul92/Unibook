@@ -1,0 +1,99 @@
+<custom-header></custom-header>
+<!-- main content structure-->
+<main  *ngIf="university" class="main-content">
+<!-- Aside Trigger -->
+	<a routerLink="/dashboard" routerLinkActive="active" class="aside-trigger">
+		<img src="assets/img/icons/right-arrow.svg" alt="">
+	</a>  <div class="main-profile-container container">
+    <div class="structure-info-profile">
+      <div class="profile-main">
+        <div class="profile-img-structure-info-page">
+          <img [src]="university.imgUrl" default="assets/images/university-default.jpeg" alt="">
+        </div>
+      <!-- structure info header text -->
+        <div class="profile-text-structure-info">
+          <ul class="structure-info-header-text">
+            <li>Umumi telebelerin sayi
+              <span>{{university.studentCount}}</span>
+            </li>
+            <li>Muellimlerin sayi
+              <span>{{university.teacherCount}}</span>
+            </li>
+            <li>Kafedralarin sayi
+              <span>{{university.kafedraCount}}</span>
+            </li>
+            <li>Departamentlerin sayi
+              <span>{{university.departmentCount}}</span>
+            </li>
+          </ul>
+        </div>
+      <!-- structure info header text -->
+      </div>
+      <div class="profile-main-nav">
+        <a class="nav-btn" 
+        [class.active-btn]="currentState == 'detail'" 
+        (click)="changeView('detail'); false">Umumi informasiya</a>
+        <a class="nav-btn" 
+        [class.active-btn]="currentState == 'kafedra-list'" 
+        (click)="changeView('kafedra-list'); false">Kafedralar</a>
+        <a class="nav-btn" 
+        [class.active-btn]="currentState == 'faculty-list'" 
+        (click)="changeView('faculty-list'); false">Fakulteler</a>
+        <a class="nav-btn" 
+        [class.active-btn]="currentState == 'specialty-list'" 
+        (click)="changeView('specialty-list'); false">Ixtisaslar</a>
+      </div>
+    </div>
+    <div class="main-container st-block-style xtra-width">
+    <!-- overall information regarding university departments -->
+      <university-departments-list *ngIf="currentState == 'kafedra-list'" [university]='university'></university-departments-list>
+      <faculty-list *ngIf="currentState == 'faculty-list'" [university]='university'></faculty-list>
+      <specialty-list *ngIf="currentState == 'specialty-list'" [university]='university'></specialty-list>
+    </div>
+    <div *ngIf="currentState == 'detail'" class="bottom-section-structure-info-page">
+      <div class="row">
+        <div class="structure-info-text">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="structure-first-left-text">
+              <h5>Universitet haqqinda</h5><br>
+              <p>{{university.info}}</p><br><br><br>
+              <ul>
+                <h5>Universitetin diger melumatlari</h5><hr>
+                <li>Binalarin Sayi: {{university.buildingCount}}<hr></li>
+                <li>Umumi sahesi: {{university.commonArea}}<hr></li>
+                <li>Tədris-laboratoriya sahəsi: {{university.eduLabArea}}<hr></li>
+                <li>Idman sahesi: {{university.sportArea}}<hr></li>
+                <li>Kompyuterlerin sayi: {{university.pcCount}}<hr></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="structure-first-right-text-top">
+              <ul>
+                <li>
+                  <img src="img/desk.svg" alt="">
+                  <h4>Rehberlik</h4>
+                </li>
+                <br>
+                <li>
+                  <p class="management-title"><span>Rektor</span>: <br>{{university.rektorName}}</p>
+                </li>
+                <br>
+              </ul>
+            </div>
+            <div class="structure-first-right-text-bottom">
+              <ul>
+                <li>
+                  <img src="img/desk.svg" alt="">
+                  <h4>Universitetin adresi</h4>
+                </li>
+                <br>
+                <li><span>{{university.street}}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

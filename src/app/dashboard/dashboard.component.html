@@ -1,0 +1,81 @@
+<custom-header></custom-header>
+<custom-masonry *ngIf="universities"></custom-masonry>
+<!--<custom-jquery *ngIf="firstTime"></custom-jquery>-->
+<div *ngIf="university">
+	<!-- Main -->
+	<main class="main-content">
+	<!-- Aside Trigger -->
+		<a routerLink="/dashboard" routerLinkActive="active" class="aside-trigger" asideTrigger>
+			<img src="assets/img/icons/right-arrow.svg" alt="">
+		</a>
+	<!-- Aside -->
+	<aside class="left-aside structure-aside">
+		<div class="aside-nav"  navButton>
+			<div class="selected-structure" *ngIf="currentModule">
+				<a class="structure-btn" (click)="setState(module)">{{currentModule.name.az}}</a>
+				<ul class="aside-nav-list" *ngIf="modules">
+					<a
+					*ngFor="let module of modules" 
+					href="#" class="structure-btn" (click)="setState(module)">{{module.name.az}}</a>
+				</ul>
+			</div>
+		</div>
+		<div class="aside-content" *ngIf="universities">
+			<university-aside *ngIf="currentModuleId"
+			[university]='university' 
+			[currentState]='currentState' 
+			[currentModuleId]="currentModuleId"
+			(gotoDetail)="gotoDetail()"
+			(select)="filterUniversitiesBy($event)"></university-aside> 
+			<div class="aside-block" *ngIf="currentState == 'dashboard'">
+				<university-search 
+				(update)='search($event)'
+				[universities]="universities"
+				[allUniversities]='allUniversities' 
+				></university-search>
+				<university-sort  *ngIf="currentState == 'dashboard'" 
+				(select)="sortUniversitiesBy($event)"></university-sort>
+			</div>
+		</div>
+	</aside>
+	<!-- End Aside -->
+
+	<!-- Main Container -->
+		<div class="main-container st-block-style" *ngIf="currentState == 'dashboard'">
+			<university-departments-info 
+			[university]='university'></university-departments-info>
+			<universities-list 
+			[universities]='universities' 
+			[loading]="loading"
+			(gotoInfo)='gotoInfo($event)'
+			(update)="searchUniversities($event)"
+			(loadMoreUniversities)='loadMoreUniversities()'></universities-list>
+		</div>
+
+		<div *ngIf="currentState == 'students-list'">
+			<students-list *ngIf="currentModuleId"
+				[allStudents]='allStudents' 
+				[university]='university'
+				[loading]="loading"
+				[students]='students'
+				(select)="sortStudentsBy($event)"
+				(update)="searchStudents($event)"
+				(loadMoreStudents)='loadMoreStudents()'
+				></students-list>
+		</div>
+		<div *ngIf="currentState == 'teachers-list'">
+			<teachers-list *ngIf="currentModuleId"
+				[allTeachers]='allTeachers' 
+				[university]='university'
+				[loading]="loading"
+				[teachers]='teachers'
+				(select)="sortTeachersBy($event)"
+				(update)="searchTeachers($event)"
+				(loadMoreTeachers)='loadMoreTeachers()'
+				></teachers-list>
+		</div>
+	<!-- End Main Container -->
+
+	</main>
+	<!-- End Main -->
+</div>

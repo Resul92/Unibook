@@ -1,0 +1,19 @@
+<custom-loader *ngIf="loading"></custom-loader>
+<div *ngIf="!university.specialties">no specialties to show</div>
+<div class="content university-list">
+	<div class="structure-inder">
+		<div class="row">
+			<div *ngFor="let specialty of university.specialties" class="col-lg-4 col=-md-4 col-sm-6 col-xs-12 structure-inder-block">
+				<ul>
+					<li class="lessons-head">
+						<h3>R</h3>
+					</li>
+					<li>
+						<p>{{specialty.name}}</p>
+						<p>{{specialty.director}}</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

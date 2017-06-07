@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="22px" viewBox="0 0 18 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>126</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.19 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Meetings" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Meetings-themes" transform="translate(-1387.000000, -419.000000)" fill="#F35252">
+            <g id="Main-Content" transform="translate(15.000000, 91.000000)">
+                <g id="profile-header" filter="url(#filter-1)">
+                    <g id="More-btn-hover" transform="translate(1363.000000, 241.000000)">
+                        <path d="M19.74975,89 L16.25,89 C15.974,89 15.75,89.225 15.75,89.5 L15.75,91 L12.5,91 C12.224,91 12,91.225 12,91.5 C12,91.7775 12.224,92 12.5,92 L13,92 L13,104.5 C13,104.7775 13.224,105 13.5,105 L22.49975,105 C22.77625,105 22.99975,104.7775 22.99975,104.5 L22.99975,92 L23.49975,92 C23.77625,92 23.99975,91.7775 23.99975,91.5 C23.99975,91.225 23.77625,91 23.49975,91 L20.24975,91 L20.24975,89.5 C20.24975,89.225 20.02625,89 19.74975,89 L19.74975,89 Z M21.99975,92 L21.99975,104 L14,104 L14,92 L21.99975,92 L21.99975,92 Z M19.49975,103 C19.77625,103 19.99975,102.7775 19.99975,102.5 L19.99975,94 C19.99975,93.725 19.77625,93.5 19.49975,93.5 C19.224,93.5 18.99975,93.725 18.99975,94 L18.99975,102.5 C18.99975,102.7775 19.224,103 19.49975,103 L19.49975,103 Z M16.49975,103 C16.77625,103 17,102.7775 17,102.5 L17,94 C17,93.725 16.77625,93.5 16.49975,93.5 C16.224,93.5 16,93.725 16,94 L16,102.5 C16,102.7775 16.224,103 16.49975,103 L16.49975,103 Z M16.75,91 L16.75,90 L19.24975,90 L19.24975,91 L16.75,91 L16.75,91 Z" id="126"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

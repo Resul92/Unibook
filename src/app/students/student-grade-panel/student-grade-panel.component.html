@@ -1,0 +1,22 @@
+<div class="grid-item" *ngFor="let class of student.classes">
+	<div class="st-block-style">
+		<table class="info-table-marks" >
+			<tr class="first-row">
+				<td rowspan="2">
+					<div class="lessons-head"><h3>{{class.name | firstletters | uppercase}}</h3></div>
+				</td>
+				<td class="table-lesson-name"><p>{{class.name}}</p></td>
+				<td class="table-lesson-year"><p>{{class.year}}</p></td>
+				<td class="table-lesson-qb"><p>{{class.attendance | remainderPercentage}}% <span>q/b</span></td>
+				<td class="table-lesson-exam"><p>{{class.semesterPoints}}</p></td>
+				<td rowspan="2" class="table-lesson-main-mark"><h1>{{class.grade}}</h1></td>
+			</tr>
+			<tr class="second-row">
+				<td><p>{{class.group}}</p></td>
+				<td class="table-lesson-year"><p>{{class.semester}}</p></td>
+				<td class="table-lesson-ei"><p>{{class.attendance}}% <span>i/e</span></td>
+				<td class="table-lesson-exam"><p>{{class.examPoints}}</p></td>
+			</tr>
+		</table>
+	</div>
+</div>

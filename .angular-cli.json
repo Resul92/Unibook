@@ -19,10 +19,20 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "css/animate.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "css/loader.css",
+        "css/screen.css"
       ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
+      "scripts": [   
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/imagesloaded/imagesloaded.pkgd.min.js",
+        "../node_modules/select2/dist/js/select2.min.js",
+        "../node_modules/masonry-layout/dist/masonry.pkgd.min.js"
+     ],
+     "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"

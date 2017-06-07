@@ -1,0 +1,65 @@
+<header>
+	<a routerLink="{{backUrl}}" routerLinkActive="active" class="header-logo">
+		<img src="assets/img/unibook.png" alt="">
+	</a>
+	<nav class="header-nav">
+		<ul>
+			<li class="header-system">
+				<a href="#" class="icon-btn white-color-btn open-popup" data-popup="system-popup" popUp>
+					<img src="assets/img/icons/set_system.svg" alt="">
+				</a>
+				<!-- App popup -->
+				<div id="system-popup" class="popup">
+					<div class="popup-content">
+						<ul class="system-select">
+							<li *ngFor="let application of applications">
+								<a routerLink="{{application.url}}" routerLinkActive="active" class="active-system system-btn">
+									<img [src]="application.imgUrl" default="assets/img/school.svg" alt="">
+									<div class="center">{{application.name}}</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- popup end -->
+			</li>
+
+			<li class="header-user">
+				<a class="open-popup" data-popup="login-popup" popUp>
+					<img class="header-profile-image" default="assets/images/user.png" [src]="user.imgUrl" default="assets/images/user.png" alt="">
+				</a>
+				<span class="user-dot"></span>
+
+				<!-- popup -->
+				<div id="login-popup" class="popup">
+					<div class="popup-content">
+						<div class="popup-content-info">
+							<div class="top-popup">
+								<div class="popup-profile-img">
+									<img [src]="user.imgUrl" default="assets/images/user.png" alt="">
+								</div>
+								<div class="popup-students-info">
+									<p>{{user.name}}</p>
+									<p>{{user.role}}</p>
+									<p>{{user.structure.name}}</p>
+								</div>
+							</div>
+							<div class="center-popup">
+								<ul>
+									<li>Mektublarim <p>0</p></li>
+									<li>Menim elavelerim <p>0</p></li>
+									<li>Dersler haqqinda bildirish <p>0</p></li>
+								</ul>
+							</div>
+							<div class="bottom-popup">
+								<a href="http://192.168.1.78:8082/DashboardRest/index.html" class="danger-btn" (click)="logout()">ÇIXIŞ</a>
+								<a routerLink="/user-profile" routerLinkActive="active" class="rounded-btn">MƏNİM SƏHİFƏM</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- popup end -->
+			</li>
+		</ul>
+	</nav>
+</header>
