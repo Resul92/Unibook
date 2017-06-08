@@ -19,7 +19,6 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit { 
 	university: any;
-	state = ['info', 'detail', 'dashboard'];
 	currentState = 'dashboard';
 	currentModule;
 	universities: University[] = [];
@@ -40,6 +39,7 @@ export class DashboardComponent implements OnInit {
 	loading: Boolean;
 	modules;
 	currentModuleId;
+	state: string = 'hide';
 
 	constructor(
 		private userService: UserService,
@@ -71,7 +71,6 @@ export class DashboardComponent implements OnInit {
 				let currentModuleIndex = this.modules.indexOf(this.currentModule);
 				console.log('currentModuleIndex: ', currentModuleIndex);
 				this.modules.splice(currentModuleIndex, 1);
-				this.modules.unshift(this.currentModule);
 				console.log('mods in the button: ', this.modules);
 				console.log('current module: ', this.currentModule);
 			});
@@ -139,26 +138,28 @@ export class DashboardComponent implements OnInit {
 		this.router.navigate(link);
 	}
 	setState(mod){
-		let currentModuleIndex = this.modules.indexOf(this.currentModule);
-		console.log('currentModuleIndex: ', currentModuleIndex);
-		this.modules.splice(currentModuleIndex, 1);
-		this.modules.unshift(this.currentModule);
-		console.log('currentModule is: ', mod.name.az);
-		console.log('modules:', this.modules);
-		if(mod.id === 1000009){
-			this.currentState = 'dashboard';
-		} else if(mod.id === 1000010){
-			this.currentState = 'teachers-list';
-		}  else if(mod.id === 1000046){
-			this.currentState = 'students-list';
-		} else {
-			console.log('setting to unknown module...')
-			this.currentState = mod.name.az;
+		if(mod !== this.currentModule){
+			let currentModuleIndex = this.modules.indexOf(mod);
+			console.log('currentModuleIndex: ', currentModuleIndex);
+			this.modules.splice(currentModuleIndex, 1);
+			this.modules.unshift(this.currentModule);
+			console.log('currentModule is: ', mod.name.az);
+			console.log('modules:', this.modules);
+			if(mod.id === 1000009){
+				this.currentState = 'dashboard';
+			} else if(mod.id === 1000010){
+				this.currentState = 'teachers-list';
+			}  else if(mod.id === 1000046){
+				this.currentState = 'students-list';
+			} else {
+				console.log('setting to unknown module...')
+				this.currentState = mod.name.az;
+			}
+			this.currentModule = mod;
+			this.currentModuleId = this.currentModule.id;
+			console.log("currentModule.name.az: ", this.currentModule.name.az)
+			console.log('current modules: ', this.modules);
 		}
-		this.currentModule = mod;
-		this.currentModuleId = this.currentModule.id;
-		console.log("currentModule.name.az: ", this.currentModule.name.az)
-		console.log('current modules: ', this.modules);
 	}
 	sortStudentsBy(property: string): void {
 		if (this.students){
