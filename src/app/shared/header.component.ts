@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit {
 		}
 	};
 	public student;
-	private backUrl;
-	private applications;
+	public backUrl;
+	public applications;
 	constructor(private userService: UserService) {}
 
 	ngOnInit(): void {
