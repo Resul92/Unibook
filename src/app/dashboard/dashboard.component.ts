@@ -91,37 +91,52 @@ export class DashboardComponent implements OnInit {
 		// need to set the initial query to only ask for he first one
 		// need to send additional requests to the query and push it the result to the local variale
 	}
-	loadMoreStudents(){
+	loadMoreStudents(mods?){
 		this.loading = true;
-		// need to have a counter starting at one to know how may times it was activated
-		this.studentPageCounter++;
-		this.studentService.getRealStudents(this.studentPageCounter)
-		.then(students => {
-			this.loading = false;
-			//since loading extra data breaks the view in masonry, we'll set it to empty and then load the data
-			this.oldStudents = this.students;
-			this.students = [];
-			this.students = this.oldStudents.concat(students);
-			this.allStudents = this.allStudents.concat(students);
-			console.log("students list in the dashboard:", this.students);
-		});	
-		// neet add method to the querying function to only ask for the necessary number of items
-		// need to set the initial query to only ask for he first one
-		// need to send additional requests to the query and push it the result to the local variale
+		if(mods){
+			// we are just requesting things with other filters
+			this.setSubModules = mods;
+			this.teacherService.getRealTeachers(1, this.setSubModules);
+		} else {
+			// need to have a counter starting at one to know how may times it was activated
+			this.studentPageCounter++;
+			this.studentService.getRealStudents(this.studentPageCounter, this.setSubModules)
+			.then(students => {
+				this.loading = false;
+				//since loading extra data breaks the view in masonry, we'll set it to empty and then load the data
+				this.oldStudents = this.students;
+				this.students = [];
+				this.students = this.oldStudents.concat(students);
+				this.allStudents = this.allStudents.concat(students);
+				console.log("students list in the dashboard:", this.students);
+			});	
+			// neet add method to the querying function to only ask for the necessary number of items
+			// need to set the initial query to only ask for he first one
+			// need to send additional requests to the query and push it the result to the local variale
+		}
 	}
-	loadMoreTeachers(){
+	loadMoreTeachers(mods?){
 		this.loading = true;
-		// need to have a counter starting at one to know how may times it was activated
-		this.teacherPageCounter++;
-		this.teacherService.getRealTeachers(this.teacherPageCounter)
-		.then(teachers => {
-			this.loading = false;
-			this.teachers
-			this.teachers = this.teachers.concat(teachers);
-			this.allTeachers = this.allTeachers.concat(teachers);
-			console.log("teachers list in the dashboard:", this.teachers);
-		});	
-		// need to send additional requests to the query and push it the result to the local variale
+		if(mods){
+			// we are just requesting things with other filters
+			this.setSubModules = mods;
+			this.teacherService.getRealTeachers(1, this.setSubModules);
+		} else {
+			// need to have a counter starting at one to know how may times it was activated
+			this.teacherPageCounter++;
+			this.teacherService.getRealTeachers(this.teacherPageCounter, this.setSubModules)
+			.then(teachers => {
+				this.loading = false;
+				this.teachers
+				this.teachers = this.teachers.concat(teachers);
+				this.allTeachers = this.allTeachers.concat(teachers);
+				console.log("teachers list in the dashboard:", this.teachers);
+			});	
+			// need to send additional requests to the query and push it the result to the local variale			
+		}
+	}
+	setSubModules(mods){
+		console.log('mods: ', mods);
 	}
 	searchUniversities(results: University[]): void {
 		this.universities = results;

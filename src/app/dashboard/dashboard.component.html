@@ -25,7 +25,7 @@
 			[university]='university' 
 			[currentState]='currentState' 
 			[currentModuleId]="currentModuleId"
-			(gotoDetail)="gotoDetail()"
+			(subModulesList)="setSubModules($event)"
 			(select)="filterUniversitiesBy($event)"></university-aside> 
 			<div class="aside-block" *ngIf="currentState == 'dashboard'">
 				<university-search 

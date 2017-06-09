@@ -27,6 +27,7 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit, OnChange
 	@Output() gotoDetail = new EventEmitter<string>();
 	@Output() filterStudents = new EventEmitter<{}>();
 	@Output() filterTeachers = new EventEmitter<{}>();
+	@Output() subModulesList = new EventEmitter<Array<any>>();
 	currentFilter;
 	maleChecked;
 	femaleChecked;
@@ -35,7 +36,10 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit, OnChange
 	ngOnInit() {
 		let maleChecked = true;
 		let femaleChecked = true;
-		this.userService.getModules().then(mods => this.subModules = mods.json().data.filter(module => module.parentId === this.currentModuleId));
+		this.userService.getModules().then(mods => {
+			this.subModules = mods.json().data.filter(module => module.parentId === this.currentModuleId);
+			this.subModulesList.emit(this.subModules);
+		});
 	}
 	ngAfterViewInit() {
 		// checking if the current state has initialised
@@ -52,6 +56,7 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit, OnChange
 			this.userService.getModules().then(mods => {
 				this.subModules = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId), token);
 				console.log('submodules list: ', this.subModules);
+				this.subModulesList.emit(this.subModules);
 			});			
 		});
 	}
@@ -92,9 +97,6 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit, OnChange
 		} else if (this.maleChecked) {
 			return 'kishi';
 		}
-	}
-	goChild(child){
-		this.gotoDetail.emit(child);
 	}
 	sortBy(property: string): void {
 		if (this.university.departments){

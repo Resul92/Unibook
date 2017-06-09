@@ -34,11 +34,11 @@ export class StudentService {
 
 	//////////// need to build methods that would successfully 
 	/// connect to the real api
-	getRealStudents(page): Promise<any> {
+	getRealStudents(page, subModules): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.authToken = token;
 			// getting teachers from the backend
-	 		this.realStudentsUrl = `http://atis.edu.az/UnibookHsisRest/students/tms?token=${token}&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046&page=${page}&pageSize=50`;
+	 		this.realStudentsUrl = `http://atis.edu.az/UnibookHsisRest/students/tms?token=${token}&subModuleId=${subModules}&page=${page}&pageSize=50`;
 			console.log('getting real students url', this.realStudentsUrl);		
 			return this.http.get(this.realStudentsUrl)
 			.toPromise()
