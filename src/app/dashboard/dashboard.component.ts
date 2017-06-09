@@ -54,26 +54,26 @@ export class DashboardComponent implements OnInit {
 		// getting user's org info
 		this.userService.getCurrentUser().then(user => { 
 			this.user = user;
-			console.log('current user in dashboard component: ', this.user)
+			//console.log('current user in dashboard component: ', this.user)
 			this.universityService.getRealUniversityById(this.user.structure.id)
 			.then(university => {
 				this.university = university;
-				console.log('this university', this.university);
+				//console.log('this university', this.university);
 			});
 			this.userService.getModules().then(mods => {
 				this.modules = mods.json().data.filter(module => module.parentId === 0);
 				//console.log('mods receiver drom api: ', this.modules);
 				this.currentModule = this.modules.find(mod => mod.id === 1000009);
-				console.log("currentModule.name.az: ", this.currentModule.name.az)
+				//console.log("currentModule.name.az: ", this.currentModule.name.az)
 				this.currentModuleId = this.currentModule.id;
 				//console.log('currentModule: ', this.currentModule);
 				let currentModuleIndex = this.modules.indexOf(this.currentModule);
-				console.log('currentModuleIndex: ', currentModuleIndex);
+				//console.log('currentModuleIndex: ', currentModuleIndex);
 				this.modules.splice(currentModuleIndex, 1);
-				console.log('mods in the button: ', this.modules);
-				console.log('current module: ', this.currentModule);
+				//console.log('mods in the button: ', this.modules);
+				//console.log('current module: ', this.currentModule);
 			});
-			console.log('current modules: ', this.modules);
+			//console.log('current modules: ', this.modules);
 		});
 	}
 	loadMoreUniversities(){
@@ -137,11 +137,11 @@ export class DashboardComponent implements OnInit {
 		this.router.navigate(link);
 	}
 	setState(mod){
-		console.log('mod is: ', mod);
+		//console.log('mod is: ', mod);
 		if(mod !== this.currentModule){
 			this.modules.unshift(this.currentModule);
-			console.log('new currentModule is: ', mod.name.az);
-			console.log('modules:', this.modules);
+			//console.log('new currentModule is: ', mod.name.az);
+			//console.log('modules:', this.modules);
 			if(mod.id === 1000009){
 				this.currentState = 'dashboard';
 			} else if(mod.id === 1000010){
@@ -157,10 +157,10 @@ export class DashboardComponent implements OnInit {
 			this.modules.splice(currentModuleIndex, 1);
 			this.currentModule = mod;
 			this.currentModuleId = this.currentModule.id;
-			console.log("currentModule.name.az: ", this.currentModule.name.az)
-			console.log('current modules: ', this.modules);
+			//console.log("currentModule.name.az: ", this.currentModule.name.az)
+			//console.log('current modules: ', this.modules);
 		} else {
-			console.log('no new module selected');
+			//console.log('no new module selected');
 		}
 	}
 	sortStudentsBy(property: string): void {

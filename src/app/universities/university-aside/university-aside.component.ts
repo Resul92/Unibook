@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit, ElementRef, AfterViewInit, ViewChild  } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ElementRef, AfterViewInit, OnChanges  } from '@angular/core';
 import { University } from '../../shared/university.model';
 import { UserService } from '../../shared/user.service';
 
@@ -11,7 +11,7 @@ declare var select2;
 	selector: 'university-aside',
 	templateUrl: 'university-aside.component.html'
 })
-export class UniversityAsideComponent implements OnInit, AfterViewInit { 
+export class UniversityAsideComponent implements OnInit, AfterViewInit, OnChanges { 
 	constructor(public userService: UserService) {}
 
 	@Input() university: University;
@@ -30,12 +30,12 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit {
 	currentFilter;
 	maleChecked;
 	femaleChecked;
-	submodules: Array<any>;
+	subModules: Array<any>;
 
 	ngOnInit() {
 		let maleChecked = true;
 		let femaleChecked = true;
-		this.userService.getSubModules(this.currentModuleId).then(subModules => this.submodules = subModules);
+		this.userService.getModules().then(mods => this.subModules = mods.json().data.filter(module => module.parentId === this.currentModuleId));
 	}
 	ngAfterViewInit() {
 		// checking if the current state has initialised
@@ -46,6 +46,28 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit {
 	    	}			
 		}
 	}
+	ngOnChanges(){
+		this.userService.getToken().then(token => {
+			console.log('currentModuleId: ', this.currentModuleId);
+			this.userService.getModules().then(mods => {
+				this.subModules = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId), token);
+				console.log('submodules list: ', this.subModules);
+			});			
+		});
+	}
+    mapModules(mods, token): Array<any>{
+       // console.log('response.json().data: ',response.json().data);
+       console.log('mapModules response: ', mods);
+       return mods.map(mod => this.toModule(mod));
+    }
+    toModule(r:any): any{
+        let mod = {
+            name: r.name.az,
+            id : r.id
+        }
+        //console.log(mod.name, mod.id);
+        return mod;
+    }
 	toggleFemale() {
 		this.femaleChecked = !this.femaleChecked;
 		if (this.currentState == "students-list") {
@@ -54,7 +76,6 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit {
 			this.filterTeachersBy('gender', this.genderFilter());
 		}
 	}
-
 	toggleMale() {
 		this.maleChecked = !this.maleChecked;
 		if (this.currentState == "students-list") {
@@ -63,7 +84,6 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit {
 			this.filterTeachersBy('gender', this.genderFilter());
 		}
 	}
-
 	genderFilter() {
 		if (this.femaleChecked && this.maleChecked) {
 			return 'all';
@@ -73,7 +93,6 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit {
 			return 'kishi';
 		}
 	}
-
 	goChild(child){
 		this.gotoDetail.emit(child);
 	}

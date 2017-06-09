@@ -8,20 +8,13 @@
 	</h4>
 </div>
 
-<div class="aside-block" *ngIf="currentState == 'info' || currentState == 'detail' || currentState == 'kafedra-list' || currentState == 'faculty-list'">
-	<!-- hide in the dashboard page because the ministry doesn't have a detail page -->
-	<span (click)="goChild('detail')" class="simple-btn" [class.active-btn]="currentState == 'detail'">Umumi informasiya</span>
-	<a href="#" class="simple-btn" (click)="goChild('info'); false" [class.active-btn]="currentState == 'kafedra-list'">Kafedralar</a>
-	<a href="#" class="simple-btn" (click)="goChild('faculty-list'); false" [class.active-btn]="currentState == 'faculty-list'">Fakulteler</a>
-</div>
 <ul class="aside-block" *ngIf="currentState =='students-list' || currentState == 'teachers-list'" >
 	<li class="simple-btn">Umumi telebelerin sayi<span class="aside-block-spn">{{university.studentCount}}</span></li>
 	<li class="simple-btn">Bu il qebul olanlar <span class="aside-block-spn">{{university.freshmanCount}}</span></li>
 	<li class="simple-btn">Əyani tələbəlırin sayrı <span class="aside-block-spn">{{university.onCampusCount}}</span></li>
 	<li class="simple-btn">Qiyabi tələbəlırin sayrı <span class="aside-block-spn">{{university.offCampusCount}}</span></li>
 </ul>
-<div class="aside-block" *ngIf="currentState == 'teachers-list'">
-	<a class="simple-btn" (click)="filterTeachersBy('grade', 'all'); false" [class.active-btn]="currentFilter == 'all'">Hamisini göster</a>
+<div class="aside-block">
 	<!--
 	<div class="checkbox">
 		<label>
@@ -29,16 +22,11 @@
 		Is Active
 		</label>
 	</div>-->
-	
+	<a class="simple-btn" (click)="filterTeachersBy('grade', 'bakalavr'); false" [class.active-btn]="currentFilter == 'bakalavr'" *ngFor="let subModule of subModules">{{subModule.name}}</a>
+<!--
 	<a class="simple-btn" (click)="filterTeachersBy('grade', 'bakalavr'); false" [class.active-btn]="currentFilter == 'bakalavr'">Bakalavr</a>
 	<a class="simple-btn" (click)="filterTeachersBy('grade', 'magistr'); false" [class.active-btn]="currentFilter == 'magistr'">Magistr</a>
-	<a class="simple-btn" (click)="filterTeachersBy('grade', 'doktorant'); false" [class.active-btn]="currentFilter == 'doktorant'">Doktorant</a>
-</div>
-<div class="aside-block" *ngIf="currentState =='students-list'">
-	<a class="simple-btn" (click)="filterStudentsBy('grade', 'all'); false" [class.active-btn]="currentFilter == 'all'">Hamisini göster</a>
-	<a class="simple-btn" (click)="filterStudentsBy('grade', 'bakalavr'); false" [class.active-btn]="currentFilter == 'bakalavr'">Bakalavr</a>
-	<a class="simple-btn" (click)="filterStudentsBy('grade', 'magistr'); false" [class.active-btn]="currentFilter == 'magistr'">Magistr</a>
-	<a class="simple-btn" (click)="filterStudentsBy('grade', 'doktorant'); false" [class.active-btn]="currentFilter == 'doktorant'">Doktorant</a>
+	<a class="simple-btn" (click)="filterTeachersBy('grade', 'doktorant'); false" [class.active-btn]="currentFilter == 'doktorant'">Doktorant</a>-->
 </div>
 <!--
 	// not sure if we will need these filters

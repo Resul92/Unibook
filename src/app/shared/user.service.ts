@@ -39,7 +39,7 @@ export class UserService {
             console.log('token in getToken: ', JSON.parse(localStorage.getItem('currentUser')).token);
             resolve(JSON.parse(localStorage.getItem('currentUser')).token);
         });
-        console.log('res responses is: ', res);
+        //console.log('res responses is: ', res);
         return res;
     }
     //get applications list to be shown in the header
@@ -91,31 +91,8 @@ export class UserService {
             name: r.name.az,
             id : r.id
         }
-        console.log(mod.name, mod.id);
+        //console.log(mod.name, mod.id);
         return mod;
-    }
-    getSubModules(id): Promise<any>{
-        return this.getToken().then(token =>{
-            this.subModulesUrl = `http://atis.edu.az/ROS/applications/modules/${id}/subModules?token=${token}`;
-            console.log('subModulesUrl: ', this.subModulesUrl);        
-            return this.http.get(this.subModulesUrl)
-            .toPromise()
-            .then(response => {
-                console.log('response.json().data for getting subModules', response.json().data);
-                return this.mapSubModules(response, token);
-            })
-            .catch(this.handleError);
-        })
-    }
-    mapSubModules(response, token){
-       return response.json().data.map(subMod => this.toSubModule(subMod, token));
-    }
-    toSubModule(r:any, token){
-        let subMod = {
-            name: r.name.az,
-            id : r.id
-        }
-        return subMod;
     }
 /*
             this.user.imgUrl = `http://atis.edu.az/AdministrationRest/users/${user.id}/image?token=${token}`;

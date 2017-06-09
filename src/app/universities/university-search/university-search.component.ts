@@ -12,7 +12,7 @@ import { University } from '../../shared/university.model';
 	templateUrl: 'university-search.component.html',
 })
 
-export class UniversitySearchComponent implements OnInit {
+export class UniversitySearchComponent implements OnInit, OnChanges {
 	universitiesObservable: Observable<University[]>;
 	@Input() universities: University[];
 	private searchTerms = new Subject<string>();
