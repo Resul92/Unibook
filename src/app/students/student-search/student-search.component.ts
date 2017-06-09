@@ -13,12 +13,12 @@ import { Student } from '../../shared/student.model';
 })
 
 export class StudentSearchComponent implements OnInit {
-	studentsObservable: Observable<Student[]>;
 	@Input() students: Student[];
-	private searchTerms = new Subject<string>();
 	@Output() update = new EventEmitter();
-	anyErrors : Error;
  	@Input() allStudents: Student[];
+	studentsObservable: Observable<Student[]>;
+	private searchTerms = new Subject<string>();
+	anyErrors : Error;
 
 	constructor(
 		private studentService: StudentService,
@@ -34,13 +34,6 @@ export class StudentSearchComponent implements OnInit {
 		}
 	}
 
-	getStudents(): void {
-		this.studentService.getRealStudents(1)
-			.then(students => {
-				console.log(this.students);
-				this.update.emit(students);
-			});
-	}
 	ngOnInit(): void {
 		this.allStudents = this.students;
 		this.studentsObservable = this.searchTerms

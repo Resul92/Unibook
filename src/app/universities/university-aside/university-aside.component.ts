@@ -73,6 +73,9 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit, OnChange
         //console.log(mod.name, mod.id);
         return mod;
     }
+    addFilter(subModule){
+    	console.log("adding submodule: ", subModule);
+    }
 	toggleFemale() {
 		this.femaleChecked = !this.femaleChecked;
 		if (this.currentState == "students-list") {

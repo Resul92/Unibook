@@ -45,7 +45,7 @@ export class UserService {
     //get applications list to be shown in the header
     getApplications(): Promise<any>{
         return this.getToken().then(token =>{
-            this.applicationsUrl = `http://atis.edu.az/ROS/applications?token=${token}`;
+            this.applicationsUrl = `http://192.168.1.78:8082/ROS/applications?token=${token}`;
             console.log('applicationsUrl: ', this.applicationsUrl);        
             return this.http.get(this.applicationsUrl)
             .toPromise()
@@ -70,7 +70,7 @@ export class UserService {
     //get applications list to be shown in the header
     getModules(): Promise<any>{
         return this.getToken().then(token =>{
-            this.modulesUrl = `http://atis.edu.az/ROS/applications/1000003/modules?token=${token}`;
+            this.modulesUrl = `http://192.168.1.78:8082/ROS/applications/1000003/modules?token=${token}`;
             console.log('modulesUrl: ', this.modulesUrl);        
             return this.http.get(this.modulesUrl)
             .toPromise();
@@ -95,7 +95,7 @@ export class UserService {
         return mod;
     }
 /*
-            this.user.imgUrl = `http://atis.edu.az/AdministrationRest/users/${user.id}/image?token=${token}`;
+            this.user.imgUrl = `http://192.168.1.78:8082/AdministrationRest/users/${user.id}/image?token=${token}`;
             //this.user = user;
             this.user.id = user.id;
             this.user.name = user.person.name + " " + user.person.patronymic + " " + user.person.surname;
@@ -147,8 +147,8 @@ export class UserService {
             email: obj.contacts,// to be added
             facebook: obj.contacts,// to be added
             google: obj.contacts,// to be added
-            imgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
-            coverImgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/coverImage?token=${token}`,
+            imgUrl: `http://192.168.1.78:8082/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
+            coverImgUrl: `http://192.168.1.78:8082/UnibookHsisRest/students/${obj.id}/coverImage?token=${token}`,
             documents: obj.pelcDocuments, // to be adopted to the documents interface for properties to match
             subjects: [],// to be added LATER
             completedClasses: 0,// to be added LATER
@@ -181,7 +181,7 @@ export class UserService {
     getCurrentUser(): Promise<any> {
         return this.getToken().then(token => {
             console.log('current user in local storage in getCurrentUser: ', token);
-            this.currentUserURL = `http://atis.edu.az/ROS/profile?token=${token}`;
+            this.currentUserURL = `http://192.168.1.78:8082/ROS/profile?token=${token}`;
             console.log('getCurrentUser from url: ', this.currentUserURL);
             return this.http.get(this.currentUserURL)
             .toPromise()
@@ -213,7 +213,7 @@ export class UserService {
                 } else {
                     console.log('current user response', response);
                     // redirect to login if there's something wrong with login
-                    //window.location.href='http://atis.edu.az/';
+                    //window.location.href='http://192.168.1.78:8082/';
                 }
             })
             // handle errors - for now, just print them to the console
@@ -223,7 +223,7 @@ export class UserService {
 
     logout() {
         localStorage.removeItem('currentUser');
-        //window.location.href='http://atis.edu.az/';
+        //window.location.href='http://192.168.1.78:8082/';
     }
 
     private handleError(error: any): Promise<any> {
@@ -243,7 +243,7 @@ export class UserService {
                 return "student";
             } else {
                 this.currentUserRole = "ERROR: unrecognized";
-                this.router.navigate(['atis.edu.az/ROS/login?app=1000004']);
+                this.router.navigate(['192.168.1.78:8082/ROS/login?app=1000004']);
             }
         } else {
             console.log('the roleID is null, do not have the user');
@@ -258,7 +258,7 @@ export class UserService {
         } else if ( roleId == 1000043) {
             return `/student/${this.currentUser.id}`;
         } else {
-            this.router.navigate(['atis.edu.az/ROS/login?app=1000004']);
+            this.router.navigate(['192.168.1.78:8082/ROS/login?app=1000004']);
         }
     }
     // I'm not sure about thse two methods - I think they may be doing the same shit
@@ -271,7 +271,7 @@ export class UserService {
         } else if ( roleId == 1000043) {
             this.router.navigate([`student`, this.currentUser.id]);
         } else {
-            this.router.navigate(['atis.edu.az/ROS/login?app=1000004']);
+            this.router.navigate(['192.168.1.78:8082/ROS/login?app=1000004']);
         }
     }*/
 }

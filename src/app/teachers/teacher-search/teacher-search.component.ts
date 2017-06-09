@@ -34,13 +34,6 @@ export class TeacherSearchComponent implements OnInit {
 		}
 	}
 
-	getTeachers(): void {
-		this.teacherService.getRealTeachers(1)
-			.then(teachers => {
-				console.log(this.teachers)
-				this.update.emit(teachers);
-			});
-	}
 	ngOnInit() {
 		this.allTeachers = this.teachers;
 		this.teachersObservable = this.searchTerms
