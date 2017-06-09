@@ -12,7 +12,7 @@
 	<aside class="left-aside structure-aside">
 		<div class="aside-nav"  navButton>
 			<div class="selected-structure" *ngIf="currentModule">
-				<a class="structure-btn" (click)="setState(module)">{{currentModule.name.az}}</a>
+				<a class="structure-btn" (click)="setState(currentModule)">{{currentModule.name.az}}</a>
 				<ul class="aside-nav-list" *ngIf="modules">
 					<a
 					*ngFor="let module of modules" 

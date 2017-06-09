@@ -27,7 +27,7 @@ export class TeacherService {
 	getRealTeachers(page): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.authToken = token;
-	 		this.realTeachersUrl = `http://192.168.1.78:8082/UnibookHsisRest/teachers/tms?token=${token}&genderId=&orgId=&statusId=&subModuleId=1000050%2C1000051%2C1000062%2C1000061&page=${page}&pageSize=50`;
+	 		this.realTeachersUrl = `http://atis.edu.az/UnibookHsisRest/teachers/tms?token=${token}&genderId=&orgId=&statusId=&subModuleId=1000050%2C1000051%2C1000062%2C1000061&page=${page}&pageSize=50`;
 			// getting teachers from the backend
 			console.log('getting real teachers url', this.realTeachersUrl, "token: ", token);
 			return this.http.get(this.realTeachersUrl)
@@ -41,7 +41,7 @@ export class TeacherService {
 	}
 	getRealTeacherById(id) {
 		return this.userService.getToken().then(token =>{
-			this.realTeacherByIdUrl = `http://192.168.1.78:8082/UnibookHsisRest/teachers/${id}?token=${token}`;
+			this.realTeacherByIdUrl = `http://atis.edu.az/UnibookHsisRest/teachers/${id}?token=${token}`;
 			console.log('realTeacherByIdURL', this.realTeacherByIdUrl);
 			return this.http.get(this.realTeacherByIdUrl)
 			.toPromise()
@@ -55,7 +55,7 @@ export class TeacherService {
 	getRealTeachersByUniversityId(id){
 		return this.userService.getToken().then(token =>{
 			// getting teachers from the backend
-			this.realTeachersByUniUrl = `http://192.168.1.78:8082/UnibookHsisRest/teachers?token=${token}&orgId=${id}&subModuleId=1000050%2C1000051%2C1000062%2C1000061`;
+			this.realTeachersByUniUrl = `http://atis.edu.az/UnibookHsisRest/teachers?token=${token}&orgId=${id}&subModuleId=1000050%2C1000051%2C1000062%2C1000061`;
 			return this.http.get(this.realTeachersByUniUrl)
 			.toPromise()
 			.then(response => {
@@ -78,7 +78,7 @@ export class TeacherService {
 		let teacher = <any>({
 			id: obj.id,
 			name: obj.firstName + " " + obj.middleName + " " + obj.lastName,
-			imgUrl: `http://192.168.1.78:8082/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
+			imgUrl: `http://atis.edu.az/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
 			jobStatus: obj.academicName,
 			faculty: obj.department,
 			subjects: obj.subjects
@@ -114,8 +114,8 @@ export class TeacherService {
 			email: obj.contacts,// to be added - turn contacts to an array and add them as a list in the template
 			facebook: obj.contacts,// to be added
 			google: obj.contacts,// to be added
-			imgUrl: `http://192.168.1.78:8082/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
-			coverImgUrl: `http://192.168.1.78:8082/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
+			imgUrl: `http://atis.edu.az/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
+			coverImgUrl: `http://atis.edu.az/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
 			documents: obj.pwlcDocuments,
 			subjects: obj.subjects,
 			completedClasses: null,// to be added LATER
@@ -150,7 +150,7 @@ export class TeacherService {
 		return Promise.reject(error.message || error);
 	}
 	searchReal(term: string): Observable<any> {
-		let searchUrl = `http://192.168.1.78:8082/UnibookHsisRest/teachers?token=${this.authToken}&keyword=${term}&genderId=1000035&orgId=&uniName=&uniOrg=&statusId=&status=&actionTypeId=&genderName=&actionName=&statusName=&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046`;
+		let searchUrl = `http://atis.edu.az/UnibookHsisRest/teachers?token=${this.authToken}&keyword=${term}&genderId=1000035&orgId=&uniName=&uniOrg=&statusId=&status=&actionTypeId=&genderName=&actionName=&statusName=&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046`;
 		console.log('getting teachers for', term," from ", searchUrl);
 		return this.http
 			.get(searchUrl)

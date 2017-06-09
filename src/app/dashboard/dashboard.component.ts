@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
 	loading: Boolean;
 	modules;
 	currentModuleId;
-	state: string = 'hide';
 
 	constructor(
 		private userService: UserService,
@@ -138,27 +137,30 @@ export class DashboardComponent implements OnInit {
 		this.router.navigate(link);
 	}
 	setState(mod){
+		console.log('mod is: ', mod);
 		if(mod !== this.currentModule){
-			let currentModuleIndex = this.modules.indexOf(mod);
-			console.log('currentModuleIndex: ', currentModuleIndex);
-			this.modules.splice(currentModuleIndex, 1);
 			this.modules.unshift(this.currentModule);
-			console.log('currentModule is: ', mod.name.az);
+			console.log('new currentModule is: ', mod.name.az);
 			console.log('modules:', this.modules);
 			if(mod.id === 1000009){
 				this.currentState = 'dashboard';
 			} else if(mod.id === 1000010){
 				this.currentState = 'teachers-list';
-			}  else if(mod.id === 1000046){
+			}  else if(mod.id === 1000011){
 				this.currentState = 'students-list';
 			} else {
 				console.log('setting to unknown module...')
 				this.currentState = mod.name.az;
 			}
+			let currentModuleIndex = this.modules.indexOf(mod);
+			//console.log('currentModuleIndex: ', currentModuleIndex);
+			this.modules.splice(currentModuleIndex, 1);
 			this.currentModule = mod;
 			this.currentModuleId = this.currentModule.id;
 			console.log("currentModule.name.az: ", this.currentModule.name.az)
 			console.log('current modules: ', this.modules);
+		} else {
+			console.log('no new module selected');
 		}
 	}
 	sortStudentsBy(property: string): void {
