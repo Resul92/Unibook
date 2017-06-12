@@ -24,6 +24,7 @@ export class StudentService {
 	private realStudentContacts;
 	private authToken;
 	private realStudentDocs;
+	private subModulesList: Array<any> = [1000048, 1000047, 1000058, 1000059, 1000057, 1000046 ];
 	public students : ReplaySubject<any> = new ReplaySubject(1);
 
 	constructor(
@@ -33,11 +34,12 @@ export class StudentService {
 
 	//////////// need to build methods that would successfully 
 	/// connect to the real api
-	getRealStudents(page, subModules): Promise<any> {
+	getRealStudents(page, subModules?): Promise<any> {
+		if(subModules){ this.subModulesList = subModules};
 		return this.userService.getToken().then(token =>{
 			this.authToken = token;
 			// getting teachers from the backend
-			let subModulesString = subModules.join("&");
+			let subModulesString = this.subModulesList.join("%2C");
 	 		let realStudentsUrl = `http://atis.edu.az/UnibookHsisRest/students/tms?token=${token}&subModuleId=${subModulesString}&page=${page}&pageSize=50`;
 			console.log('getting real students url', realStudentsUrl);		
 			return this.http.get(realStudentsUrl)

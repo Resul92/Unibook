@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 	loadMoreStudents(mods?){
-		console.log('loadModeUniversities called:');
+		console.log('loadModeStudents called:');
 		this.loading = true;
 		if(mods){
 			this.studentPageCounter = 1;
@@ -151,11 +151,12 @@ export class DashboardComponent implements OnInit {
 			// based on current states with the modules
 			console.log('setting subModules: ', subModulesIdList);
 			console.log('current state: ', this.currentState);
-			if(this.currentState = 'dashboard'){
+			if(this.currentState == 'dashboard'){
 				this.loadMoreUniversities(this.subModulesList);
-			} else if(this.currentState = 'teachers-list'){
+			} else if(this.currentState == 'teachers-list'){
+				console.log("have to call load more teachers");
 				this.loadMoreTeachers(this.subModulesList);
-			}  else if(this.currentState = 'students-list'){
+			}  else if(this.currentState == 'students-list'){
 				this.loadMoreStudents(this.subModulesList);
 			}
 		}
