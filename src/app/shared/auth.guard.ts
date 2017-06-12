@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
         // not logged in so redirect to login page
         // send them to auth component / auth page
         console.log('not logged in');
-        //window.location.href='http://192.168.1.78:8082/';
+        //window.location.href='http://atis.edu.az/';
         return false;
     }
 }

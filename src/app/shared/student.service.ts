@@ -38,7 +38,7 @@ export class StudentService {
 		return this.userService.getToken().then(token =>{
 			this.authToken = token;
 			// getting teachers from the backend
-	 		this.realStudentsUrl = `http://192.168.1.78:8082/UnibookHsisRest/students/tms?token=${token}&subModuleId=${subModules}&page=${page}&pageSize=50`;
+	 		this.realStudentsUrl = `http://atis.edu.az/UnibookHsisRest/students/tms?token=${token}&subModuleId=${subModules}&page=${page}&pageSize=50`;
 			console.log('getting real students url', this.realStudentsUrl);		
 			return this.http.get(this.realStudentsUrl)
 			.toPromise()
@@ -51,7 +51,7 @@ export class StudentService {
 	}
 	getRealStudentById(id): Promise<any>  {
 		return this.userService.getToken().then(token =>{
-			this.realStudentByIdUrl = `http://192.168.1.78:8082/UnibookHsisRest/students/${id}?token=${token}`;
+			this.realStudentByIdUrl = `http://atis.edu.az/UnibookHsisRest/students/${id}?token=${token}`;
 			console.log('realStudentByIdURL', this.realStudentByIdUrl);
 			return this.http.get(this.realStudentByIdUrl)
 			.toPromise()
@@ -64,7 +64,7 @@ export class StudentService {
 	}
 	getRealStudentsByUniversityId(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
-			this.realStudentsByUniUrl = `http://192.168.1.78:8082/UnibookHsisRest/students?token=${token}&orgId=${id}&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046`;
+			this.realStudentsByUniUrl = `http://atis.edu.az/UnibookHsisRest/students?token=${token}&orgId=${id}&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046`;
 			return this.http.get(this.realStudentsByUniUrl)
 			.toPromise()
 			.then(response => {
@@ -87,7 +87,7 @@ export class StudentService {
 			id: obj.id,
 			name: obj.firstName + " " + obj.middleName + " " + obj.lastName,
 			status: obj.eduTypeId.value.az,
-			imgUrl: `http://192.168.1.78:8082/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
+			imgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
 			grade: obj.eduLevelId.value.az,
 			universityName: obj.orgName,
 			profession: obj.specialty.az,
@@ -123,8 +123,8 @@ export class StudentService {
 			email: obj.contacts,// to be added
 			facebook: obj.contacts,// to be added
 			google: obj.contacts,// to be added
-			imgUrl: `http://192.168.1.78:8082/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
-			coverImgUrl: `http://192.168.1.78:8082/UnibookHsisRest/students/${obj.id}/coverImage?token=${token}`,
+			imgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
+			coverImgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/coverImage?token=${token}`,
 			documents: obj.pelcDocuments, // to be adopted to the documents interface for properties to match
 			subjects: null,// to be added LATER
 			completedClasses: null,// to be added LATER
@@ -170,7 +170,7 @@ export class StudentService {
 		return Promise.reject(error.message || error);
 	}
 	searchReal(term: string): Observable<Student[]> {
-		let searchUrl = `http://192.168.1.78:8082/UnibookHsisRest/students?token=${this.authToken}&keyword=${term}&genderId=1000035&orgId=&uniName=&uniOrg=&statusId=&status=&actionTypeId=&genderName=&actionName=&statusName=&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046`;
+		let searchUrl = `http://atis.edu.az/UnibookHsisRest/students?token=${this.authToken}&keyword=${term}&genderId=1000035&orgId=&uniName=&uniOrg=&statusId=&status=&actionTypeId=&genderName=&actionName=&statusName=&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046`;
 		console.log('getting students for', term," from ", searchUrl);
 		return this.http.get(searchUrl).map((r: Response) => {
 			console.log(r);

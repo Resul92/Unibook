@@ -33,7 +33,7 @@ export class UniversityService {
 	getRealUniversities(page): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			console.log('current user token: ', token);
-	 		this.realUniversitiesUrl = `http://192.168.1.78:8082/UnibookHsisRest/structures/type/U?token=${token}&page=${page}&pageSize=50`;
+	 		this.realUniversitiesUrl = `http://atis.edu.az/UnibookHsisRest/structures/type/U?token=${token}&page=${page}&pageSize=50`;
 			console.log('getting real structures list from', this.realUniversitiesUrl);		
 			return this.http.get(this.realUniversitiesUrl)
 			.toPromise()
@@ -46,7 +46,7 @@ export class UniversityService {
 	}
 	getRealUniversityById(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
-			this.realUniversityByIdUrl = `http://192.168.1.78:8082/UnibookHsisRest/structures/${id}?token=${token}`;		
+			this.realUniversityByIdUrl = `http://atis.edu.az/UnibookHsisRest/structures/${id}?token=${token}`;		
 			console.log('realUniversityByIdURL', this.realUniversityByIdUrl);
 			return this.http.get(this.realUniversityByIdUrl)
 			.toPromise()
@@ -60,7 +60,7 @@ export class UniversityService {
 	// gets a list of faculties that belong to a specific university id
 	getRealDepartmentById(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
-			this.realDepartmentByIdUrl	= `http://192.168.1.78:8082/UnibookHsisRest/structures/org/${id}/type/K?token=${token}`
+			this.realDepartmentByIdUrl	= `http://atis.edu.az/UnibookHsisRest/structures/org/${id}/type/K?token=${token}`
 			//console.log('current user token: ', token);
 			console.log('gettind departments list from: ', this.realDepartmentByIdUrl);
 			return this.http.get(this.realDepartmentByIdUrl)
@@ -75,7 +75,7 @@ export class UniversityService {
 	// gets a list of faculties that belong to a specific university id
 	getRealFacultyById(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
-			this.realFacultyByIdUrl	= `http://192.168.1.78:8082/UnibookHsisRest/structures/org/${id}/type/F?token=${token}`
+			this.realFacultyByIdUrl	= `http://atis.edu.az/UnibookHsisRest/structures/org/${id}/type/F?token=${token}`
 			//console.log('current user token: ', token);
 			console.log('gettind faculties list from: ', this.realFacultyByIdUrl);
 			return this.http.get(this.realFacultyByIdUrl)
@@ -90,7 +90,7 @@ export class UniversityService {
 	// gets a list of faculties that belong to a specific university id
 	getRealSpecialtyById(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
-			this.realSpecialtyByIdUrl	= `http://192.168.1.78:8082/UnibookHsisRest/structures/org/${id}/type/I?token=${token}`
+			this.realSpecialtyByIdUrl	= `http://atis.edu.az/UnibookHsisRest/structures/org/${id}/type/I?token=${token}`
  			//console.log('current user token: ', token);
 			console.log('gettind specialties list from: ', this.realSpecialtyByIdUrl);
 			return this.http.get(this.realSpecialtyByIdUrl)
@@ -104,7 +104,7 @@ export class UniversityService {
 	}
 	getRealUniversityStats(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
-			this.realUniversityStatsUrl = `http://192.168.1.78:8082/ReportingRest/reports/org/${id}?token=${token}`;
+			this.realUniversityStatsUrl = `http://atis.edu.az/ReportingRest/reports/org/${id}?token=${token}`;
 			console.log('realUniversityStatsURL', this.realUniversityStatsUrl);
 			return this.http.get(this.realUniversityStatsUrl)
 			.toPromise()
@@ -177,7 +177,7 @@ export class UniversityService {
 			studentCount: obj.studentCount,
 			teacherCount: obj.employeeCount,
 			street: obj.address.az,
-			imgUrl: `http://192.168.1.78:8082/UnibookHsisRest/structures/${obj.id}/logo?token=${token}`
+			imgUrl: `http://atis.edu.az/UnibookHsisRest/structures/${obj.id}/logo?token=${token}`
 		});
 		return uni;
 	}
@@ -193,8 +193,8 @@ export class UniversityService {
 			studentCount: obj.studentCount,
 			teacherCount: obj.employeeCount,
 			street: obj.address.az,
-			imgUrl: `http://192.168.1.78:8082/UnibookHsisRest/structures/${obj.id}/logo?token=${token}`,
-			coverImgUrl: `http://192.168.1.78:8082/UnibookHsisRest/structures/${obj.id}/cover?token=${token}`,	
+			imgUrl: `http://atis.edu.az/UnibookHsisRest/structures/${obj.id}/logo?token=${token}`,
+			coverImgUrl: `http://atis.edu.az/UnibookHsisRest/structures/${obj.id}/cover?token=${token}`,	
 			rektorName: obj.rectorName,
 			buildingCount: obj.structureInfo.buildingCount,
 			commonArea: obj.structureInfo.commonArea,

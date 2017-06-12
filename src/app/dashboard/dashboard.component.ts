@@ -136,6 +136,8 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 	setSubModules(mods){
+		// check if it's different from before, update the relevant data...
+		// based on current states with the modules
 		console.log('mods: ', mods);
 	}
 	searchUniversities(results: University[]): void {

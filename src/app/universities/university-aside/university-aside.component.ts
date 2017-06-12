@@ -1,17 +1,15 @@
-import { Component, EventEmitter, Input, Output, OnInit, ElementRef, AfterViewInit, OnChanges  } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ElementRef, OnChanges  } from '@angular/core';
 import { University } from '../../shared/university.model';
 import { UserService } from '../../shared/user.service';
 
 declare var $:any;
-declare var Select2;
-declare var select2;
 
 @Component({
 	
 	selector: 'university-aside',
 	templateUrl: 'university-aside.component.html'
 })
-export class UniversityAsideComponent implements OnInit, AfterViewInit, OnChanges { 
+export class UniversityAsideComponent implements OnInit, OnChanges { 
 	constructor(public userService: UserService) {}
 
 	@Input() university: University;
@@ -37,44 +35,38 @@ export class UniversityAsideComponent implements OnInit, AfterViewInit, OnChange
 		let maleChecked = true;
 		let femaleChecked = true;
 		this.userService.getModules().then(mods => {
-			this.subModules = mods.json().data.filter(module => module.parentId === this.currentModuleId);
+			this.subModules = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId))
+			console.log('submodules: ', this.subModules);
 			this.subModulesList.emit(this.subModules);
 		});
 	}
-	ngAfterViewInit() {
-		// checking if the current state has initialised
-		if (this.currentState){
-			//the element will only be created at the appropriate
-			if (this.currentState =='students-list' || this.currentState == 'teachers-list'){
-	    		$(".student-faculty").select2();
-	    	}			
-		}
-	}
 	ngOnChanges(){
-		this.userService.getToken().then(token => {
-			console.log('currentModuleId: ', this.currentModuleId);
-			this.userService.getModules().then(mods => {
-				this.subModules = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId), token);
-				console.log('submodules list: ', this.subModules);
-				this.subModulesList.emit(this.subModules);
-			});			
-		});
+		//console.log('detecting change');
+		this.userService.getModules().then(mods => {
+			this.subModules = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId));
+			//console.log('submodules list: ', this.subModules);
+			this.subModulesList.emit(this.subModules);
+		});			
 	}
-    mapModules(mods, token): Array<any>{
+    toggleFilter(subModule){
+    	let index = this.subModules.indexOf(subModule);
+    	this.subModules[index].active = !subModule.active;
+    	//console.log("changed submodule list: ", this.subModules);
+    	this.subModulesList.emit(this.subModules);
+    }
+    mapModules(mods): Array<any>{
        // console.log('response.json().data: ',response.json().data);
-       console.log('mapModules response: ', mods);
+       //console.log('mapModules response: ', mods);
        return mods.map(mod => this.toModule(mod));
     }
     toModule(r:any): any{
         let mod = {
             name: r.name.az,
-            id : r.id
+            id : r.id,
+            active: true
         }
         //console.log(mod.name, mod.id);
         return mod;
-    }
-    addFilter(subModule){
-    	console.log("adding submodule: ", subModule);
     }
 	toggleFemale() {
 		this.femaleChecked = !this.femaleChecked;

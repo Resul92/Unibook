@@ -22,7 +22,7 @@
 		Is Active
 		</label>
 	</div>-->
-	<a class="simple-btn" (click)="addFilter(subModule); false" [class.active-btn]="" *ngFor="let subModule of subModules">{{subModule.name}}</a>
+	<a class="simple-btn" (click)="toggleFilter(subModule); false" [class.active-btn]="subModule.active" *ngFor="let subModule of subModules">{{subModule.name}}</a>
 <!--
 	<a class="simple-btn" (click)="filterTeachersBy('grade', 'bakalavr'); false" [class.active-btn]="currentFilter == 'bakalavr'">Bakalavr</a>
 	<a class="simple-btn" (click)="filterTeachersBy('grade', 'magistr'); false" [class.active-btn]="currentFilter == 'magistr'">Magistr</a>
