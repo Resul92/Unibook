@@ -152,12 +152,12 @@ export class DashboardComponent implements OnInit {
 			console.log('setting subModules: ', subModulesIdList);
 			console.log('current state: ', this.currentState);
 			if(this.currentState == 'dashboard'){
-				this.loadMoreUniversities(this.subModulesList);
+				this.loadMoreUniversities(this.subModulesList.join(","));
 			} else if(this.currentState == 'teachers-list'){
 				console.log("have to call load more teachers");
-				this.loadMoreTeachers(this.subModulesList);
+				this.loadMoreTeachers(this.subModulesList.join(","));
 			}  else if(this.currentState == 'students-list'){
-				this.loadMoreStudents(this.subModulesList);
+				this.loadMoreStudents(this.subModulesList.join(","));
 			}
 		}
 	}

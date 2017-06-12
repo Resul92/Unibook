@@ -25,7 +25,7 @@ export class UniversityService {
 	private uniLogoUrl;
 	private uniCoverUrl;
 	private searchUrl;
-	private subModulesList: Array<any> = [];
+	private subModulesList: string = '';
 	public universities: ReplaySubject<any> = new ReplaySubject(1);
 
 	constructor(private http: Http,
@@ -35,7 +35,6 @@ export class UniversityService {
 		if(subModules){ this.subModulesList = subModules};
 		return this.userService.getToken().then(token =>{
 			console.log('current user token: ', token);			
-			let subModulesString = this.subModulesList.join("%2C");
 	 		this.realUniversitiesUrl = `http://atis.edu.az/UnibookHsisRest/structures/type/U?token=${token}&page=${page}&pageSize=50`;
 			console.log('getting real structures list from', this.realUniversitiesUrl);		
 			return this.http.get(this.realUniversitiesUrl)

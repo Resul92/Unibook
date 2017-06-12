@@ -17,7 +17,7 @@ export class TeacherService {
 	private realTeacherByIdUrl;
 	private authToken;
 	private realTeachersUrl;
-	private subModulesList: Array<any> = [1000050, 1000051, 1000062, 1000061 ];
+	private subModulesList: string = `1000050, 1000051, 1000062, 1000061`;
 	constructor(
 		private http: Http,
 		private userService: UserService
@@ -29,8 +29,7 @@ export class TeacherService {
 		if(subModules){ this.subModulesList = subModules};
 		return this.userService.getToken().then(token =>{
 			this.authToken = token;
-			let subModulesString = this.subModulesList.join("%2C");
-	 		this.realTeachersUrl = `http://atis.edu.az/UnibookHsisRest/teachers/tms?token=${token}&genderId=&orgId=&statusId=&subModuleId=${subModulesString}&page=${page}&pageSize=50`;
+	 		this.realTeachersUrl = `http://atis.edu.az/UnibookHsisRest/teachers/tms?token=${token}&genderId=&orgId=&statusId=&subModuleId=${this.subModulesList}&page=${page}&pageSize=50`;
 			// getting teachers from the backend
 			console.log('getting real teachers url', this.realTeachersUrl, "token: ", token);
 			return this.http.get(this.realTeachersUrl)
