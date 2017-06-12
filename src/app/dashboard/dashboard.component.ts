@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
 			this.universityService.getRealUniversities(this.universityPageCounter, mods);
 		} else {
 			this.universityPageCounter++;
-			this.universityService.getRealUniversities(this.universityPageCounter, this.subModulesList)
+			this.universityService.getRealUniversities(this.universityPageCounter)
 			.then(universities => {
 				this.loading = false;
 				this.universities = this.universities.concat(universities);
@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 	loadMoreStudents(mods?){
-		console.log('loadModeStudents called:');
+		console.log('loadModeStudents called with mods:', mods);
 		this.loading = true;
 		if(mods){
 			this.studentPageCounter = 1;
@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
 		} else {
 			// need to have a counter starting at one to know how may times it was activated
 			this.studentPageCounter++;
-			this.studentService.getRealStudents(this.studentPageCounter, this.subModulesList)
+			this.studentService.getRealStudents(this.studentPageCounter)
 			.then(students => {
 				this.loading = false;
 				//since loading extra data breaks the view in masonry, we'll set it to empty and then load the data
@@ -119,7 +119,7 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 	loadMoreTeachers(mods?){
-		console.log('loadModeTeachers called:');
+		console.log('loadModeTeachers called with mods:', mods);
 		this.loading = true;
 		if(mods){
 			// we are just requesting things with other filters
@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
 		} else {
 			// need to have a counter starting at one to know how may times it was activated
 			this.teacherPageCounter++;
-			this.teacherService.getRealTeachers(this.teacherPageCounter, this.subModulesList)
+			this.teacherService.getRealTeachers(this.teacherPageCounter)
 			.then(teachers => {
 				this.loading = false;
 				this.teachers
