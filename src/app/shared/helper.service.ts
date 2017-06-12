@@ -26,7 +26,15 @@ export class HelperService {
 	sort(objs, property: string) {
 		return objs.sort(this.dynamicSort(property));
 	}
-
+	arraysEqual(arr1, arr2) {
+	    if(arr1.length !== arr2.length)
+	        return false;
+	    for(var i = arr1.length; i--;) {
+	        if(arr1[i] !== arr2[i])
+	            return false;
+	    }
+	    return true;
+	}
 	dynamicSort(property: string) {
 	    var sortOrder = 1;
 	    if(property[0] === "-") {

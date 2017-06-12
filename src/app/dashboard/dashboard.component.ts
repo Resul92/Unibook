@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { University } from '../shared/university.model';
 import { UniversityService } from '../shared/university.service';
 import { HelperService } from '../shared/helper.service';
@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
 	loading: Boolean;
 	modules;
 	currentModuleId;
+	subModulesList: Array<any>;
 
 	constructor(
 		private userService: UserService,
@@ -76,31 +77,36 @@ export class DashboardComponent implements OnInit {
 			//console.log('current modules: ', this.modules);
 		});
 	}
-	loadMoreUniversities(){
+	loadMoreUniversities(mods?){
+		console.log('loadModeUniversities called:');
 		// need to have a counter starting at one to know how may times it was activated
-		this.loading = true;
-		this.universityPageCounter++;
-		this.universityService.getRealUniversities(this.universityPageCounter)
-		.then(universities => {
-			this.loading = false;
-			this.universities = this.universities.concat(universities);
-			this.allUniversities = this.allUniversities.concat(universities);
-			console.log("universities list in the dashboard:", this.universities);
-		});	
-		// neet add method to the querying function to only ask for the necessary number of items
-		// need to set the initial query to only ask for he first one
-		// need to send additional requests to the query and push it the result to the local variale
-	}
-	loadMoreStudents(mods?){
 		this.loading = true;
 		if(mods){
 			// we are just requesting things with other filters
-			this.setSubModules = mods;
-			this.teacherService.getRealTeachers(1, this.setSubModules);
+			//setting counter to one because we are filtering universities
+			this.universityPageCounter = 1;
+			this.universityService.getRealUniversities(this.universityPageCounter, mods);
+		} else {
+			this.universityPageCounter++;
+			this.universityService.getRealUniversities(this.universityPageCounter, this.subModulesList)
+			.then(universities => {
+				this.loading = false;
+				this.universities = this.universities.concat(universities);
+				this.allUniversities = this.allUniversities.concat(universities);
+				console.log("universities list in the dashboard:", this.universities);
+			});	
+		}
+	}
+	loadMoreStudents(mods?){
+		console.log('loadModeUniversities called:');
+		this.loading = true;
+		if(mods){
+			this.studentPageCounter = 1;
+			this.studentService.getRealStudents(this.studentPageCounter, mods);
 		} else {
 			// need to have a counter starting at one to know how may times it was activated
 			this.studentPageCounter++;
-			this.studentService.getRealStudents(this.studentPageCounter, this.setSubModules)
+			this.studentService.getRealStudents(this.studentPageCounter, this.subModulesList)
 			.then(students => {
 				this.loading = false;
 				//since loading extra data breaks the view in masonry, we'll set it to empty and then load the data
@@ -110,21 +116,19 @@ export class DashboardComponent implements OnInit {
 				this.allStudents = this.allStudents.concat(students);
 				console.log("students list in the dashboard:", this.students);
 			});	
-			// neet add method to the querying function to only ask for the necessary number of items
-			// need to set the initial query to only ask for he first one
-			// need to send additional requests to the query and push it the result to the local variale
 		}
 	}
 	loadMoreTeachers(mods?){
+		console.log('loadModeTeachers called:');
 		this.loading = true;
 		if(mods){
 			// we are just requesting things with other filters
-			this.setSubModules = mods;
-			this.teacherService.getRealTeachers(1, this.setSubModules);
+			this.teacherPageCounter = 1;
+			this.teacherService.getRealTeachers(this.teacherPageCounter, mods);
 		} else {
 			// need to have a counter starting at one to know how may times it was activated
 			this.teacherPageCounter++;
-			this.teacherService.getRealTeachers(this.teacherPageCounter, this.setSubModules)
+			this.teacherService.getRealTeachers(this.teacherPageCounter, this.subModulesList)
 			.then(teachers => {
 				this.loading = false;
 				this.teachers
@@ -136,9 +140,25 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 	setSubModules(mods){
+		let subModulesIdList = mods.map(mod => {
+			if(mod.active) {return mod.id}});
+		console.log('new subModules: ', subModulesIdList);
+		console.log('old subModules: ', this.subModulesList);
+		if(! this.subModulesList){ this.subModulesList = subModulesIdList};
 		// check if it's different from before, update the relevant data...
-		// based on current states with the modules
-		console.log('mods: ', mods);
+		if(!this.helperService.arraysEqual(subModulesIdList, this.subModulesList)) {
+			this.subModulesList = subModulesIdList;
+			// based on current states with the modules
+			console.log('setting subModules: ', subModulesIdList);
+			console.log('current state: ', this.currentState);
+			if(this.currentState = 'dashboard'){
+				this.loadMoreUniversities(this.subModulesList);
+			} else if(this.currentState = 'teachers-list'){
+				this.loadMoreTeachers(this.subModulesList);
+			}  else if(this.currentState = 'students-list'){
+				this.loadMoreStudents(this.subModulesList);
+			}
+		}
 	}
 	searchUniversities(results: University[]): void {
 		this.universities = results;

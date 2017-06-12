@@ -21,7 +21,6 @@ export class StudentService {
 	private realStudentByIdUrl;
 	private realStudentPersonal;
 	private realStudentFamily;
-	private realStudentsUrl;
 	private realStudentContacts;
 	private authToken;
 	private realStudentDocs;
@@ -38,9 +37,10 @@ export class StudentService {
 		return this.userService.getToken().then(token =>{
 			this.authToken = token;
 			// getting teachers from the backend
-	 		this.realStudentsUrl = `http://atis.edu.az/UnibookHsisRest/students/tms?token=${token}&subModuleId=${subModules}&page=${page}&pageSize=50`;
-			console.log('getting real students url', this.realStudentsUrl);		
-			return this.http.get(this.realStudentsUrl)
+			let subModulesString = subModules.join("&");
+	 		let realStudentsUrl = `http://atis.edu.az/UnibookHsisRest/students/tms?token=${token}&subModuleId=${subModulesString}&page=${page}&pageSize=50`;
+			console.log('getting real students url', realStudentsUrl);		
+			return this.http.get(realStudentsUrl)
 			.toPromise()
 			.then(response => {
 				console.log('getRealStudents response.json().data', response.json().data);

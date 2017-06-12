@@ -27,7 +27,8 @@ export class TeacherService {
 	getRealTeachers(page, subModules): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.authToken = token;
-	 		this.realTeachersUrl = `http://atis.edu.az/UnibookHsisRest/teachers/tms?token=${token}&genderId=&orgId=&statusId=&subModuleId=${subModules}&page=${page}&pageSize=50`;
+			let subModulesString = subModules.join("&");
+	 		this.realTeachersUrl = `http://atis.edu.az/UnibookHsisRest/teachers/tms?token=${token}&genderId=&orgId=&statusId=&subModuleId=${subModulesString}&page=${page}&pageSize=50`;
 			// getting teachers from the backend
 			console.log('getting real teachers url', this.realTeachersUrl, "token: ", token);
 			return this.http.get(this.realTeachersUrl)

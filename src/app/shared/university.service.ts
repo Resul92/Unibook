@@ -30,7 +30,7 @@ export class UniversityService {
 	constructor(private http: Http,
 		private userService: UserService) { }
 	/// connect to the real api
-	getRealUniversities(page): Promise<any> {
+	getRealUniversities(page, subModules): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			console.log('current user token: ', token);
 	 		this.realUniversitiesUrl = `http://atis.edu.az/UnibookHsisRest/structures/type/U?token=${token}&page=${page}&pageSize=50`;
