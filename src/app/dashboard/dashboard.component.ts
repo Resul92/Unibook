@@ -140,6 +140,7 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 	setSubModules(mods){
+		//console.log(mods);
 		let subModulesIdList = mods.map(mod => {
 			if(mod.active) {return mod.id}});
 		console.log('new subModules: ', subModulesIdList);

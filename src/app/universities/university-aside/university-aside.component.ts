@@ -30,29 +30,37 @@ export class UniversityAsideComponent implements OnInit, OnChanges {
 	maleChecked;
 	femaleChecked;
 	subModules: Array<any>;
+	filters: Array<any>;
 
 	ngOnInit() {
 		let maleChecked = true;
 		let femaleChecked = true;
 		this.userService.getModules().then(mods => {
 			this.subModules = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId))
+			this.filters = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId))
 			console.log('submodules: ', this.subModules);
-			this.subModulesList.emit(this.subModules);
+			this.subModulesList.emit(this.filters);
 		});
 	}
 	ngOnChanges(){
 		//console.log('detecting change');
 		this.userService.getModules().then(mods => {
 			this.subModules = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId));
+			this.filters = this.mapModules(mods.json().data.filter(module => module.parentId === this.currentModuleId));
 			//console.log('submodules list: ', this.subModules);
-			this.subModulesList.emit(this.subModules);
+			this.subModulesList.emit(this.filters);
 		});			
 	}
     toggleFilter(subModule){
     	let index = this.subModules.indexOf(subModule);
     	this.subModules[index].active = !subModule.active;
-    	//console.log("changed submodule list: ", this.subModules);
-    	this.subModulesList.emit(this.subModules);
+    	if(this.filters.indexOf(subModule) > -1){ 
+    		this.filters = this.filters.splice(index, 1);
+    	} else {
+    		this.filters.push(subModule);
+    	}
+    	console.log("changed submodule list: ", this.filters);
+    	this.subModulesList.emit(this.filters);
     }
     mapModules(mods): Array<any>{
        // console.log('response.json().data: ',response.json().data);
