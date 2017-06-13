@@ -17,7 +17,7 @@
 						<h5>Ali Tehsil Müəssəsiəsi</h5>
 						<ng-select
 							[options]="universities"
-							(selected)="getFacultiesByUniversityId($event.value); uni_id = $event.value; uni_name = $event.label"
+							(selected)="getFacultiesByUniversityId($event); uni_id = $event.id; uni_name = $event.name"
 							placeholder="Seçin!"
 							[allowClear]="true">
 						</ng-select>

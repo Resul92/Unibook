@@ -8,7 +8,7 @@ import { UniversityService } from '../../shared/university.service';
 	templateUrl: 'teacher-filter.component.html'
 })
 export class TeacherFilterComponent implements OnInit { 
-	@Input() universities: University[];
+	@Input() universities;
 	@Input() university: University;
 	@Output() 
 	select = new EventEmitter();
@@ -20,11 +20,17 @@ export class TeacherFilterComponent implements OnInit {
 	selected: any;
 	disabled: boolean = true;
 	characters: Array<any>;
+	mappedUniversities;
 	constructor(
 		private universityService: UniversityService
 	) { }
 	ngOnInit(){
 		console.log('universities in filter: ', this.universities);
+		// this.mappedUniversities = this.universities.map(uni => {
+		// 	uni.label = uni.name;
+		// 	uni.value = uni.id;
+		// });
+		// console.log('universities in filter: ', this.mappedUniversities);
 	}
 	onChange(value) {
     	this.select.emit(value)
