@@ -31,6 +31,8 @@
     "imagesloaded": "^4.1.2",
     "jquery": "^3.2.1",
     "masonry-layout": "^4.2.0",
+    "ng-select": "^1.0.0-beta.5",
+    "ngx-bootstrap": "^1.7.1",
     "rxjs": "^5.1.0",
     "select2": "^4.0.3",
     "zone.js": "^0.8.4"

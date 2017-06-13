@@ -1,5 +1,63 @@
-<select #sel (change)="onChange(sel.value)" name="filter" id="filter" class="filter" placeholder="Acar sozunu daxil edin">
-	<option 
-	*ngFor="let property of teacherFilterProperties"
-	value="{{property.value}}">{{property.name}}</option>
-</select>
+<button type="button" class="btn btn-primary" (click)="staticModal.show()">Static modal</button>
+ 
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Static modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This is static modal, backdrop click will not close it.
+        Click <b>&times;</b> to close modal.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<a class="select-faculty-btn" (click)="showModal()" filterByUni>
+	<span>{{university.name}}</span>
+	<i class="fa fa-filter" aria-hidden="true"></i>
+</a>
+<div bsModal #modal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title pull-left">Strukturu seçin</h4>
+				<button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<h5>Ali Tehsil Müəssəsiəsi</h5>
+						<ng-select
+							[options]="universities"
+							(selected)="getFacultiesByUniversityId($event.value); uni_id = $event.value"
+							placeholder="Seçin!"
+							[allowClear]="true">
+						</ng-select>
+					</div>
+					
+					<div class="form-group">
+						<h5>Ali Tehsil Müəssəsiəsi</h5>
+						<ng-select
+							[options]="faculties"
+							[disabled]="disabled"
+							placeholder="Fakültə seçin!"
+							(selected)="faculty_id = $event.value"
+							[allowClear]="true">
+						</ng-select>
+					</div>
+
+					<button type="submit" class="btn btn-default" (click)="setOrgId(uni_id, faculty_id)">Təstiq et</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

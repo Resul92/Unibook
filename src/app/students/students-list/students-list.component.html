@@ -34,7 +34,11 @@
 				(select)="onSortChange($event)"
 				[students]="students"
 			></student-sort>
-			<student-university-filter></student-university-filter>
+			<student-filter
+			[university]="university"
+			[universities]="universities"
+			(select)="filterStudentsBy($event)"
+			></student-filter>
 		</div>
 		
 		<custom-loader *ngIf="loading"></custom-loader>

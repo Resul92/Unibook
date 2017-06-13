@@ -8,6 +8,13 @@
 	</h4>
 </div>
 
+<!--
+<student-filter 
+*ngIf="currentState == 'student-list'"
+[universities]="universities"
+(select)="filterStudentsBy($event)"
+></student-filter>-->
+
 <ul class="aside-block" *ngIf="currentState =='students-list' || currentState == 'teachers-list'" >
 	<li class="simple-btn">Umumi telebelerin sayi<span class="aside-block-spn">{{university.studentCount}}</span></li>
 	<li class="simple-btn">Bu il qebul olanlar <span class="aside-block-spn">{{university.freshmanCount}}</span></li>

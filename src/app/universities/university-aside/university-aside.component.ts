@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit, ElementRef, OnChanges  } from '@angular/core';
 import { University } from '../../shared/university.model';
 import { UserService } from '../../shared/user.service';
-
 declare var $:any;
 
 @Component({
@@ -13,6 +12,7 @@ export class UniversityAsideComponent implements OnInit, OnChanges {
 	constructor(public userService: UserService) {}
 
 	@Input() university: University;
+	@Input() universities: University[];
 	@Input() currentState: string;
 	@Input() currentModuleId: string;
 
@@ -52,16 +52,27 @@ export class UniversityAsideComponent implements OnInit, OnChanges {
 		});			
 	}
     toggleFilter(subModule){
-    	let index = this.subModules.indexOf(subModule);
+    	let index = this.findIndexOf(this.subModules, subModule);
     	this.subModules[index].active = !subModule.active;
-    	if(this.filters.indexOf(subModule) > -1){ 
-    		this.filters = this.filters.splice(index, 1);
+    	let filterIndex = this.findIndexOf(this.filters, subModule);
+		console.log("filter exists at index: ",filterIndex );
+    	if(filterIndex  > -1){ 
+    		//console.log('before removing a filter: ', this.filters)
+    		this.filters.splice(filterIndex, 1);
+    		//console.log('after removing a filter: ', this.filters)
     	} else {
+    		//console.log('before adding a filter: ', this.filters)
     		this.filters.push(subModule);
+    		//console.log('after adding a filter: ', this.filters)
     	}
-    	console.log("changed submodule list: ", this.filters);
+    	//console.log("changed submodule list: ", this.filters);
     	this.subModulesList.emit(this.filters);
     }
+    findIndexOf(array, obj){
+		let index = array.findIndex(filter => obj.id == filter.id);
+		return index;
+    }
+
     mapModules(mods): Array<any>{
        // console.log('response.json().data: ',response.json().data);
        //console.log('mapModules response: ', mods);
@@ -76,45 +87,6 @@ export class UniversityAsideComponent implements OnInit, OnChanges {
         //console.log(mod.name, mod.id);
         return mod;
     }
-	toggleFemale() {
-		this.femaleChecked = !this.femaleChecked;
-		if (this.currentState == "students-list") {
-			this.filterStudentsBy('gender', this.genderFilter());
-		} else if (this.currentState == "teachers-list"){
-			this.filterTeachersBy('gender', this.genderFilter());
-		}
-	}
-	toggleMale() {
-		this.maleChecked = !this.maleChecked;
-		if (this.currentState == "students-list") {
-			this.filterStudentsBy('gender', this.genderFilter());
-		} else if (this.currentState == "teachers-list"){
-			this.filterTeachersBy('gender', this.genderFilter());
-		}
-	}
-	genderFilter() {
-		if (this.femaleChecked && this.maleChecked) {
-			return 'all';
-		} else if (this.femaleChecked) {
-			return 'qadin';
-		} else if (this.maleChecked) {
-			return 'kishi';
-		}
-	}
-	sortBy(property: string): void {
-		if (this.university.departments){
-			console.log('sortBy in the dashboard component started, trying to sort by: ', property);
-			this.university.departments.sort(this.dynamicSort(property));
-		}
-	}
-	filterStudentsBy(property, value){
-		this.currentFilter = value;
-		this.filterStudents.emit({property, value});
-	}
-	filterTeachersBy(property, value){
-		this.currentFilter = value;
-		this.filterTeachers.emit({property, value});
-	}
 	dynamicSort(property: string) {
 	    var sortOrder = 1;
 	    if(property[0] === "-") {
@@ -125,5 +97,37 @@ export class UniversityAsideComponent implements OnInit, OnChanges {
 	        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
 	        return result * sortOrder;
 	    }
+	}
+	// filters that might come in handy in the future
+	// toggleFemale() {
+	// 	this.femaleChecked = !this.femaleChecked;
+	// 	if (this.currentState == "students-list") {
+	// 		this.filterStudentsBy('gender', this.genderFilter());
+	// 	} else if (this.currentState == "teachers-list"){
+	// 		this.filterTeachersBy('gender', this.genderFilter());
+	// 	}
+	// }
+	// toggleMale() {
+	// 	this.maleChecked = !this.maleChecked;
+	// 	if (this.currentState == "students-list") {
+	// 		this.filterStudentsBy('gender', this.genderFilter());
+	// 	} else if (this.currentState == "teachers-list"){
+	// 		this.filterTeachersBy('gender', this.genderFilter());
+	// 	}
+	// }
+	// genderFilter() {
+	// 	if (this.femaleChecked && this.maleChecked) {
+	// 		return 'all';
+	// 	} else if (this.femaleChecked) {
+	// 		return 'qadin';
+	// 	} else if (this.maleChecked) {
+	// 		return 'kishi';
+	// 	}
+	// }
+	sortBy(property: string): void {
+		if (this.university.departments){
+			console.log('sortBy in the dashboard component started, trying to sort by: ', property);
+			this.university.departments.sort(this.dynamicSort(property));
+		}
 	}
 }

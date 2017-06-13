@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ModalModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 // services
@@ -103,13 +104,16 @@ import { LoaderComponent } from './shared/loader.component'
 import { TeacherUniversityFilterComponent } from './teachers/teacher-university-filter/teacher-university-filter.component';
 import { StudentUniversityFilterComponent } from './students/student-university-filter/student-university-filter.component';
 import { FilterByUniDirective } from './shared/filter-by-uni.directive';
+import { SelectModule } from 'ng-select';
 
 @NgModule({
 	imports: [
 		BrowserModule,
 		FormsModule,
 		HttpModule,
-		routing
+		ModalModule.forRoot(),
+		routing,
+		SelectModule
 	],
 	declarations: [
 		InitializeDropdown,

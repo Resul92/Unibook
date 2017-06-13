@@ -19,6 +19,7 @@ export class StudentsListComponent implements OnInit,OnChanges {
 	@Output() update = new EventEmitter();
  	@Input() allStudents: Student[];
 	@Input() loading: boolean;
+	@Input() universities: University[];
 
 	constructor(
 		private studentService: StudentService) {
@@ -55,5 +56,10 @@ export class StudentsListComponent implements OnInit,OnChanges {
 	}
 	loadMoreStuds(){
 		this.loadMoreStudents.emit();
+	}
+	filterStudentsBy(ids){
+		console.log('ids in filter: ', ids);
+		// this.currentFilter = value;
+		// this.filterStudents.emit({property, value});
 	}
 }
