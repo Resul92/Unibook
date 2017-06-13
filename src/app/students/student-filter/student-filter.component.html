@@ -1,5 +1,42 @@
-<!--<custom-jquery></custom-jquery>-->
+<a class="select-faculty-btn" (click)="showModal()" filterByUni>
+	<span>{{university.name}}</span>
+	<i class="fa fa-filter" aria-hidden="true"></i>
+</a>
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title pull-left">Strukturu seçin</h4>
+				<button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<h5>Ali Tehsil Müəssəsiəsi</h5>
+						<ng-select
+							[options]="universities"
+							(selected)="getFacultiesByUniversityId($event.value); uni_id = $event.value; uni_name = $event.label"
+							placeholder="Seçin!"
+							[allowClear]="true">
+						</ng-select>
+					</div>
+					
+					<div class="form-group">
+						<h5>Ali Tehsil Müəssəsiəsi</h5>
+						<ng-select
+							[options]="faculties"
+							[disabled]="disabled"
+							placeholder="Fakültə seçin!"
+							(selected)="faculty_id = $event.value; faculty_name = $event.label"
+							[allowClear]="true">
+						</ng-select>
+					</div>
 
-<select #sel (change)="onChange(sel.value)" name="filter" id="filter" class="custom-select filter" placeholder="Acar sozunu daxil edin">
-	<option value="name">A-z siralama</option>
-</select>
+					<button type="submit" class="btn btn-default" (click)="setOrgId(uni_id, faculty_id)">Təstiq et</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

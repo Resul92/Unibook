@@ -1,42 +1,21 @@
-import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { TeacherFilterProperty } from '../../shared/teacher-filter-property.model';
+import { Component, Input, Output, EventEmitter, ViewChild, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/ng2-bootstrap';
 import { University } from '../../shared/university.model';
 import { UniversityService } from '../../shared/university.service';
-
 @Component({
-	
 	selector: 'teacher-filter',
-	templateUrl: 'teacher-filter.component.html',
-	animations: [
-		trigger('slideToggle', [
-			
-			state('hide', style({
-				height: '40px'
-			})),
-			state('show', style({
-				height: '*'
-			})),
-
-			transition('hide <=> show', animate('300ms')),
-
-		]),
-	]
+	styleUrls: ['teacher-filter.component.css'],
+	templateUrl: 'teacher-filter.component.html'
 })
-export class TeacherFilterComponent { 
-	@Input () 
-	teacherFilterProperties: TeacherFilterProperty;
+export class TeacherFilterComponent implements OnInit { 
 	@Input() universities: University[];
 	@Input() university: University;
-
 	@Output() 
 	select = new EventEmitter();
+	@ViewChild('modal') public modal : ModalDirective;
 	faculties: any[];
 	uni_id: any;
 	faculty_id: any;
-
-	@ViewChild('modal') public modal : ModalDirective;
 	all: any[];
 	selected: any;
 	disabled: boolean = true;
@@ -44,6 +23,9 @@ export class TeacherFilterComponent {
 	constructor(
 		private universityService: UniversityService
 	) { }
+	ngOnInit(){
+		console.log('universities in filter: ', this.universities);
+	}
 	onChange(value) {
     	this.select.emit(value)
 	}
@@ -51,6 +33,7 @@ export class TeacherFilterComponent {
 		this.modal.show();
 	}
 	getFacultiesByUniversityId(uni_id) {
+		console.log('getFacultiesByUniversityId: ', uni_id);
 		var array2 = [];
 
 
@@ -67,7 +50,6 @@ export class TeacherFilterComponent {
 
 		this.disabled = false;
 	}
-
 	setOrgId(uni_id, faculty_id) {
 		let emitter = {
 			uni_id: uni_id,

@@ -9,10 +9,6 @@ import { Teacher } from '../../shared/teacher.model';
 import { TeacherService } from '../../shared/teacher.service';
 import { University } from '../../shared/university.model';
 import { UniversityService } from '../../shared/university.service';
-import { StudentFilterProperty } from '../../shared/student-filter-property.model';
-import { StudentFilterPropertyService } from '../../shared/student-filter-property.service';
-import { TeacherFilterProperty } from '../../shared/teacher-filter-property.model';
-import { TeacherFilterPropertyService } from '../../shared/teacher-filter-property.service';
 
 @Component({
 	
@@ -36,8 +32,6 @@ export class UniversitiesInfoComponent implements OnInit, DoCheck {
 		private helperService: HelperService,
 		private studentService: StudentService,
 		private teacherService: TeacherService,
-		private studentFilterPropertyService: StudentFilterPropertyService,
-		private teacherFilterPropertyService: TeacherFilterPropertyService,
 		private location: Location,
 		private route: ActivatedRoute,
 		private router: Router) {}

@@ -15,9 +15,6 @@ import { UniversityService } from './shared/university.service';
 import { StudentService } from './shared/student.service';
 import { HelperService } from './shared/helper.service';
 import { TeacherService } from './shared/teacher.service';
-import { UniversityFilterPropertyService } from './shared/university-filter-property.service';
-import { StudentFilterPropertyService } from './shared/student-filter-property.service';
-import { TeacherFilterPropertyService } from './shared/teacher-filter-property.service';
 //Shared and app-level Components
 import { SpinnerComponent } from "./core/spinner/spinner.component";
 import { AuthComponent } from './shared/auth.component';
@@ -101,8 +98,6 @@ import { NavButtonDirective } from './shared/nav-button.directive';
 import { PopupDirective } from './shared/popup.directive';
 import { AsideTriggerDirective } from './shared/aside-trigger.directive';
 import { LoaderComponent } from './shared/loader.component'
-import { TeacherUniversityFilterComponent } from './teachers/teacher-university-filter/teacher-university-filter.component';
-import { StudentUniversityFilterComponent } from './students/student-university-filter/student-university-filter.component';
 import { FilterByUniDirective } from './shared/filter-by-uni.directive';
 import { SelectModule } from 'ng-select';
 
@@ -190,8 +185,6 @@ import { SelectModule } from 'ng-select';
 		PopupDirective,
 		AsideTriggerDirective,
 		LoaderComponent,
-		TeacherUniversityFilterComponent,
-		StudentUniversityFilterComponent,
 		FilterByUniDirective,
 		SpinnerComponent,
 		SearchPipe
@@ -203,9 +196,6 @@ import { SelectModule } from 'ng-select';
 		HelperService,
 		StudentService,
 		TeacherService,
-		UniversityFilterPropertyService,
-		StudentFilterPropertyService,
-		TeacherFilterPropertyService,
 		SpinnerService
 	],
 	bootstrap: [AppComponent]
