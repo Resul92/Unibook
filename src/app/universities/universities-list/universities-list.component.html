@@ -1,5 +1,5 @@
 <custom-loader *ngIf="loading"></custom-loader>
-<div class="content university-list">
+<h1 *ngIf="universities.length === 0 && !loading">No data to show.</h1><div class="content university-list">
 	<div class="row grid grid-4">
 		<div class="grid-sizer"></div>
 		<div class="grid-item" *ngFor="let university of universities"

@@ -30,10 +30,10 @@
 			[allStudents]='allStudents' 
 			(update)="search($event)"
 			[students]="students"></student-search> -
-			<student-sort
+			<!--<student-sort
 				(select)="onSortChange($event)"
 				[students]="students"
-			></student-sort>
+			></student-sort>-->
 			<student-filter
 			[university]="university"
 			[universities]="universities"
@@ -45,6 +45,7 @@
 
 		<div class="row grid grid-4">
 			<div class="grid-sizer"></div>
+			<h1 *ngIf="students.length === 0 && !loading">No data to show.</h1>
 			<div class="grid-item" *ngFor="let student of students">
 				<div class="students-grid-block">
 					<div class="student-grid-inner">

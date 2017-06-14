@@ -24,10 +24,10 @@
 		[allTeachers]='allTeachers' 
 		[teachers]="teachers"></teacher-search>
 		<div class="structure-inner-sort">
-			<teacher-sort
+			<!--<teacher-sort
 				(select)="onSortChange($event)"
 				[teachers]="teachers"
-			></teacher-sort>
+			></teacher-sort>-->
 			<teacher-filter
 			[university]="university"
 			[universities]="universities"
@@ -39,6 +39,7 @@
 
 		<div class="grid grid-4">
 			<div class="grid-sizer"></div>
+			<h1 *ngIf="teachers.length === 0 && !loading">No data to show.</h1>
 			<div class="grid-item" *ngFor="let teacher of teachers">
 				<a routerLink="/teacher/{{teacher.id}}" routerLinkActive="active" class="teachers-profile-tables">
 					<div class="teachers-profile-tables-top">

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { University } from '../shared/university.model';
 import { UniversityService } from '../shared/university.service';
 import { HelperService } from '../shared/helper.service';
@@ -47,7 +47,6 @@ export class DashboardComponent implements OnInit {
 		private studentService: StudentService,
 		private teacherService: TeacherService,
 		private helperService: HelperService,
-		public ref: ChangeDetectorRef,
 		private router: Router) {
 	}
 
@@ -83,10 +82,13 @@ export class DashboardComponent implements OnInit {
 		// need to have a counter starting at one to know how may times it was activated
 		this.loading = true;
 		if(mods){
+			this.loading = false;
 			// we are just requesting things with other filters
 			//setting counter to one because we are filtering universities
 			this.universityPageCounter = 1;
-			this.universityService.getRealUniversities(this.universityPageCounter, mods);
+			this.universityService.getRealUniversities(this.universityPageCounter, mods).then(universities => {
+				this.universities = universities;
+			});
 		} else {
 			this.universityPageCounter++;
 			this.universityService.getRealUniversities(this.universityPageCounter)
@@ -102,8 +104,11 @@ export class DashboardComponent implements OnInit {
 		console.log('loadModeStudents called with mods:', mods);
 		this.loading = true;
 		if(mods){
+			this.loading = false;
 			this.studentPageCounter = 1;
-			this.studentService.getRealStudents(this.studentPageCounter, mods);
+			this.studentService.getRealStudents(this.studentPageCounter, mods).then(students => {
+				this.students = students;
+			});
 		} else {
 			// need to have a counter starting at one to know how may times it was activated
 			this.studentPageCounter++;
@@ -123,9 +128,12 @@ export class DashboardComponent implements OnInit {
 		console.log('loadModeTeachers called with mods:', mods);
 		this.loading = true;
 		if(mods){
+			this.loading = false;
 			// we are just requesting things with other filters
 			this.teacherPageCounter = 1;
-			this.teacherService.getRealTeachers(this.teacherPageCounter, mods);
+			this.teacherService.getRealTeachers(this.teacherPageCounter, mods).then(teachers => {
+				this.teachers = teachers;
+			});
 		} else {
 			// need to have a counter starting at one to know how may times it was activated
 			this.teacherPageCounter++;
@@ -205,24 +213,28 @@ export class DashboardComponent implements OnInit {
 	}
 	sortStudentsBy(property: string): void {
 		console.log('sorting students by: ', property);
+		console.log('before sorting: ', this.students);
 		if (this.students){
-			this.students = this.helperService.sort(this.students, property);
+			this.helperService.sort(this.students, property);
 		}
 		console.log('after sorting: ', this.students);
 	}
 	sortTeachersBy(property: string): void {
 		console.log('sorting teachers by: ', property);
+		console.log('before sorting: ', this.teachers);
 		if (this.teachers){
-			this.teachers = this.helperService.sort(this.teachers, property);
+			this.helperService.sort(this.teachers, property);
 		}
 		console.log('after sorting: ', this.teachers);
 	}
 	sortUniversitiesBy(property: string): void {
 		console.log('sorting universities by: ', property);
+		console.log('before sorting: ', this.universities);
+		console.log(this.helperService.sort(this.universities, property));
 		if (this.universities){
 			this.universities = this.helperService.sort(this.universities, property);
+		} 
 		console.log('after sorting: ', this.universities);
-		}
 	}
 	filterStudentsBy(property: string, value: string): void {
 		if (this.students){
