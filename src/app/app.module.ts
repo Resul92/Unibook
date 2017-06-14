@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ModalModule } from 'ngx-bootstrap';
+import { LoadersCssModule } from 'angular2-loaders-css';
 
 import { AppComponent } from './app.component';
 // services
@@ -108,7 +109,8 @@ import { SelectModule } from 'ng-select';
 		HttpModule,
 		ModalModule.forRoot(),
 		routing,
-		SelectModule
+		SelectModule,
+		LoadersCssModule
 	],
 	declarations: [
 		InitializeDropdown,

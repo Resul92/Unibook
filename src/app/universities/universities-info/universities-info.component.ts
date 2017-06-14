@@ -9,6 +9,8 @@ import { Teacher } from '../../shared/teacher.model';
 import { TeacherService } from '../../shared/teacher.service';
 import { University } from '../../shared/university.model';
 import { UniversityService } from '../../shared/university.service';
+declare var $: any;
+declare var jQuery: any;
 
 @Component({
 	

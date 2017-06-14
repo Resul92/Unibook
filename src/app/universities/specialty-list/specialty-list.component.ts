@@ -3,8 +3,7 @@ import { University } from '../../shared/university.model';
 
 @Component({
   selector: 'specialty-list',
-  templateUrl: './specialty-list.component.html',
-  styleUrls: ['./specialty-list.component.css']
+  templateUrl: './specialty-list.component.html'
 })
 export class SpecialtyListComponent implements OnInit {
 	@Input() 

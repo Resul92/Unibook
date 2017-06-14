@@ -20,8 +20,8 @@ export class UniversitySortComponent {
 		private helperService: HelperService
 		) {
 	}
-	onChange(value) {
-		console.log('Change made -- onChange');
+	onChangeVal(value) {
+		console.log('sorting by: ', value);
     	this.select.emit(value)
 	}
 }

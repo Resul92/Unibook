@@ -4,8 +4,10 @@
 <!-- Aside Trigger -->
 	<a routerLink="/dashboard" routerLinkActive="active" class="aside-trigger">
 		<img src="assets/img/icons/right-arrow.svg" alt="">
-	</a>  <div class="main-profile-container container">
-    <div class="structure-info-profile">
+	</a>  
+  <div class="main-profile-container container">
+    <div class="structure-info-profile" 
+     [ngStyle]="{ 'background-image': 'url(assets/images/bdu.jpg)'}">
       <div class="profile-main">
         <div class="profile-img-structure-info-page">
           <img [src]="university.imgUrl" default="assets/images/university-default.jpeg" alt="">

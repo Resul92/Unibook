@@ -52,6 +52,7 @@ export class StudentsListComponent implements OnInit,OnChanges {
 		this.update.emit(results);
 	}
 	onSortChange(value) {
+		console.log('sort by: ', value);
     	this.select.emit(value)
 	}
 	loadMoreStuds(){

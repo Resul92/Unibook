@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { University } from '../shared/university.model';
 import { UniversityService } from '../shared/university.service';
 import { HelperService } from '../shared/helper.service';
@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
 		private studentService: StudentService,
 		private teacherService: TeacherService,
 		private helperService: HelperService,
+		public ref: ChangeDetectorRef,
 		private router: Router) {
 	}
 
@@ -203,18 +204,24 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 	sortStudentsBy(property: string): void {
+		console.log('sorting students by: ', property);
 		if (this.students){
-			this.helperService.sort(this.students, property);
+			this.students = this.helperService.sort(this.students, property);
 		}
+		console.log('after sorting: ', this.students);
 	}
 	sortTeachersBy(property: string): void {
+		console.log('sorting teachers by: ', property);
 		if (this.teachers){
-			this.helperService.sort(this.teachers, property);
+			this.teachers = this.helperService.sort(this.teachers, property);
 		}
+		console.log('after sorting: ', this.teachers);
 	}
 	sortUniversitiesBy(property: string): void {
+		console.log('sorting universities by: ', property);
 		if (this.universities){
-			this.helperService.sort(this.universities, property);
+			this.universities = this.helperService.sort(this.universities, property);
+		console.log('after sorting: ', this.universities);
 		}
 	}
 	filterStudentsBy(property: string, value: string): void {
