@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
 			this.universityService.getRealUniversityById(this.user.structure.id)
 			.then(university => {
 				this.university = university;
-				//console.log('this university', this.university);
+				console.log('this university', this.university);
 			});
 			this.userService.getModules().then(mods => {
 				this.modules = mods.json().data.filter(module => module.parentId === 0);

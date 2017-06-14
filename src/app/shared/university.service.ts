@@ -53,7 +53,7 @@ export class UniversityService {
 			return this.http.get(this.realUniversityByIdUrl)
 			.toPromise()
 			.then(response => {
-				//console.log('response.json().data for getting university by id', response.json().data);
+				console.log('response.json().data for getting university by id', response.json().data);
 				return this.toUniDetail(response.json().data, token);
 			})
             .catch(this.handleError);
@@ -203,7 +203,8 @@ export class UniversityService {
 			eduLabArea: obj.structureInfo.eduLabArea,
 			sportArea: obj.structureInfo.sportArea,
 			campusArea: obj.structureInfo.campusArea,
-			pcCount: obj.structureInfo.pcCount
+			pcCount: obj.structureInfo.pcCount,
+			departmentCount: obj.fakulteCount
 		});
 		return uni;
 	}
