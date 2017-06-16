@@ -20,11 +20,12 @@
 			<div *ngIf="currentState=='plan'">
 				<teacher-plan-panel [teacher]='teacher'></teacher-plan-panel>
 			</div>
+			<!--not sure if this is even needed
 			<div *ngIf="currentState=='grades'">
 				<div class="user-filtration">
 					<teacher-grade-filter ></teacher-grade-filter>
 				</div>
-			</div>
+			</div>-->
 			<div class="blocks-grid">
 				<teacher-grade-panel [teacher]='teacher'></teacher-grade-panel>
 			</div>
