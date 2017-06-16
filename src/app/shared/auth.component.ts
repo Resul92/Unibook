@@ -26,13 +26,20 @@ export class AuthComponent {
 			.queryParams
 			.subscribe(params => {
 			  let token = params['token'];
+                	let url = this.route.snapshot.url[0].path;
+                	console.log('url: ', url);
                 if (token) {
                 	console.log('token in auth component: ', token);
-			  		this.userService.login(token);
+                	let url = this.route.snapshot.url[0].path;
+                	console.log('url: ', url);
+                	if(url === "AdministrationSystemView") { url = 'dashboard'};
+			  		this.userService.login(token, url);
                     // return true to indicate successful login
                     return true;
                 } else {
                     // return false to indicate failed login
+                    // redirect to the main system if login failed
+                    //window.location.href='http://atis.edu.az/';
                     return false;
                 }
 		});

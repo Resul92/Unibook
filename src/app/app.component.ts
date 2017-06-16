@@ -11,7 +11,6 @@ declare var $: any;
 export class AppComponent implements OnInit {
 	title = 'Unibook';
 	ngOnInit(){
-		localStorage.removeItem('currentUser');
 	}
 	ngAfterViewInit(){
 		$(document).ready(function(){

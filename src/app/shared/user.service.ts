@@ -24,19 +24,19 @@ export class UserService {
         private http: Http,
         private router: Router
     ) {}
-    login(token) {
+    login(token, url) {
         localStorage.setItem('currentUser', JSON.stringify({ 
             token: token,
         }));
         console.log('old token:', JSON.parse(localStorage.getItem('currentUser')).token);
         console.log('new tokenL ', token);
         this.getCurrentUser().then(user => {
-            this.router.navigate(['dashboard']);
+            this.router.navigate([url]);
         });
     }
     getToken(): Promise<any>{
         let res = new Promise<any>((resolve, reject) => {
-            console.log('token in getToken: ', JSON.parse(localStorage.getItem('currentUser')).token);
+            console.log('token in getToken: ', JSON.parse(localStorage.getItem('currentUser')));
             resolve(JSON.parse(localStorage.getItem('currentUser')).token);
         });
         //console.log('res responses is: ', res);
