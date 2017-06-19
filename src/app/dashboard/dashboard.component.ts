@@ -64,7 +64,8 @@ export class DashboardComponent implements OnInit {
 			this.userService.getModules().then(mods => {
 				this.modules = mods.json().data.filter(module => module.parentId === 0);
 				//console.log('mods receiver drom api: ', this.modules);
-				this.currentModule = this.modules.find(mod => mod.id === 1000009);
+				//set the current view to the first module in the list
+				this.currentModule = this.modules[0];
 				//console.log("currentModule.name.az: ", this.currentModule.name.az)
 				this.currentModuleId = this.currentModule.id;
 				//console.log('currentModule: ', this.currentModule);

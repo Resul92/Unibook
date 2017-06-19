@@ -14,13 +14,6 @@
 [universities]="universities"
 (select)="filterStudentsBy($event)"
 ></student-filter>-->
-
-<ul class="aside-block" *ngIf="currentState =='students-list' || currentState == 'teachers-list'" >
-	<li class="simple-btn">Umumi telebelerin sayi<span class="aside-block-spn">{{university.studentCount}}</span></li>
-	<li class="simple-btn">Bu il qebul olanlar <span class="aside-block-spn">{{university.freshmanCount}}</span></li>
-	<li class="simple-btn">Əyani tələbəlırin sayrı <span class="aside-block-spn">{{university.onCampusCount}}</span></li>
-	<li class="simple-btn">Qiyabi tələbəlırin sayrı <span class="aside-block-spn">{{university.offCampusCount}}</span></li>
-</ul>
 <div class="aside-block">
 	<!--
 	<div class="checkbox">
@@ -30,10 +23,7 @@
 		</label>
 	</div>-->
 	<a class="simple-btn" (click)="toggleFilter(subModule); false" [class.active-btn]="subModule.active" *ngFor="let subModule of subModules">{{subModule.name}}</a>
-<!--
-	<a class="simple-btn" (click)="filterTeachersBy('grade', 'bakalavr'); false" [class.active-btn]="currentFilter == 'bakalavr'">Bakalavr</a>
-	<a class="simple-btn" (click)="filterTeachersBy('grade', 'magistr'); false" [class.active-btn]="currentFilter == 'magistr'">Magistr</a>
-	<a class="simple-btn" (click)="filterTeachersBy('grade', 'doktorant'); false" [class.active-btn]="currentFilter == 'doktorant'">Doktorant</a>-->
+
 </div>
 <!--
 	// not sure if we will need these filters
