@@ -28,11 +28,6 @@
 				(select)="onSortChange($event)"
 				[teachers]="teachers"
 			></teacher-sort>-->
-			<teacher-filter
-			[university]="university"
-			[universities]="universities"
-			(select)="filterTeachersBy($event)"
-			></teacher-filter>
 		</div>
 		
 		<custom-loader *ngIf="loading"></custom-loader>
@@ -67,4 +62,9 @@
 		</div>
 		<button class="loader-btn" (click)="loadMoreTeachs()">Load More:</button>
 	</div>
+	<teacher-filter
+			[university]="university"
+			[universities]="universities"
+			(select)="filterTeachersBy($event)"
+			></teacher-filter>
 </div>
