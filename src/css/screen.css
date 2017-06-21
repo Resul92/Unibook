@@ -1165,7 +1165,7 @@ Main Components
 .vert-scroll {
 	position: relative;
     overflow-y: scroll;
-    height: 500px;
+    height: 600px;
     width: 100%;
 }
 .ov-hid {
