@@ -26,6 +26,7 @@ export class TeachersListComponent implements OnInit, OnChanges {
 		private teacherService: TeacherService) {
 	}
 	ngOnInit(){
+		this.loading = true;
 		// for getting teachers from the real api
 		// initial query to only ask for the first page	
 		this.loadMoreTeachs();
@@ -56,6 +57,7 @@ export class TeachersListComponent implements OnInit, OnChanges {
     	this.select.emit(value)
 	}
 	loadMoreTeachs(){
+		this.loading = true;
 		this.loadMoreTeachers.emit();
 	}
 }

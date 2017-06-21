@@ -25,6 +25,7 @@ export class StudentsListComponent implements OnInit,OnChanges {
 		private studentService: StudentService) {
 	}
 	ngOnInit(){
+		this.loading = true;
 		// get students list by universityid from a test back end
 		// initial query to only ask for the first page	
 		this.loadMoreStuds();
@@ -56,6 +57,7 @@ export class StudentsListComponent implements OnInit,OnChanges {
     	this.select.emit(value)
 	}
 	loadMoreStuds(){
+		this.loading = true;
 		this.loadMoreStudents.emit();
 	}
 }

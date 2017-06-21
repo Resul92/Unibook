@@ -79,72 +79,72 @@ export class DashboardComponent implements OnInit {
 		});
 	}
 	loadMoreUniversities(mods?){
-		console.log('loadModeUniversities called:');
+		console.log('loadMoreUniversities called:');
 		// need to have a counter starting at one to know how may times it was activated
 		this.loading = true;
 		if(mods){
-			this.loading = false;
 			// we are just requesting things with other filters
 			//setting counter to one because we are filtering universities
 			this.universityPageCounter = 1;
 			this.universityService.getRealUniversities(this.universityPageCounter, mods).then(universities => {
 				this.universities = universities;
+				this.loading = false;
 			});
 		} else {
 			this.universityPageCounter++;
 			this.universityService.getRealUniversities(this.universityPageCounter)
 			.then(universities => {
-				this.loading = false;
 				this.universities = this.universities.concat(universities);
 				this.allUniversities = this.allUniversities.concat(universities);
 				console.log("universities list in the dashboard:", this.universities);
+				this.loading = false;
 			});	
 		}
 	}
 	loadMoreStudents(mods?){
-		console.log('loadModeStudents called with mods:', mods);
+		console.log('loadMoreStudents called with mods:', mods);
 		this.loading = true;
 		if(mods){
-			this.loading = false;
 			this.studentPageCounter = 1;
 			this.studentService.getRealStudents(this.studentPageCounter, mods).then(students => {
 				this.students = students;
+				this.loading = false;
 			});
 		} else {
 			// need to have a counter starting at one to know how may times it was activated
 			this.studentPageCounter++;
 			this.studentService.getRealStudents(this.studentPageCounter)
 			.then(students => {
-				this.loading = false;
 				//since loading extra data breaks the view in masonry, we'll set it to empty and then load the data
 				this.oldStudents = this.students;
 				this.students = [];
 				this.students = this.oldStudents.concat(students);
 				this.allStudents = this.allStudents.concat(students);
 				console.log("students list in the dashboard:", this.students);
+				this.loading = false;
 			});	
 		}
 	}
 	loadMoreTeachers(mods?){
-		console.log('loadModeTeachers called with mods:', mods);
+		console.log('loadMoreTeachers called with mods:', mods);
 		this.loading = true;
 		if(mods){
-			this.loading = false;
 			// we are just requesting things with other filters
 			this.teacherPageCounter = 1;
 			this.teacherService.getRealTeachers(this.teacherPageCounter, mods).then(teachers => {
 				this.teachers = teachers;
+				this.loading = false;
 			});
 		} else {
 			// need to have a counter starting at one to know how may times it was activated
 			this.teacherPageCounter++;
 			this.teacherService.getRealTeachers(this.teacherPageCounter)
 			.then(teachers => {
-				this.loading = false;
 				this.teachers
 				this.teachers = this.teachers.concat(teachers);
 				this.allTeachers = this.allTeachers.concat(teachers);
 				console.log("teachers list in the dashboard:", this.teachers);
+				this.loading = false;
 			});	
 			// need to send additional requests to the query and push it the result to the local variale			
 		}
