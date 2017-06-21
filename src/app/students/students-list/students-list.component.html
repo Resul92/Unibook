@@ -30,15 +30,10 @@
 			[allStudents]='allStudents' 
 			(update)="search($event)"
 			[students]="students"></student-search> -
-			<!--<student-sort
+			<student-sort
 				(select)="onSortChange($event)"
 				[students]="students"
-			></student-sort>-->
-			<student-filter
-			[university]="university"
-			[universities]="universities"
-			(select)="filterStudentsBy($event)"
-			></student-filter>
+			></student-sort>
 		</div>
 		
 		<custom-loader *ngIf="loading"></custom-loader>

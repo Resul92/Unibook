@@ -237,15 +237,11 @@ export class DashboardComponent implements OnInit {
 		} 
 		console.log('after sorting: ', this.universities);
 	}
-	filterStudentsBy(property: string, value: string): void {
-		if (this.students){
-			this.helperService.filter(this.students, property, value);
-		}
+	filterStudentsBy(property: string): void {
+		console.log('filter students by: ', property)
 	}
-	filterTeachersBy(property: string, value: string): void {
-		if (this.teachers){
-			this.helperService.filter(this.teachers, property, value);
-		}
+	filterTeachersBy(property: string): void {
+		console.log('filter teachers by: ', property)
 	}
 	filterUniversitiesBy(property: string, value: string): void {
 		if (this.universities){

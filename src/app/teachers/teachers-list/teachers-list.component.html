@@ -24,10 +24,10 @@
 		[allTeachers]='allTeachers' 
 		[teachers]="teachers"></teacher-search>
 		<div class="structure-inner-sort">
-			<!--<teacher-sort
+			<teacher-sort
 				(select)="onSortChange($event)"
 				[teachers]="teachers"
-			></teacher-sort>-->
+			></teacher-sort>
 		</div>
 		
 		<custom-loader *ngIf="loading"></custom-loader>
@@ -62,9 +62,4 @@
 		</div>
 		<button class="loader-btn" (click)="loadMoreTeachs()">Load More:</button>
 	</div>
-	<teacher-filter
-			[university]="university"
-			[universities]="universities"
-			(select)="filterTeachersBy($event)"
-			></teacher-filter>
 </div>

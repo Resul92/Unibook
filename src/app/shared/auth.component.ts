@@ -39,7 +39,7 @@ export class AuthComponent {
                 } else {
                     // return false to indicate failed login
                     // redirect to the main system if login failed
-                    //window.location.href='http://192.168.1.78:8082/';
+                    //window.location.href='http://atis.edu.az/';
                     return false;
                 }
 		});

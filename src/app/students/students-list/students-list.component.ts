@@ -58,9 +58,4 @@ export class StudentsListComponent implements OnInit,OnChanges {
 	loadMoreStuds(){
 		this.loadMoreStudents.emit();
 	}
-	filterStudentsBy(ids){
-		console.log('ids in filter: ', ids);
-		// this.currentFilter = value;
-		// this.filterStudents.emit({property, value});
-	}
 }

@@ -27,14 +27,22 @@
 			[currentModuleId]="currentModuleId"
 			(subModulesList)="setSubModules($event)"
 			(select)="filterUniversitiesBy($event)"></university-aside> 
-			<div class="aside-block" *ngIf="currentState == 'dashboard'">
+			<div class="aside-block" *ngIf="currentState == 'dashboard' || currentState == 'students-list' || currentState == 'teachers-list'">
 				<university-search 
 				(update)='search($event)'
 				[universities]="universities"
 				[allUniversities]='allUniversities' 
-				></university-search><!--
-				<university-sort  *ngIf="currentState == 'dashboard'" 
-				(select)="sortUniversitiesBy($event)"></university-sort>-->
+				></university-search>
+				<student-filter *ngIf="currentState == 'students-list'"
+				[university]="university"
+				[universities]="universities"
+				(select)="filterStudentsBy($event)"
+				></student-filter>
+				<teacher-filter *ngIf="currentState == 'teachers-list'"
+				[university]="university"
+				[universities]="universities"
+				(select)="filterStudentsBy($event)"
+				></teacher-filter>
 			</div>
 		</div>
 	</aside>
