@@ -1,65 +1,66 @@
 <teacher-charts [university]='university'></teacher-charts>
 <!-- Main Container -->
-<div class="main-container st-block-style">
+<div class="ov-hid">
+	<div class="main-container st-block-style vert-scroll">
 
-	<!-- Content Header -->
-	<!-- charts -->
-	<div class="content-header">
-		<div class="row">
-			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">	
-				<canvas id="teacherTypeChart" width="200" height="100"></canvas>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">
-				<canvas id="teacherGradeChart" width="200" height="100"></canvas>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">
-				<canvas id="teachergenderChart" width="200" height="100"></canvas>
-			</div>
-		</div><hr>
-	</div>
-	<!-- charts end -->
-	<div class="content teachers-profile-row">
-		<teacher-search 
-		(update)="search($event)"
-		[allTeachers]='allTeachers' 
-		[teachers]="teachers"></teacher-search>
-		<div class="structure-inner-sort">
-			<teacher-sort
-				(select)="onSortChange($event)"
-				[teachers]="teachers"
-			></teacher-sort>
+		<!-- Content Header -->
+		<!-- charts -->
+		<div class="content-header">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">	
+					<canvas id="teacherTypeChart" width="200" height="100"></canvas>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">
+					<canvas id="teacherGradeChart" width="200" height="100"></canvas>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 structure-counter">
+					<canvas id="teachergenderChart" width="200" height="100"></canvas>
+				</div>
+			</div><hr>
 		</div>
-		
-		<custom-loader *ngIf="loading"></custom-loader>
-
-		<div class="grid grid-4">
-			<div class="grid-sizer"></div>
-			<h1 *ngIf="teachers.length === 0 && !loading">No data to show.</h1>
-			<div class="grid-item" *ngFor="let teacher of teachers">
-				<a routerLink="/teacher/{{teacher.id}}" routerLinkActive="active" class="teachers-profile-tables">
-					<div class="teachers-profile-tables-top">
-						<ul class="teachers-profile">
-							<!-- computing first letters of 1000 teachers o the client slows the website down and breaks the chart animations - if you want to add, just return them from the server and include as variables here
-							<li class="lessons-head-degree">
-								<h6>{{teacher.faculty | firstletters | uppercase}}</h6>
-							</li>-->
-							<li>
-								<img [src]="teacher.imgUrl" default="assets/images/user.png" alt="">
-							</li><!--
-							<li class="lessons-head-teachers-profile">
-								<h6>{{teacher.profession | firstletters | uppercase}}</h6>
-							</li>-->
-						</ul>
-					</div>
-					<p>{{teacher.name}}</p>
-					<div class="teachers-profile-tables-bottom">
-						<span>{{teacher.profession}}</span>
-						<span>{{teacher.universityName}}</span>
-						<span>{{teacher.faculty}}</span>
-					</div>
-				</a>
+		<!-- charts end -->
+		<div class="content teachers-profile-row">
+			<teacher-search 
+			(update)="search($event)"
+			[allTeachers]='allTeachers' 
+			[teachers]="teachers"></teacher-search>
+			<div class="structure-inner-sort">
+				<teacher-sort
+					(select)="onSortChange($event)"
+					[teachers]="teachers"
+				></teacher-sort>
 			</div>
+			
+			<custom-loader *ngIf="loading"></custom-loader>
+			<h1 class="no-data" *ngIf="teachers.length === 0 && !loading">No data to show.</h1>
+			<div class="grid grid-4">
+				<div class="grid-sizer"></div>
+				<div class="grid-item" *ngFor="let teacher of teachers">
+					<a routerLink="/teacher/{{teacher.id}}" routerLinkActive="active" class="teachers-profile-tables">
+						<div class="teachers-profile-tables-top">
+							<ul class="teachers-profile">
+								<!-- computing first letters of 1000 teachers o the client slows the website down and breaks the chart animations - if you want to add, just return them from the server and include as variables here
+								<li class="lessons-head-degree">
+									<h6>{{teacher.faculty | firstletters | uppercase}}</h6>
+								</li>-->
+								<li>
+									<img [src]="teacher.imgUrl" default="assets/images/user.png" alt="">
+								</li><!--
+								<li class="lessons-head-teachers-profile">
+									<h6>{{teacher.profession | firstletters | uppercase}}</h6>
+								</li>-->
+							</ul>
+						</div>
+						<p>{{teacher.name}}</p>
+						<div class="teachers-profile-tables-bottom">
+							<span>{{teacher.profession}}</span>
+							<span>{{teacher.universityName}}</span>
+							<span>{{teacher.faculty}}</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<button class="loader-btn" (click)="loadMoreTeachs()">Load More:</button>
 		</div>
-		<button class="loader-btn" (click)="loadMoreTeachs()">Load More:</button>
 	</div>
 </div>

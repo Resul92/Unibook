@@ -757,7 +757,7 @@ header:after { content: ""; display: table; clear: both; }
 .structure-inner-sort .input-wrapper { width: 40%; float: left; }
 .structure-inner-sort .custom-select-wrapper { width: 180px; float: right; }
 
-.content.teachers-profile-row { padding-top: 30px; padding-bottom: 15px; }
+.content.teachers-profile-row { padding-top: 30px; padding-bottom: 15px; overflow: hidden; }
 
 .teachers-profile-tables { padding: 15px; display: block; text-align: center; -moz-transition: all, 0.2s ease; -o-transition: all, 0.2s ease; -webkit-transition: all, 0.2s ease; -ms-transition: all, 0.2s ease; transition: all, 0.2s ease; }
 .teachers-profile-tables p { margin: 15px; font-weight: 300; color: #494949; }
@@ -1156,5 +1156,18 @@ Main Components
 	text-align: center;
 }
 
+.no-data {
+    display: block;
+    position: relative;
+    top: 5px;
+}
 
-
+.vert-scroll {
+	position: relative;
+    overflow-y: scroll;
+    height: 500px;
+    width: 100%;
+}
+.ov-hid {
+	overflow: hidden;
+}
