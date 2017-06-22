@@ -9,52 +9,54 @@ import { UniversityService } from '../../shared/university.service';
 })
 export class TeacherFilterComponent implements OnInit { 
 	@Input() universities;
-	@Input() university: University;
 	@Output() 
 	select = new EventEmitter();
 	@ViewChild('modal') public modal : ModalDirective;
 	faculties: any[];
 	uni_id: any;
 	faculty_id: any;
-	all: any[];
 	selected: any;
 	disabled: boolean = true;
-	characters: Array<any>;
-	mappedUniversities;
+	universityOptions;
 	constructor(
 		private universityService: UniversityService
 	) { }
 	ngOnInit(){
-		console.log('universities in filter: ', this.universities);
-		// this.mappedUniversities = this.universities.map(uni => {
-		// 	uni.label = uni.name;
-		// 	uni.value = uni.id;
-		// });
-		// console.log('universities in filter: ', this.mappedUniversities);
+		//console.log('universities in filter: ', this.universities);
+		this.universityOptions = this.universities.map(uni => {
+			let res = {
+				label: uni.name,
+				value: uni.id
+			};
+			return res;
+		});
+		//console.log("universities options:", this.universityOptions);
 	}
 	onChange(value) {
     	this.select.emit(value)
 	}
+	getFacultiesByUniversityId(id){
+		//console.log('getting faculties by university id: ', id);
+		this.disabled = true;
+		this.uni_id = id;
+		this.universityService.getRealFacultyById(id).then( faculties => {
+			this.faculties = faculties.map( faculty => {
+				let res = {
+					label: faculty.name,
+					value: faculty.id
+				};
+				return res;
+			});
+			this.disabled = false;
+			//console.log("faculties options:", this.universityOptions);
+		});
+	}
+	setFaculty(id){
+		this.faculty_id = id;
+		//console.log('setting uni id and fac id for filtering to', this.faculty_id);
+	}
 	showModal(){
 		this.modal.show();
-	}
-	getFacultiesByUniversityId(uni_id) {
-		console.log('getFacultiesByUniversityId: ', uni_id);
-		var array2 = [];
-
-
-		this.universityService.getRealFacultyById(uni_id).then(faculties => {
-			faculties.data.forEach(faculty => {
-				var obj2 = {
-					value: faculty.id,
-					label: faculty.name.az
-				}
-				array2.push(obj2);
-			});
-			this.faculties = array2;
-		});
-
-		this.disabled = false;
 	}
 	setOrgId(uni_id, faculty_id) {
 		let emitter = {
@@ -62,6 +64,5 @@ export class TeacherFilterComponent implements OnInit {
 			faculty_id: faculty_id
 		}
 		this.select.emit(emitter);
-		this.modal.hide();	
 	}
 }

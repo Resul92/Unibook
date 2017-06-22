@@ -34,14 +34,12 @@
 				[allUniversities]='allUniversities' 
 				></university-search>
 				<student-filter *ngIf="currentState == 'students-list'"
-				[university]="university"
 				[universities]="universities"
 				(select)="filterStudentsBy($event)"
 				></student-filter>
 				<teacher-filter *ngIf="currentState == 'teachers-list'"
-				[university]="university"
 				[universities]="universities"
-				(select)="filterStudentsBy($event)"
+				(select)="filterTeachersBy($event)"
 				></teacher-filter>
 			</div>
 		</div>

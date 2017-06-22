@@ -8,43 +8,54 @@ import { UniversityService } from '../../shared/university.service';
 	templateUrl: 'student-filter.component.html'
 })
 export class StudentFilterComponent { 
-	@Input() universities: University[];
-	@Input() university: University;
+	@Input() universities;
 	@Output() 
 	select = new EventEmitter();
 	@ViewChild('modal') public modal : ModalDirective;
 	faculties: any[];
 	uni_id: any;
 	faculty_id: any;
-	all: any[];
 	selected: any;
 	disabled: boolean = true;
-	characters: Array<any>;
+	universityOptions;
 	constructor(
 		private universityService: UniversityService
 	) { }
+	ngOnInit(){
+		//console.log('universities in filter: ', this.universities);
+		this.universityOptions = this.universities.map(uni => {
+			let res = {
+				label: uni.name,
+				value: uni.id
+			};
+			return res;
+		});
+		//console.log("universities options:", this.universityOptions);
+	}
 	onChange(value) {
     	this.select.emit(value)
 	}
-	showModal(){
-		this.modal.show();
-	}
-	getFacultiesByUniversityId(uni_id) {
-		var array2 = [];
-
-
-		this.universityService.getRealFacultyById(uni_id).then(faculties => {
-			faculties.data.forEach(faculty => {
-				var obj2 = {
-					value: faculty.id,
-					label: faculty.name.az
-				}
-				array2.push(obj2);
+	getFacultiesByUniversityId(id){
+		//console.log('getting faculties by university id: ', id);
+		this.disabled = true;
+		this.uni_id = id;
+		this.universityService.getRealFacultyById(id).then( faculties => {
+			this.faculties = faculties.map( faculty => {
+				let res = {
+					label: faculty.name,
+					value: faculty.id
+				};
+				return res;
 			});
-			this.faculties = array2;
+			this.disabled = false;
+			//console.log("faculties options:", this.universityOptions);
 		});
-
-		this.disabled = false;
+	}
+	setFaculty(id){
+		this.faculty_id = id;
+		//console.log('setting uni id and fac id for filtering to', this.faculty_id);
+	}	showModal(){
+		this.modal.show();
 	}
 	setOrgId(uni_id, faculty_id) {
 		let emitter = {
@@ -52,6 +63,5 @@ export class StudentFilterComponent {
 			faculty_id: faculty_id
 		}
 		this.select.emit(emitter);
-		this.modal.hide();	
 	}
 }

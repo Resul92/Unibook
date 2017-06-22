@@ -29,7 +29,7 @@ export class UniversitiesListComponent implements OnInit,OnChanges {
 		this.loadMoreUniversities.emit();
 	}
 	ngOnChanges(changes){
-		console.log(changes);
+		//console.log(changes);
 		$(document).ready(function(){
 			console.log('masonry working');
 			// init Isotope

@@ -40,6 +40,8 @@ export class DashboardComponent implements OnInit {
 	modules;
 	currentModuleId;
 	subModulesList: Array<any>;
+	teacherModulesList: Array<any>;
+	studentModulesList: Array<any>;
 
 	constructor(
 		private userService: UserService,
@@ -78,8 +80,9 @@ export class DashboardComponent implements OnInit {
 			//console.log('current modules: ', this.modules);
 		});
 	}
-	loadMoreUniversities(mods?){
+	loadMoreUniversities(mods?, counter?){
 		console.log('loadMoreUniversities called:');
+		if(counter){ this.universityPageCounter = counter};
 		// need to have a counter starting at one to know how may times it was activated
 		this.loading = true;
 		if(mods){
@@ -101,10 +104,12 @@ export class DashboardComponent implements OnInit {
 			});	
 		}
 	}
-	loadMoreStudents(mods?){
-		console.log('loadMoreStudents called with mods:', mods);
+	loadMoreStudents(mods?, counter?){
+		console.log('loadMoreStudents called with mods:', mods, counter);
+		if(counter){ this.studentPageCounter = counter};
 		this.loading = true;
 		if(mods){
+			this.studentModulesList = mods;
 			this.studentPageCounter = 1;
 			this.studentService.getRealStudents(this.studentPageCounter, mods).then(students => {
 				this.students = students;
@@ -125,28 +130,43 @@ export class DashboardComponent implements OnInit {
 			});	
 		}
 	}
-	loadMoreTeachers(mods?){
+	loadMoreTeachers(mods?, counter?, id?){
 		console.log('loadMoreTeachers called with mods:', mods);
+		if(counter){ this.teacherPageCounter = counter};
 		this.loading = true;
-		if(mods){
-			// we are just requesting things with other filters
+		if (mods) {
+			this.teacherModulesList = mods;
 			this.teacherPageCounter = 1;
-			this.teacherService.getRealTeachers(this.teacherPageCounter, mods).then(teachers => {
-				this.teachers = teachers;
-				this.loading = false;
-			});
-		} else {
-			// need to have a counter starting at one to know how may times it was activated
-			this.teacherPageCounter++;
-			this.teacherService.getRealTeachers(this.teacherPageCounter)
-			.then(teachers => {
-				this.teachers
-				this.teachers = this.teachers.concat(teachers);
-				this.allTeachers = this.allTeachers.concat(teachers);
-				console.log("teachers list in the dashboard:", this.teachers);
-				this.loading = false;
-			});	
-			// need to send additional requests to the query and push it the result to the local variale			
+		}
+		if (counter) {
+			this.teacherPageCounter = counter;
+		}
+		//if id is present load them from getRealTeacherById method instead of getRealTeachersMethod
+		if (id){
+
+		}else {
+			//if the request sent from::
+			//changes in submodules list - added or removed
+			//or by filtering by uni / faculty - replace existing students with new one, no need to append
+			if(mods || counter){
+				// we are just requesting things with other filters
+				this.teacherService.getRealTeachers(this.teacherPageCounter, this.teacherModulesList).then(teachers => {
+					this.teachers = teachers;
+					this.loading = false;
+				});
+			} else {
+				// if the request comes from pagination append new students to existing ones
+				this.teacherPageCounter++;
+				this.teacherService.getRealTeachers(this.teacherPageCounter, this.teacherModulesList)
+				.then(teachers => {
+					this.teachers
+					this.teachers = this.teachers.concat(teachers);
+					this.allTeachers = this.allTeachers.concat(teachers);
+					console.log("teachers list in the dashboard:", this.teachers);
+					this.loading = false;
+				});	
+				// need to send additional requests to the query and push it the result to the local variale			
+			}
 		}
 	}
 	setSubModules(mods){
@@ -238,10 +258,10 @@ export class DashboardComponent implements OnInit {
 		console.log('after sorting: ', this.universities);
 	}
 	filterStudentsBy(property: string): void {
-		console.log('filter students by: ', property)
+		console.log('filter students by: ', property);
 	}
 	filterTeachersBy(property: string): void {
-		console.log('filter teachers by: ', property)
+		console.log('filter teachers by: ', property);		
 	}
 	filterUniversitiesBy(property: string, value: string): void {
 		if (this.universities){

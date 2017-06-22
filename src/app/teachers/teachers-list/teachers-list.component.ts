@@ -32,7 +32,7 @@ export class TeachersListComponent implements OnInit, OnChanges {
 		this.loadMoreTeachs();
 	}
 	ngOnChanges(changes){
-		console.log(changes);
+		//console.log(changes);
 		$(document).ready(function(){
 			console.log('masonry working');
 			// init Isotope

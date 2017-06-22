@@ -23,6 +23,9 @@ export class FilterByUniDirective {
         $(".close").on('click', function(){
            $('.wrapper-modal').removeClass('opened-wrapper-modal');
         });
+        $(".submit").on('click', function(e){
+           $('.wrapper-modal').removeClass('opened-wrapper-modal');
+        });
         $('.modal-overlay').on('click', function() {
            $('.wrapper-modal').removeClass('opened-wrapper-modal');
         });

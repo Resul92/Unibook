@@ -7,42 +7,8 @@
 		{{university.name}}
 	</h4>
 </div>
-
-<!--
-<student-filter 
-*ngIf="currentState == 'student-list'"
-[universities]="universities"
-(select)="filterStudentsBy($event)"
-></student-filter>-->
 <div class="aside-block">
-	<!--
-	<div class="checkbox">
-		<label>
-			<input type=heckbox" name="isActive" [(ngModel)]="user.isActive">
-		Is Active
-		</label>
-	</div>-->
 	<a class="simple-btn" (click)="toggleFilter(subModule); false" [class.active-btn]="subModule.active" *ngFor="let subModule of subModules">{{subModule.name}}</a>
-
 </div>
-<!--
-	// not sure if we will need these filters
-<div class="aside-block checkbox-slide" *ngIf="currentState =='students-list' || currentState == 'teachers-list'">
-	<label class="switch" (click)="toggleMale()">
-		<div class="label-title">Kişi</div>
-		<input type="checkbox" name="gender" value="male" checked="maleChecked">
-		<div class="slider round"></div>
-	</label>
-	<label class="switch" (click)="toggleFemale()">
-		<div class="label-title">Qadın</div>
-		<input type="checkbox" name="gender" value="female" checked="femaleChecked">
-		<div class="slider round"></div>
-	</label>
 
-	<select name="studyTypeFilter" #sel (change)="onChange(sel.value)" id="studyTypeFilter" class="custom-select studyTypeFilter" placeholder="Əyani və ya qiyabi" *ngIf="currentState =='students-list'">
-		<option value="profile">Hər ikisi</option>
-		<option value="profile">Əyani</option>
-		<option value="word">Qiyabi</option>
-	</select>
-</div>	-->
 <!-- End Aside -->
