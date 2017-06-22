@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
 	selector: 'custom-header',
@@ -20,7 +21,14 @@ export class HeaderComponent implements OnInit {
 	public student;
 	public backUrl;
 	public applications;
-	constructor(private userService: UserService) {}
+	constructor(private userService: UserService,
+		public translate: TranslateService) {
+	        translate.addLangs(["en", "fr"]);
+	        translate.setDefaultLang('en');
+
+	        let browserLang = translate.getBrowserLang();
+	        translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+	}
 
 	ngOnInit(): void {
 		this.userService.getCurrentUser()
@@ -34,6 +42,14 @@ export class HeaderComponent implements OnInit {
 				});
 			console.log('lookup result for the current user is', this.user);
 			});
+		});
+		this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {
+		    console.log(res);
+		    //=> 'hello world'
+		});
+		this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {
+		    console.log(res);
+		    //=> 'hello world'
 		});
 	}
 	
