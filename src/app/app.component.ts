@@ -20,9 +20,6 @@ export class AppComponent implements OnInit {
     }
 	title = 'Unibook';
 	ngOnInit(){
-		this.translate.setTranslation('en', {
-		    HELLO: 'hello {{value}}'
-		});
 	}
 	ngAfterViewInit(){
 		$(document).ready(function(){

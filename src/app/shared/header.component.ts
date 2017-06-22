@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 	templateUrl: 'header.component.html'
 })
 export class HeaderComponent implements OnInit { 
+	param = {value: 'world'};
 	public redirectUrl;
 	public user = {
 		id: "",
@@ -28,9 +29,16 @@ export class HeaderComponent implements OnInit {
 
 	        let browserLang = translate.getBrowserLang();
 	        translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+		    translate.setTranslation('en', {
+			    HELLO: 'hello {{value}}'
+			});
 	}
 
 	ngOnInit(): void {
+		this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {
+		    console.log(res);
+		    //=> 'hello world'
+		});
 		this.userService.getCurrentUser()
 		.then(user => {
 			this.user = user;
@@ -42,14 +50,6 @@ export class HeaderComponent implements OnInit {
 				});
 			console.log('lookup result for the current user is', this.user);
 			});
-		});
-		this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {
-		    console.log(res);
-		    //=> 'hello world'
-		});
-		this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {
-		    console.log(res);
-		    //=> 'hello world'
 		});
 	}
 	

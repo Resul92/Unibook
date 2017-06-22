@@ -105,8 +105,9 @@ import { SelectModule } from 'ng-select';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http, "i18n/", ".json");
+    return new TranslateHttpLoader(http);
 }
+
 @NgModule({
 	imports: [
 		BrowserModule,
