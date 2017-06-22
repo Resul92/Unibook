@@ -8,7 +8,6 @@ import {TranslateService} from '@ngx-translate/core';
 	templateUrl: 'header.component.html'
 })
 export class HeaderComponent implements OnInit { 
-	param = {value: 'world'};
 	public redirectUrl;
 	public user = {
 		id: "",
@@ -24,21 +23,9 @@ export class HeaderComponent implements OnInit {
 	public applications;
 	constructor(private userService: UserService,
 		public translate: TranslateService) {
-	        translate.addLangs(["en", "fr"]);
-	        translate.setDefaultLang('en');
-
-	        let browserLang = translate.getBrowserLang();
-	        translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
-		    translate.setTranslation('en', {
-			    HELLO: 'hello {{value}}'
-			});
 	}
 
 	ngOnInit(): void {
-		this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {
-		    console.log(res);
-		    //=> 'hello world'
-		});
 		this.userService.getCurrentUser()
 		.then(user => {
 			this.user = user;
