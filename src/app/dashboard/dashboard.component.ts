@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
 	subModulesList: Array<any>;
 	teacherModulesList: Array<any>;
 	studentModulesList: Array<any>;
+	orgId;
 
 	constructor(
 		private userService: UserService,
@@ -104,35 +105,47 @@ export class DashboardComponent implements OnInit {
 			});	
 		}
 	}
-	loadMoreStudents(mods?, counter?){
-		console.log('loadMoreStudents called with mods:', mods, counter);
-		if(counter){ this.studentPageCounter = counter};
+	loadMoreStudents(mods?, counter?, id?){
+		console.log('studebt page counter: ', counter, this.studentPageCounter);
+		//console.log('loadMoreStudents called with mods:', mods);
 		this.loading = true;
-		if(mods){
+		if (mods) {
 			this.studentModulesList = mods;
 			this.studentPageCounter = 1;
-			this.studentService.getRealStudents(this.studentPageCounter, mods).then(students => {
+		}
+		if (counter) {
+			this.studentPageCounter = counter;
+		} else if(!counter && !mods) {
+			this.studentPageCounter++;
+		}
+		//if id is present load them from getRealStudentById method instead of getRealStudentsMethod
+		if (id){
+			this.orgId = id;
+		}
+		//if the request sent from::
+		//changes in submodules list - added or removed
+		//or by filtering by uni / faculty - replace existing students with new one, no need to append
+		// we are just requesting things with other filters
+		// if the request comes from pagination append new students to existing ones
+		console.log('student page counter: ', counter, this.studentPageCounter);
+		this.studentService.getRealStudents(this.studentPageCounter, this.studentModulesList, this.orgId)
+		.then(students => {
+			if(mods || counter || id){
 				this.students = students;
 				this.loading = false;
-			});
-		} else {
-			// need to have a counter starting at one to know how may times it was activated
-			this.studentPageCounter++;
-			this.studentService.getRealStudents(this.studentPageCounter)
-			.then(students => {
-				//since loading extra data breaks the view in masonry, we'll set it to empty and then load the data
-				this.oldStudents = this.students;
-				this.students = [];
-				this.students = this.oldStudents.concat(students);
-				this.allStudents = this.allStudents.concat(students);
-				console.log("students list in the dashboard:", this.students);
-				this.loading = false;
-			});	
-		}
+			} else {
+			this.students
+			this.students = this.students.concat(students);
+			this.allStudents = this.allStudents.concat(students);
+			console.log("students list in the dashboard:", this.students);
+			this.loading = false;
+			}
+		});	
+		// need to send additional requests to the query and push it the result to the local variale
 	}
 	loadMoreTeachers(mods?, counter?, id?){
-		console.log('loadMoreTeachers called with mods:', mods);
-		if(counter){ this.teacherPageCounter = counter};
+		console.log('teacher page counter: ', counter, this.teacherPageCounter);
+		//console.log('loadMoreTeachers called with mods:', mods);
 		this.loading = true;
 		if (mods) {
 			this.teacherModulesList = mods;
@@ -140,34 +153,33 @@ export class DashboardComponent implements OnInit {
 		}
 		if (counter) {
 			this.teacherPageCounter = counter;
+		} else if(!counter && !mods) {
+			this.teacherPageCounter++;
 		}
 		//if id is present load them from getRealTeacherById method instead of getRealTeachersMethod
 		if (id){
-
-		}else {
-			//if the request sent from::
-			//changes in submodules list - added or removed
-			//or by filtering by uni / faculty - replace existing students with new one, no need to append
-			if(mods || counter){
-				// we are just requesting things with other filters
-				this.teacherService.getRealTeachers(this.teacherPageCounter, this.teacherModulesList).then(teachers => {
-					this.teachers = teachers;
-					this.loading = false;
-				});
-			} else {
-				// if the request comes from pagination append new students to existing ones
-				this.teacherPageCounter++;
-				this.teacherService.getRealTeachers(this.teacherPageCounter, this.teacherModulesList)
-				.then(teachers => {
-					this.teachers
-					this.teachers = this.teachers.concat(teachers);
-					this.allTeachers = this.allTeachers.concat(teachers);
-					console.log("teachers list in the dashboard:", this.teachers);
-					this.loading = false;
-				});	
-				// need to send additional requests to the query and push it the result to the local variale			
-			}
+			this.orgId = id;
 		}
+		//if the request sent from::
+		//changes in submodules list - added or removed
+		//or by filtering by uni / faculty - replace existing students with new one, no need to append
+		// we are just requesting things with other filters
+		// if the request comes from pagination append new students to existing ones
+		console.log('teacher page counter: ', counter, this.teacherPageCounter);
+		this.teacherService.getRealTeachers(this.teacherPageCounter, this.teacherModulesList, this.orgId)
+		.then(teachers => {
+			if(mods || counter || id){
+				this.teachers = teachers;
+				this.loading = false;
+			} else {
+			this.teachers
+			this.teachers = this.teachers.concat(teachers);
+			this.allTeachers = this.allTeachers.concat(teachers);
+			console.log("teachers list in the dashboard:", this.teachers);
+			this.loading = false;
+			}
+		});	
+		// need to send additional requests to the query and push it the result to the local variale			
 	}
 	setSubModules(mods){
 		//console.log(mods);
@@ -257,11 +269,11 @@ export class DashboardComponent implements OnInit {
 		} 
 		console.log('after sorting: ', this.universities);
 	}
-	filterStudentsBy(property: string): void {
-		console.log('filter students by: ', property);
+	filterStudentsBy(property): void {
+		this.loadMoreStudents(undefined, 1, property.faculty_id);
 	}
-	filterTeachersBy(property: string): void {
-		console.log('filter teachers by: ', property);		
+	filterTeachersBy(property): void {
+		this.loadMoreTeachers(undefined, 1, property.faculty_id);
 	}
 	filterUniversitiesBy(property: string, value: string): void {
 		if (this.universities){

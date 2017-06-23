@@ -18,6 +18,7 @@ export class TeacherService {
 	private authToken;
 	private realTeachersUrl;
 	private subModulesList: string = `1000050, 1000051, 1000062, 1000061`;
+	private orgId;
 	constructor(
 		private http: Http,
 		private userService: UserService
@@ -25,11 +26,12 @@ export class TeacherService {
 
 	//////////// need to build methods that would successfully 
 	/// connectto the real api
-	getRealTeachers(page, subModules?): Promise<any> {
+	getRealTeachers(page, subModules?, orgId?): Promise<any> {
 		if(subModules){ this.subModulesList = subModules};
+		if(orgId) { this.orgId = orgId};
 		return this.userService.getToken().then(token =>{
 			this.authToken = token;
-	 		this.realTeachersUrl = `http://atis.edu.az/UnibookHsisRest/teachers/tms?token=${token}&genderId=&orgId=&statusId=&subModuleId=${this.subModulesList}&page=${page}&pageSize=50`;
+	 		this.realTeachersUrl = `http://atis.edu.az/UnibookHsisRest/teachers/tms?token=${token}&genderId=&orgId=${this.orgId}&statusId=&subModuleId=${this.subModulesList}&page=${page}&pageSize=50`;
 			// getting teachers from the backend
 			console.log('getting real teachers url', this.realTeachersUrl, "token: ", token);
 			return this.http.get(this.realTeachersUrl)
@@ -144,7 +146,7 @@ export class TeacherService {
 			let property = valueProperties[i];
 		// if the obj.propert in array of the ones we need value fo
 			if (obj[property] === null && valueProperties.indexOf(property) > -1) {
-				console.log(property, "equal null");
+				//console.log(property, "equal null");
 				obj[property] = {value: {az : null}};
 			}
 		}
