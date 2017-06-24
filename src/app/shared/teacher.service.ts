@@ -89,6 +89,8 @@ export class TeacherService {
 			imgUrl: `http://atis.edu.az/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
 			jobStatus: obj.academicName,
 			faculty: obj.department,
+			universityName: obj.orgName,
+			title: obj.structure.value.az,// unused, but should remain
 			subjects: obj.subjects
 		});
 		return teacher;
