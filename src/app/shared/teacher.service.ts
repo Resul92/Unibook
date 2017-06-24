@@ -4,7 +4,7 @@ import { Headers, Http, Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
-import { Teacher, Document } from './teacher.model';
+import { Teacher, Document, Contact } from './teacher.model';
 import { UserService } from './user.service';
 import { HelperService } from './helper.service';
 
@@ -118,10 +118,7 @@ export class TeacherService {
 			birthAddress: obj.addresses,// to be added
 			currentAddress: obj.addresses,// to be added
 			temporaryAddress: obj.addresses,// to be added
-			phoneNumbers: obj.contacts,// to be added
-			email: obj.contacts,// to be added - turn contacts to an array and add them as a list in the template
-			facebook: obj.contacts,// to be added
-			google: obj.contacts,// to be added
+			contacts: obj.contacts,
 			imgUrl: `http://atis.edu.az/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
 			coverImgUrl: `http://atis.edu.az/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
 			documents: obj.pwlcDocuments,
@@ -133,6 +130,7 @@ export class TeacherService {
 			classes: null// to be added LATER? or duplicate of subjects? add languages? from r.languages
 		});
 		teacher.documents = teacher.documents.map(doc => this.toDoc(doc));
+		teacher.contacts = teacher.contacts.map(contact => this.toContact(contact));
 	  	//console.log('Parsed student:', teacher);
 		return teacher;
 	}
@@ -144,6 +142,13 @@ export class TeacherService {
 			type: document.type.value.az
 		}
 		return doc;
+	}
+	toContact(contact): Contact {
+		let cont: Contact = {
+			name: contact.type.value.az,
+			address: contact.contact
+		}
+		return cont;
 	}
 	// setting default values to object properties in case 
 	// might have to convert into a promise

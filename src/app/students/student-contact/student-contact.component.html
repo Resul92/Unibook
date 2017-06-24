@@ -12,7 +12,7 @@
 			</ul>
 		</div>
 	</div>
-
+<!-- part of contacts
 	<div class="grid-item">
 		<div class="mob-info">
 			<ul>
@@ -24,17 +24,14 @@
 			</ul>
 		</div>
 	</div>
-
+-->
 	<div class="grid-item">
 		<div class="adress-info-right">
 			<ul>
-				<li class="info-head">Elektron elaqe</li>
+				<li class="info-head">Elaqe</li>
 				<hr class="har">
-				<li class="info-head">Facebook <p>{{student.facebook}}</p></li>
+				<li class="info-head" *ngFor="let contact of student.contacts">{{contact.name}} <p>{{contact.address}}</p></li>
 				<hr class="har">
-				<li class="info-head">Google+<p>{{student.google}}</p></li>
-				<hr class="har">
-				<li class="info-head">E-mail<p>{{student.email}}</p></li>
 			</ul>
 		</div>
 	</div>

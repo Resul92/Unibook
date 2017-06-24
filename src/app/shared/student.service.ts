@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 
-import { Student, Document } from './student.model';
+import { Student, Document, Contact } from './student.model';
 import { UserService } from './user.service';
 import { HelperService } from './helper.service';
 
@@ -126,10 +126,7 @@ export class StudentService {
 			birthAddress: obj.addresses, // to be added
 			currentAddress: obj.addresses, // to be added
 			temporaryAddress: obj.addresses, // to be added
-			phoneNumbers: obj.contacts,// to be added
-			email: obj.contacts,// to be added
-			facebook: obj.contacts,// to be added
-			google: obj.contacts,// to be added
+			contacts: obj.contacts,
 			imgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
 			coverImgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/coverImage?token=${token}`,
 			documents: obj.pelcDocuments, // to be adopted to the documents interface for properties to match
@@ -141,6 +138,7 @@ export class StudentService {
 			classes: null// to be added LATER
 		});
 		student.documents = student.documents.map(doc => this.toDoc(doc));
+		student.contacts = student.contacts.map(contact => this.toContact(contact));
 
 	  //console.log('Parsed student:', student.id);
 	  return student;
@@ -153,6 +151,13 @@ export class StudentService {
 			type: document.type.value.az
 		}
 		return doc;
+	}
+	toContact(contact): Contact {
+		let cont: Contact = {
+			name: contact.type.value.az,
+			address: contact.contact
+		}
+		return cont;
 	}
 	// setting default values to object properties in case 
 	// might have to convert into a promise

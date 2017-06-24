@@ -12,6 +12,10 @@ export interface Document {
     date: number;
     type: string;
 }
+export interface Contact {
+    name: string;
+    address: string;
+}
 interface Parent {
     id: number;
     name: string;
@@ -55,11 +59,8 @@ export class Teacher {
     public birthAddress: string,
     public currentAddress: string,
     public temporaryAddress: string,
-    public phoneNumbers: string[],
     public parents: Parent[],
-    public email: string,
-    public facebook: string,
-    public google: string,
+    public contacts: Contact[],
     public imgUrl: string,
     public coverImgUrl: string,
     public documents: Document[],
