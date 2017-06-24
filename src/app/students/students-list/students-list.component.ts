@@ -60,4 +60,7 @@ export class StudentsListComponent implements OnInit,OnChanges {
 		this.loading = true;
 		this.loadMoreStudents.emit();
 	}
+	setLoading(){
+		this.loading = true;
+	}
 }
