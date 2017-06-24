@@ -32,7 +32,9 @@ export class UniversitySearchComponent implements OnInit, OnChanges {
 		} else {
 			this.universities = this.allUniversities;
 			//console.log("this universities in search: ", this.universities);
-			this.universities = this.universities.filter(uni => uni.name.toLowerCase().startsWith(term.toLowerCase()));
+			this.universities = this.universities.filter(uni => uni.name.toLowerCase().search(term.toLowerCase()) != -1);
+//			old implementation
+//			this.universities = this.universities.filter(uni => uni.name.toLowerCase().startsWith(term.toLowerCase()));
 			//console.log("this universities in search AFTER searching: ", this.universities);
 			//this.searchTerms.next(term);
 			this.update.emit(this.universities);
