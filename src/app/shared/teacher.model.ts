@@ -6,10 +6,9 @@ interface Subject {
     grade: string;
     imgUrl: string;
 }
-interface Document {
+export interface Document {
     id: number;
     series: string;
-    name: string;
     date: number;
     type: string;
 }

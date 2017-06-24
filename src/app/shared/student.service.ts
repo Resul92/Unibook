@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 
-import { Student } from './student.model';
+import { Student, Document } from './student.model';
 import { UserService } from './user.service';
 import { HelperService } from './helper.service';
 
@@ -140,8 +140,19 @@ export class StudentService {
 			gpa: null,// to be added LATER
 			classes: null// to be added LATER
 		});
+		student.documents = student.documents.map(doc => this.toDoc(doc));
+
 	  //console.log('Parsed student:', student.id);
 	  return student;
+	}
+	toDoc(document): Document{
+		let doc: Document = {
+			id: document.id,
+			series: document.serial,
+			date: document.createDate,
+			type: document.type.value.az
+		}
+		return doc;
 	}
 	// setting default values to object properties in case 
 	// might have to convert into a promise

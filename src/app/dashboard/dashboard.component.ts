@@ -248,15 +248,15 @@ export class DashboardComponent implements OnInit {
 		console.log('sorting students by: ', property);
 		console.log('before sorting: ', this.students);
 		if (this.students){
-			this.helperService.sort(this.students, property);
+			this.students = this.helperService.sort(this.students, property);
+			console.log('after sorting: ', this.students);
 		}
-		console.log('after sorting: ', this.students);
 	}
 	sortTeachersBy(property: string): void {
 		console.log('sorting teachers by: ', property);
 		console.log('before sorting: ', this.teachers);
 		if (this.teachers){
-			this.helperService.sort(this.teachers, property);
+			this.teachers = this.helperService.sort(this.teachers, property);
 		}
 		console.log('after sorting: ', this.teachers);
 	}
@@ -266,8 +266,8 @@ export class DashboardComponent implements OnInit {
 		console.log(this.helperService.sort(this.universities, property));
 		if (this.universities){
 			this.universities = this.helperService.sort(this.universities, property);
+			console.log('after sorting: ', this.universities);
 		} 
-		console.log('after sorting: ', this.universities);
 	}
 	filterStudentsBy(property): void {
 		this.loadMoreStudents(undefined, 1, property.faculty_id);

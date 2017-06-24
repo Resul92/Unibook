@@ -4,7 +4,7 @@ import { Headers, Http, Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
-import { Teacher } from './teacher.model';
+import { Teacher, Document } from './teacher.model';
 import { UserService } from './user.service';
 import { HelperService } from './helper.service';
 
@@ -132,8 +132,18 @@ export class TeacherService {
 			gpa: null,// to be added LATER
 			classes: null// to be added LATER? or duplicate of subjects? add languages? from r.languages
 		});
+		teacher.documents = teacher.documents.map(doc => this.toDoc(doc));
 	  	//console.log('Parsed student:', teacher);
 		return teacher;
+	}
+	toDoc(document): Document{
+		let doc: Document = {
+			id: document.id,
+			series: document.serial,
+			date: document.createDate,
+			type: document.type.value.az
+		}
+		return doc;
 	}
 	// setting default values to object properties in case 
 	// might have to convert into a promise
