@@ -28,7 +28,7 @@
 			(subModulesList)="setSubModules($event)"
 			(select)="filterUniversitiesBy($event)"></university-aside> 
 			<div class="aside-block" *ngIf="currentState == 'dashboard' || currentState == 'students-list' || currentState == 'teachers-list'">
-				<university-search 
+				<university-search *ngIf="currentState == 'dashboard'"
 				(update)='search($event)'
 				[universities]="universities"
 				[allUniversities]='allUniversities' 

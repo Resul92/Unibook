@@ -24,6 +24,7 @@
 			<teacher-search 
 			(update)="search($event)"
 			[allTeachers]='allTeachers' 
+			(loading)="setLoading()"
 			[teachers]="teachers"></teacher-search>
 			<div class="structure-inner-sort">
 				<teacher-sort

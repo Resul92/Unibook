@@ -19,6 +19,7 @@ export class TeacherSearchComponent implements OnInit {
 	@Output() update = new EventEmitter();
 	anyErrors : Error;
  	@Input() allTeachers: Teacher[];
+	@Output() loading = new EventEmitter();
 
 	constructor(
 		private teacherService: TeacherService,
@@ -28,8 +29,10 @@ export class TeacherSearchComponent implements OnInit {
 	search(term: string): void {
 		// if the term is empty, get the default list of teachers from the database
 		if (term == ''){
+			this.loading.emit();
 			this.update.emit(this.allTeachers);
 		} else {
+			this.loading.emit();
 			this.searchTerms.next(term);
 		}
 	}

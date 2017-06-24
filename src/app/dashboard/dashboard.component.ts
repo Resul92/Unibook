@@ -209,9 +209,11 @@ export class DashboardComponent implements OnInit {
 	}
 	searchTeachers(results: Teacher[]): void {
 		this.teachers = results;
+		this.loading = false;
 	}
 	searchStudents(results: Student[]): void {
 		this.students = results;
+		this.loading = false;
 	}
 	gotoInfo(university: University): void { 
 		let link = ['/info', university.id];

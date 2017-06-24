@@ -1,5 +1,4 @@
 import { OnInit, Component, Input, Output, EventEmitter, DoCheck, OnChanges } from '@angular/core';
-import { TeacherService } from '../../shared/teacher.service';
 
 import { University } from '../../shared/university.model';
 import { Teacher } from '../../shared/teacher.model';
@@ -22,8 +21,7 @@ export class TeachersListComponent implements OnInit, OnChanges {
 	@Input() universities: University[];
 
 	oldTeachersArray = [];
-	constructor(
-		private teacherService: TeacherService) {
+	constructor() {
 	}
 	ngOnInit(){
 		this.loading = true;
@@ -34,7 +32,7 @@ export class TeachersListComponent implements OnInit, OnChanges {
 	ngOnChanges(changes){
 		//console.log(changes);
 		$(document).ready(function(){
-			console.log('masonry working');
+			//console.log('masonry working');
 			// init Isotope
 			var grid = document.querySelector('.grid');
 
@@ -54,7 +52,12 @@ export class TeachersListComponent implements OnInit, OnChanges {
 		this.update.emit(results);
 	}
 	onSortChange(value) {
-    	this.select.emit(value)
+		console.log('sort change value:', value);
+    	this.select.emit(value);
+
+	}
+	setLoading(){
+		this.loading = true;
 	}
 	loadMoreTeachs(){
 		this.loading = true;
