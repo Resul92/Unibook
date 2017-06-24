@@ -4,11 +4,10 @@
 			<ul>
 				<li class="info-head">Unvan</li>
 				<hr class="har">
-				<li class="info-head">Anadan oldugu unvan <p>{{student.birthAddress}}</p></li>
+				<li class="info-head" *ngFor="let address of student.addresses">{{address.name}} <p>{{address.value}}</p>
 				<hr class="har">
-				<li class="info-head">Daimi yashadigi unvan<p>{{student.currentAddress}}</p></li>
-				<hr class="har">
-				<li class="info-head">Muveqqeti yashadigi unvan<p>{{student.temporaryAddress}}</p></li>
+				</li>
+
 			</ul>
 		</div>
 	</div>

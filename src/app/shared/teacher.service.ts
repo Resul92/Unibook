@@ -4,7 +4,7 @@ import { Headers, Http, Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
-import { Teacher, Document, Contact } from './teacher.model';
+import { Teacher, Document, Contact, Address } from './teacher.model';
 import { UserService } from './user.service';
 import { HelperService } from './helper.service';
 
@@ -115,9 +115,7 @@ export class TeacherService {
 			admissionScore: null,
 			bio: obj,// unused, but should remain
 			history: obj.academicActivitys,// unused, but should remain
-			birthAddress: obj.addresses,// to be added
-			currentAddress: obj.addresses,// to be added
-			temporaryAddress: obj.addresses,// to be added
+			addresses: obj.addresses,
 			contacts: obj.contacts,
 			imgUrl: `http://atis.edu.az/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
 			coverImgUrl: `http://atis.edu.az/UnibookHsisRest/teachers/${obj.id}/image?token=${token}`,
@@ -131,6 +129,7 @@ export class TeacherService {
 		});
 		teacher.documents = teacher.documents.map(doc => this.toDoc(doc));
 		teacher.contacts = teacher.contacts.map(contact => this.toContact(contact));
+		teacher.addresses = teacher.addresses.map(contact => this.toAddress(contact));
 	  	//console.log('Parsed student:', teacher);
 		return teacher;
 	}
@@ -149,6 +148,13 @@ export class TeacherService {
 			address: contact.contact
 		}
 		return cont;
+	}
+	toAddress(addr): Address {
+		let adr: Address = {
+			name: addr.name,
+			value: addr.type.value.az
+		}
+		return adr;
 	}
 	// setting default values to object properties in case 
 	// might have to convert into a promise

@@ -16,6 +16,10 @@ export interface Contact {
     name: string;
     address: string;
 }
+export interface Address {
+    name: string;
+    value: string;
+}
 interface Parent {
     id: number;
     name: string;
@@ -56,9 +60,7 @@ export class Student {
     public admissionScore: number,
     public bio: string,
     public history: Fact[],
-    public birthAddress: string,
-    public currentAddress: string,
-    public temporaryAddress: string,
+    public addresses: Address[],
     public parents: Parent[],
     public contacts: Contact[],
     public imgUrl: string,

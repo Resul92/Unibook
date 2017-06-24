@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 
-import { Student, Document, Contact } from './student.model';
+import { Student, Document, Contact, Address } from './student.model';
 import { UserService } from './user.service';
 import { HelperService } from './helper.service';
 
@@ -123,9 +123,7 @@ export class StudentService {
 			admissionScore: obj.score,
 			bio: null, // unused, but should remain
 			history: null,// unused, but should remain
-			birthAddress: obj.addresses, // to be added
-			currentAddress: obj.addresses, // to be added
-			temporaryAddress: obj.addresses, // to be added
+			addresses: obj.addresses,
 			contacts: obj.contacts,
 			imgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
 			coverImgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/coverImage?token=${token}`,
@@ -139,6 +137,7 @@ export class StudentService {
 		});
 		student.documents = student.documents.map(doc => this.toDoc(doc));
 		student.contacts = student.contacts.map(contact => this.toContact(contact));
+		student.addresses = student.addresses.map(contact => this.toAddress(contact));
 
 	  //console.log('Parsed student:', student.id);
 	  return student;
@@ -158,6 +157,13 @@ export class StudentService {
 			address: contact.contact
 		}
 		return cont;
+	}
+	toAddress(addr): Address {
+		let adr: Address = {
+			name: addr.name,
+			value: addr.type.value.az
+		}
+		return adr;
 	}
 	// setting default values to object properties in case 
 	// might have to convert into a promise
