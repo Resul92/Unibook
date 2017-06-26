@@ -6,7 +6,7 @@
 		<ul>
 			<li>
 				<div class="dropdown" dropdown [dropdownToggle]="false">
-				    <button class="btn btn-primary" dropdown-open>{{currentLang}}</button>
+				    <a class="icon-btn white-color-btn open-popup" dropdown-open>{{currentLang}}</a>
 				    <ul class="dropdown-menu">
 				        <li *ngFor="let lang of languages" (click)="setLanguage(lang)"><a>{{lang}}</a></li>
 				    </ul>
