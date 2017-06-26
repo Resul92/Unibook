@@ -9,6 +9,7 @@ export class SpecialtyListComponent implements OnInit {
 	@Input() 
 	university: University;
 	@Input() loading: boolean;
+	@Input() currentLang;
 	ngOnInit(){
 		console.log('university in specialty-list component: ', this.university);
 	}

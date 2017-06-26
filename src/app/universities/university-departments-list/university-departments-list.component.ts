@@ -10,6 +10,7 @@ export class DepartmentListComponent implements OnInit {
 	@Input() 
 	university: University;
 	@Input() loading: boolean;
+	@Input() currentLang;
 
 	ngOnInit(){
 		console.log('university in faculty-list component: ', this.university);

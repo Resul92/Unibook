@@ -7,7 +7,7 @@ import {TranslateService} from '@ngx-translate/core';
 	selector: 'custom-header',
 	templateUrl: 'header.component.html'
 })
-export class HeaderComponent implements OnInit { 
+export class HeaderComponent implements OnInit { 	
 	public redirectUrl;
 	public user = {
 		id: "",
@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit {
 	public student;
 	public backUrl;
 	public applications;
+	public languages;
+	public currentLang;
 	constructor(private userService: UserService,
 		public translate: TranslateService) {
 	}
@@ -37,9 +39,32 @@ export class HeaderComponent implements OnInit {
 				});
 			console.log('lookup result for the current user is', this.user);
 			});
+			this.userService.getCurrentLanguage().then(currentLang => {
+				console.log('currentLanguage: ', currentLang);
+				this.currentLang = currentLang;
+				this.userService.getLanguages().then(languages => {
+					this.languages = languages;
+					let currentLanguageIndex = this.languages.indexOf(this.currentLang);
+					console.log('languages: ', languages);
+					this.languages.splice(currentLanguageIndex, 1);
+					//console.log('mods in the button: ', this.modules);
+					//console.log('current module: ', this.currentModule);
+				});
+			});
 		});
 	}
-	
+	setLanguage(lang){
+		console.log('lang is: ', lang);
+		if(lang !== this.currentLang){
+			this.languages.unshift(this.currentLang);
+			let currentLanguageIndex = this.languages.indexOf(lang);
+			this.languages.splice(currentLanguageIndex, 1);
+			this.currentLang = lang;
+			this.userService.setCurrentLanguage(lang);
+		} else {
+			//console.log('no new module selected');
+		}
+	}
 	logout():void {
 		this.userService.logout();
 	}

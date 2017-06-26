@@ -31,11 +31,13 @@
 				<div *ngIf="currentState=='about'">
 					<student-about 
 						[student]='student'
+						[currentLang]="currentLang"
 						></student-about>			
 				</div>
 				<div *ngIf="currentState=='tedris'">
 					<student-tedris 
 					[student]='student'
+					[currentLang]="currentLang"
 					></student-tedris>		
 				</div>
 			</div>

@@ -16,6 +16,7 @@ export class UniversitiesListComponent implements OnInit,OnChanges {
 	@Output() loadMoreUniversities = new EventEmitter<any>();
 	@Output() update = new EventEmitter();
 	@Input() loading: boolean;
+	@Input() currentLang;
 
 	goInfo(university: University){
 		this.gotoInfo.emit(university);
@@ -24,6 +25,7 @@ export class UniversitiesListComponent implements OnInit,OnChanges {
 		// get students list by universityid from a test back end
 		// initial query to only ask for the first page	
 		this.loadMoreUnis();
+		console.log('current language in university list: ', this.currentLang);
 	}
 	loadMoreUnis(){
 		this.loadMoreUniversities.emit();

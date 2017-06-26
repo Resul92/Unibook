@@ -14,6 +14,7 @@ export class StudentTedrisComponent {
 	currentState = this.state[0];
  	students: Student[];
 	@Input() student: Student;
+	@Input() currentLang;
 
 	constructor(
 		private studentService: StudentService,

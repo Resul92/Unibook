@@ -4,7 +4,7 @@
 			<ul>
 				<li class="info-head">Unvan</li>
 				<hr class="har">
-				<li class="info-head" *ngFor="let address of student.addresses">{{address.name}} <p>{{address.value}}</p>
+				<li class="info-head" *ngFor="let address of student.addresses">{{address.name | translate: currentLang }} <p>{{address.value | translate: currentLang }}</p>
 				<hr class="har">
 				</li>
 
@@ -29,7 +29,7 @@
 			<ul>
 				<li class="info-head">Elaqe</li>
 				<hr class="har">
-				<li class="info-head" *ngFor="let contact of student.contacts">{{contact.name}} <p>{{contact.address}}</p></li>
+				<li class="info-head" *ngFor="let contact of student.contacts">{{contact.name | translate: currentLang }} <p>{{contact.address | translate: currentLang }}</p></li>
 				<hr class="har">
 			</ul>
 		</div>

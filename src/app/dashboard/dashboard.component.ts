@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
 	teacherModulesList: Array<any>;
 	studentModulesList: Array<any>;
 	orgId;
+	currentLang;
 
 	constructor(
 		private userService: UserService,
@@ -79,6 +80,10 @@ export class DashboardComponent implements OnInit {
 				//console.log('current module: ', this.currentModule);
 			});
 			//console.log('current modules: ', this.modules);
+			this.userService.getCurrentLanguage().then(currentLang => {
+				console.log('currentLanguage: ', currentLang);
+				this.currentLang = currentLang;
+			});
 		});
 	}
 	loadMoreUniversities(mods?, counter?){

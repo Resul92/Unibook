@@ -98,7 +98,7 @@ export class UniversityService {
 			return this.http.get(this.realSpecialtyByIdUrl)
 			.toPromise()
 			.then(response => {
- 				//console.log('response.json().data for getting specialty by id', response.json().data);
+ 				console.log('response.json().data for getting specialty by id', response.json().data);
 				return this.mapSpecialties(response, token);
 			})
             .catch(this.handleError);
@@ -111,7 +111,7 @@ export class UniversityService {
 			return this.http.get(this.realUniversityStatsUrl)
 			.toPromise()
 			.then(response => {
-				//console.log('response.json().data for university/department/kafedra/specialty by id', response.json().data);
+				console.log('response.json().data for university/department/kafedra/specialty by id', response.json().data);
 				return response.json().data;
 			})
             .catch(this.handleError);
@@ -144,41 +144,41 @@ export class UniversityService {
 	toDepartment(r:any, token: any): Department{
 		let department = <Department>({
 			id: r.id,
-			name: r.name.az
+			name: r.name
 		});
 		return department;
 	}
 	// the mapping function used in the dashboard because there's less information and inconsistent variable names
 	toFaculty(r:any, token: any): Faculty{
 		//iterate thorugh the properties of the object
-		//if null, add empty to the property including the .value.az or whatever
+		//if null, add empty to the property including the .value or whatever
 		let faculty = <Faculty>({
 			id: r.id,
-			name: r.name.az
+			name: r.name
 		});
 		return faculty;
 	}
 	// the mapping function used in the dashboard because there's less information and inconsistent variable names
 	toSpecialty(r:any, token: any): Specialty{
 		//iterate thorugh the properties of the object
-		//if null, add empty to the property including the .value.az or whatever
+		//if null, add empty to the property including the .value or whatever
 		let specialty = <Specialty>({
 			id: r.id,
-			name: r.name.az
+			name: r.name
 		});
 		return specialty;
 	}
 	// the mapping function used in the dashboard because there's less information and inconsistent variable names
 	toUni(r:any, token: any): University{
 		//iterate thorugh the properties of the object
-		//if null, add empty to the property including the .value.az or whatever
+		//if null, add empty to the property including the .value or whatever
 		let obj = this.setDefaults(r);
 		let uni = <University>({
 			id: obj.id,
-			name: obj.name.az,
+			name: obj.name,
 			studentCount: obj.studentCount,
 			teacherCount: obj.employeeCount,
-			street: obj.address.az,
+			street: obj.address,
 			imgUrl: `http://atis.edu.az/UnibookHsisRest/structures/${obj.id}/logo?token=${token}`
 		});
 		return uni;
@@ -186,15 +186,15 @@ export class UniversityService {
 	//to Uni mapping function that's used in the detail view
 	toUniDetail(r:any, token: any): University{
 		//iterate thorugh the properties of the object
-		//if null, add empty to the property including the .value.az or whatever
+		//if null, add empty to the property including the .value or whatever
 		let obj = this.setDefaults(r);
 		let uni = <University>({
 			id: obj.id,
-			name: obj.name.az,
-			info: obj.about.az,
+			name: obj.name,
+			info: obj.about,
 			studentCount: obj.studentCount,
 			teacherCount: obj.employeeCount,
-			street: obj.address.az,
+			street: obj.address,
 			imgUrl: `http://atis.edu.az/UnibookHsisRest/structures/${obj.id}/logo?token=${token}`,
 			coverImgUrl: `http://atis.edu.az/UnibookHsisRest/structures/${obj.id}/cover?token=${token}`,	
 			rektorName: obj.rectorName,
@@ -212,7 +212,7 @@ export class UniversityService {
 	// might have to convert into a promise
 	setDefaults(obj) {
 		//console.log('setting defaults in: ', obj)
-		//array of properties  in universities that require .az
+		//array of properties  in universities that require 
 		let simpleProperties = ["name", "about", "address"]
 		// let's only check for properties that we care about
 		for (var i = 0; i < simpleProperties.length; i++){

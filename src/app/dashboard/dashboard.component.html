@@ -12,11 +12,11 @@
 	<aside class="left-aside structure-aside">
 		<div class="aside-nav"  navButton>
 			<div class="selected-structure" *ngIf="currentModule">
-				<a class="structure-btn" (click)="setState(currentModule)">{{currentModule.name.az}}</a>
+				<a class="structure-btn" (click)="setState(currentModule)">{{currentModule.name  | translate: currentLang }}</a>
 				<ul class="aside-nav-list" *ngIf="modules">
 					<a
 					*ngFor="let module of modules" 
-					href="#" class="structure-btn" (click)="setState(module)">{{module.name.az}}</a>
+					href="#" class="structure-btn" (click)="setState(module)">{{module.name  | translate: currentLang }}</a>
 				</ul>
 			</div>
 		</div>
@@ -25,6 +25,7 @@
 			[university]='university' 
 			[currentState]='currentState' 
 			[currentModuleId]="currentModuleId"
+			[currentLang]="currentLang"
 			(subModulesList)="setSubModules($event)"
 			(select)="filterUniversitiesBy($event)"></university-aside> 
 			<div class="aside-block" *ngIf="currentState == 'dashboard' || currentState == 'students-list' || currentState == 'teachers-list'">
@@ -54,6 +55,7 @@
 			<universities-list 
 			[universities]='universities' 
 			[loading]="loading"
+			[currentLang]="currentLang"
 			(gotoInfo)='gotoInfo($event)'
 			(update)="searchUniversities($event)"
 			(loadMoreUniversities)='loadMoreUniversities()'></universities-list>
@@ -66,6 +68,7 @@
 				[university]='university'
 				[universities]='universities' 
 				[loading]="loading"
+				[currentLang]="currentLang"
 				[students]='students'
 				(select)="sortStudentsBy($event)"
 				(update)="searchStudents($event)"
@@ -78,6 +81,7 @@
 				[university]='university'
 				[universities]='universities' 
 				[loading]="loading"
+				[currentLang]="currentLang"
 				[teachers]='teachers'
 				(select)="sortTeachersBy($event)"
 				(update)="searchTeachers($event)"

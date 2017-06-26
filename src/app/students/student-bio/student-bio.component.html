@@ -1,9 +1,9 @@
 <!-- profile main text content -->
 <div class="profile-content">
 	<div class="profile-content-main-text">
-		<h3 >{{student.title}}</h3>
+		<h3 >{{student.title | translate: currentLang }}</h3>
 		<h6>
-		{{student.bio}}
+		{{student.bio | translate: currentLang }}
 		</h6>
 	</div>
 	<div class="profile-content-main-img">
@@ -12,6 +12,6 @@
 	<hr>
 	<div class="text-bottom" *ngFor="let fact of student.history">
  		<h6>{{fact.date}}</h6>
-		<h6>{{fact.text}}</h6>
+		<h6>{{fact.text | translate: currentLang }}</h6>
 	</div>
 </div>

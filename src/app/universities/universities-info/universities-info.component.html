@@ -45,9 +45,15 @@
     </div>
     <div class="main-container st-block-style xtra-width">
     <!-- overall information regarding university departments -->
-      <university-departments-list *ngIf="currentState == 'kafedra-list'" [university]='university'></university-departments-list>
-      <faculty-list *ngIf="currentState == 'faculty-list'" [university]='university'></faculty-list>
-      <specialty-list *ngIf="currentState == 'specialty-list'" [university]='university'></specialty-list>
+      <university-departments-list *ngIf="currentState == 'kafedra-list'" 
+      [university]='university'
+      [currentLang]="currentLang"></university-departments-list>
+      <faculty-list *ngIf="currentState == 'faculty-list'" 
+      [university]='university'
+      [currentLang]="currentLang"></faculty-list>
+      <specialty-list *ngIf="currentState == 'specialty-list'" 
+      [university]='university'
+      [currentLang]="currentLang"></specialty-list>
     </div>
     <div *ngIf="currentState == 'detail'" class="bottom-section-structure-info-page">
       <div class="row">
@@ -55,7 +61,7 @@
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="structure-first-left-text">
               <h5>Universitet haqqinda</h5><br>
-              <p>{{university.info}}</p><br><br><br>
+              <p>{{university.info | translate: currentLang }}</p><br><br><br>
               <ul>
                 <h5>Universitetin diger melumatlari</h5><hr>
                 <li>Binalarin Sayi: {{university.buildingCount}}<hr></li>
@@ -75,7 +81,7 @@
                 </li>
                 <br>
                 <li>
-                  <p class="management-title"><span>Rektor</span>: <br>{{university.rektorName}}</p>
+                  <p class="management-title"><span>Rektor</span>: <br>{{university.rektorName | translate: currentLang }}</p>
                 </li>
                 <br>
               </ul>
@@ -87,7 +93,7 @@
                   <h4>Universitetin adresi</h4>
                 </li>
                 <br>
-                <li><span>{{university.street}}</span></li>
+                <li><span>{{university.street | translate: currentLang }}</span></li>
               </ul>
             </div>
           </div>

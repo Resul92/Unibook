@@ -1171,3 +1171,14 @@ Main Components
 .ov-hid {
 	overflow: hidden;
 }
+.language-buttons {
+    display: inline-block;
+    position: absolute;
+    right: 140px;
+    top: 20px;
+    width: 31px;
+    height: 31px;
+    overflow: hidden;
+    z-index: 10;
+    transition: height 100ms linear;
+}

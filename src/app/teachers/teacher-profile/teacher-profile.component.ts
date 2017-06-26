@@ -5,6 +5,7 @@ import { Teacher } from '../../shared/teacher.model';
 import { TeacherService } from '../../shared/teacher.service';
 import { University } from '../../shared/university.model';
 import { UniversityService } from '../../shared/university.service';
+import { UserService } from '../../shared/user.service';
 
 @Component({
 	
@@ -18,12 +19,14 @@ export class TeacherProfileComponent {
 	teacher: Teacher;
  	teachers: Teacher[];
  	university: University;
+	currentLang;
 
 	constructor(
 		private universityService: UniversityService,
 		private teacherService: TeacherService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private userService: UserService
 	) {}
 	ngOnInit(): void {
 		this.route.params.forEach((params: Params) => {
@@ -32,6 +35,10 @@ export class TeacherProfileComponent {
 			.then(teacher => {
 				this.teacher = teacher;
 				console.log('this teacher: ', this.teacher);
+			});
+			this.userService.getCurrentLanguage().then(currentLang => {
+				console.log('currentLanguage: ', currentLang);
+				this.currentLang = currentLang;
 			});
 		});
 	}

@@ -15,6 +15,7 @@ export class UniversityAsideComponent implements OnInit, OnChanges {
 	@Input() universities: University[];
 	@Input() currentState: string;
 	@Input() currentModuleId: string;
+	@Input() currentLang;
 
 	@Output() 
 	select = new EventEmitter();

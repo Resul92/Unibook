@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, DoCheck} from '@angular/core';
+import { Component, OnInit, DoCheck} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -9,6 +9,7 @@ import { Teacher } from '../../shared/teacher.model';
 import { TeacherService } from '../../shared/teacher.service';
 import { University } from '../../shared/university.model';
 import { UniversityService } from '../../shared/university.service';
+import { UserService } from '../../shared/user.service';
 declare var $: any;
 declare var jQuery: any;
 
@@ -28,6 +29,8 @@ export class UniversitiesInfoComponent implements OnInit, DoCheck {
 	people;
 	errorMessage: string = '';
 	isLoading: boolean = true;
+	currentLang;
+	university: University;
 
 	constructor(
 		private universityService: UniversityService,
@@ -36,10 +39,9 @@ export class UniversitiesInfoComponent implements OnInit, DoCheck {
 		private teacherService: TeacherService,
 		private location: Location,
 		private route: ActivatedRoute,
-		private router: Router) {}
+		private router: Router,
+		private userService: UserService) {}
 
-	@Input()
-	university: University;
 	ngOnInit(): void {
 		this.route.params.forEach((params: Params) => {
 			let id = +params['id'];
@@ -73,6 +75,10 @@ export class UniversitiesInfoComponent implements OnInit, DoCheck {
 				.then(faculties => {
 					this.university.faculties = faculties;
 					console.log('this university faculties: ', faculties);
+				});
+				this.userService.getCurrentLanguage().then(currentLang => {
+					console.log('currentLanguage: ', currentLang);
+					this.currentLang = currentLang;
 				});
 			});
 		}); 

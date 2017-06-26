@@ -14,6 +14,7 @@ export class TeacherTedrisComponent {
 	currentState = this.state[0];
  	teachers: Teacher[];
 	@Input() teacher: Teacher;
+	@Input() currentLang;
 
 	constructor(
 		private teacherService: TeacherService,

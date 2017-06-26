@@ -19,6 +19,7 @@ export class TeachersListComponent implements OnInit, OnChanges {
  	@Input() allTeachers: Teacher[];
 	@Input() loading: boolean;
 	@Input() universities: University[];
+	@Input() currentLang;
 
 	oldTeachersArray = [];
 	constructor() {

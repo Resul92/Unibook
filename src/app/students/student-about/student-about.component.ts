@@ -13,6 +13,7 @@ export class StudentAboutComponent implements OnInit {
 	state = ['bio', 'contact', 'docs', 'main-info', 'plan', 'grades'];
 	currentState = this.state[0];
 	@Input() student: Student;
+	@Input() currentLang;
 
  	students: Student[];
 

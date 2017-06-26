@@ -8,5 +8,5 @@ import { Student } from '../../shared/student.model';
 }) 
 export class StudentPlanPanelComponent {
 	@Input() student: Student;
-
+	@Input() currentLang;
 }

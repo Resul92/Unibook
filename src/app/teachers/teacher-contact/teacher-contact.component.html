@@ -4,11 +4,11 @@
 			<ul>
 				<li class="info-head">Unvan</li>
 				<hr class="har">
-				<li class="info-head">Anadan oldugu unvan <p>{{teacher.birthAddress}}</p></li>
+				<li class="info-head">Anadan oldugu unvan <p>{{teacher.birthAddress | translate: currentLang }}</p></li>
 				<hr class="har">
-				<li class="info-head">Daimi yashadigi unvan<p>{{teacher.currentAddress}}</p></li>
+				<li class="info-head">Daimi yashadigi unvan<p>{{teacher.currentAddress | translate: currentLang }}</p></li>
 				<hr class="har">
-				<li class="info-head">Muveqqeti yashadigi unvan<p>{{teacher.temporaryAddress}}</p></li>
+				<li class="info-head">Muveqqeti yashadigi unvan<p>{{teacher.temporaryAddress | translate: currentLang }}</p></li>
 			</ul>
 		</div>
 	</div>
@@ -30,7 +30,7 @@
 			<ul>
 				<li class="info-head">Elaqe</li>
 				<hr class="har">
-				<li class="info-head" *ngFor="let contact of contacts">{{contact.name}} <p>{{contact.address}}</p></li>
+				<li class="info-head" *ngFor="let contact of contacts">{{contact.name | translate: currentLang }} <p>{{contact.address | translate: currentLang }}</p></li>
 				<hr class="har">
 			</ul>
 		</div>

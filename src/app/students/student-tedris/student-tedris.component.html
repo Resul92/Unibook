@@ -18,7 +18,9 @@
 		</div>
 		<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
 			<div *ngIf="currentState=='plan'">
-				<student-plan-panel [student]='student'></student-plan-panel>
+				<student-plan-panel 
+				[student]='student'
+				[currentLang]="currentLang"></student-plan-panel>
 			</div>
 			<!-- not sure if this is needed?
 			<div *ngIf="currentState=='grades'">
@@ -27,7 +29,9 @@
 				</div>
 			</div>-->
 			<div class="blocks-grid">
-				<student-grade-panel [student]='student'></student-grade-panel>
+				<student-grade-panel 
+				[student]='student'
+				[currentLang]="currentLang"></student-grade-panel>
 			</div>
 		</div>
 	</div>

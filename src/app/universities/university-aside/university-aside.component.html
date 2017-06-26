@@ -4,11 +4,11 @@
 <div class="aside-block">
 	<img [src]="university.imgUrl" default="assets/images/university-default.jpeg" class="aside-content-image" alt="">
 	<h4 class="aside-content-header-title">
-		{{university.name}}
+		{{university.name | translate: currentLang }}
 	</h4>
 </div>
 <div class="aside-block">
-	<a class="simple-btn" (click)="toggleFilter(subModule); false" [class.active-btn]="subModule.active" *ngFor="let subModule of subModules">{{subModule.name}}</a>
+	<a class="simple-btn" (click)="toggleFilter(subModule); false" [class.active-btn]="subModule.active" *ngFor="let subModule of subModules">{{subModule.name | translate: currentLang }}</a>
 </div>
 
 <!-- End Aside -->

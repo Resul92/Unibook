@@ -14,4 +14,6 @@ export class TeacherHeaderComponent {
 	university: University;
 	@Input()
 	currentState;
+	@Input() currentLang;
+
 }

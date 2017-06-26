@@ -88,23 +88,23 @@ export class StudentService {
 	}
 	toStudent(r:any, token:any) {
 		//iterate thorugh the properties of the object
-		//if null, add empty to the property including the .value.az or whatever
+		//if null, add empty to the property including the .value or whatever
 		let obj = this.setDefaults(r);
 		let student = <any>({
 			id: obj.id,
 			name: obj.firstName + " " + obj.middleName + " " + obj.lastName,
-			status: obj.eduTypeId.value.az,
+			status: obj.eduTypeId.value,
 			imgUrl: `http://atis.edu.az/UnibookHsisRest/students/${obj.id}/image?token=${token}`,
-			grade: obj.eduLevelId.value.az,
+			grade: obj.eduLevelId.value,
 			universityName: obj.orgName,
-			profession: obj.specialty.az,
+			profession: obj.specialty,
 			faculty: null // to be added
 		});
 		return student;
 	}
 	toStudentDetail(r:any, token:any): Student{
 		//iterate thorugh the properties of the object
-		//if null, add empty to the property including the .value.az or whatever
+		//if null, add empty to the property including the .value or whatever
 		let obj = this.setDefaults(r);
 		let student = <Student>({
 			id: obj.id,
@@ -114,12 +114,12 @@ export class StudentService {
 			universityId: null,
 			universityName: obj.orgName,
 			birthday: obj.birthDate,
-			gender: obj.gender.value.az,
-			grade: obj.eduLevelId.value.az,
-			status: obj.eduTypeId.value.az,
+			gender: obj.gender.value,
+			grade: obj.eduLevelId.value,
+			status: obj.eduTypeId.value,
 			jobStatus: null,// unused
 			faculty: null, // to be added
-			profession: obj.speciality[0].name.az,
+			profession: obj.speciality[0].name,
 			admissionScore: obj.score,
 			bio: null, // unused, but should remain
 			history: null,// unused, but should remain
@@ -147,13 +147,13 @@ export class StudentService {
 			id: document.id,
 			series: document.serial,
 			date: document.createDate,
-			type: document.type.value.az
+			type: document.type.value
 		}
 		return doc;
 	}
 	toContact(contact): Contact {
 		let cont: Contact = {
-			name: contact.type.value.az,
+			name: contact.type.value,
 			address: contact.contact
 		}
 		return cont;
@@ -161,7 +161,7 @@ export class StudentService {
 	toAddress(addr): Address {
 		let adr: Address = {
 			name: addr.name,
-			value: addr.type.value.az
+			value: addr.type.value
 		}
 		return adr;
 	}
@@ -170,9 +170,9 @@ export class StudentService {
 	// this is going to be a speed efficiency bottleneck
 	setDefaults(obj) {
 		//console.log('setting defaults in: ', obj)
-		//array of properties  in universities that require .az
+		//array of properties  in universities that require 
 		let simpleProperties = ["specialty"]
-		//array of properties that require value.az
+		//array of properties that require value
 		let valueProperties = ["eduLevelId", "eduTypeId", "gender"];
 		// let's only check for properties that we care about
 		for (var i = 0; i < simpleProperties.length; i++){

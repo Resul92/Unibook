@@ -11,13 +11,13 @@
 				<li class="second-text">{{student.birthday}}</li>
 				<hr class="har">
 				<li>Cins</li>
-				<li class="second-text">{{student.gender}}</li>
+				<li class="second-text">{{student.gender | translate: currentLang }}</li>
 				<hr class="har">
 				<li>Ictimai status</li>
-				<li class="second-text">{{student.jobStatus}}</li>
+				<li class="second-text">{{student.jobStatus | translate: currentLang }}</li>
 				<hr class="har">
 				<li>Ixtisas</li>
-				<li class="second-text">{{student.profession}}}</li>
+				<li class="second-text">{{student.profession | translate: currentLang }}}</li>
 				<hr class="har">
 				<li>Qebul oldugu bal</li>
 				<li class="second-text">{{student.admissionScore}}</li>

@@ -13,6 +13,7 @@ export class TeacherAboutComponent {
 	state = ['bio', 'contact', 'docs', 'main-info', 'plan', 'grades'];
 	currentState = this.state[0];
 	@Input() teacher: Teacher;
+	@Input() currentLang;
 
 	constructor(
 		private teacherService: TeacherService,

@@ -2,8 +2,8 @@
 	<div class="profile-img"><img [src]="student.imgUrl" default="assets/images/user.png" alt=""></div>
 
 	<div class="profile-text">
-		<h4>{{student.name}}</h4>
-		<h6>{{student.universityName}}</h6>
+		<h4>{{student.name | translate: currentLang }}</h4>
+		<h6>{{student.universityName | translate: currentLang }}</h6>
 		<div class="grades">
 			<span class="active-grades"></span>
 			<span></span>
@@ -11,9 +11,9 @@
 			<span></span>
 		</div>
 		<!-- wait for university to be loaded -->
-		<h5 class="profile-university" *ngIf="university">{{university.name}}</h5>
-		<h5 class="profile-fakulity">{{student.faculty}}</h5>
-		<h5>{{student.status}}</h5>
+		<h5 class="profile-university" *ngIf="university">{{university.name | translate: currentLang }}</h5>
+		<h5 class="profile-fakulity">{{student.faculty | translate: currentLang }}</h5>
+		<h5>{{student.status | translate: currentLang }}</h5>
 	</div>
 </div>
 

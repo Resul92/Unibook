@@ -20,6 +20,7 @@ export class StudentsListComponent implements OnInit,OnChanges {
  	@Input() allStudents: Student[];
 	@Input() loading: boolean;
 	@Input() universities: University[];
+	@Input() currentLang;
 
 	constructor(
 		private studentService: StudentService) {

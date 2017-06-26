@@ -81,7 +81,7 @@ export class TeacherService {
 	}
 	toTeacher(r:any, token: any) {
 		//iterate thorugh the properties of the object
-		//if null, add empty to the property including the .value.az or whatever
+		//if null, add empty to the property including the .value or whatever
 		let obj = this.setDefaults(r);
 		let teacher = <any>({
 			id: obj.id,
@@ -90,25 +90,25 @@ export class TeacherService {
 			jobStatus: obj.academicName,
 			faculty: obj.department,
 			universityName: obj.orgName,
-			title: obj.structure.value.az,// unused, but should remain
+			title: obj.structure.value,// unused, but should remain
 			subjects: obj.subjects
 		});
 		return teacher;
 	}
 	toTeacherDetail(r:any, token: any): Teacher {
 		//iterate thorugh the properties of the object
-		//if null, add empty to the property including the .value.az or whatever
+		//if null, add empty to the property including the .value or whatever
 	  	//console.log('setting student:', r);
 		let obj = this.setDefaults(r);
 		let teacher = <Teacher>({
 			id: obj.id,
 			name: obj.firstName + " " + obj.middleName + " " + obj.lastName,
 			courseYear: null, // not used
-			title: obj.structure.value.az,// unused, but should remain
+			title: obj.structure.value,// unused, but should remain
 			universityId: obj.orgId,
 			universityName: obj.orgName,
 			birthday: obj.birthDate,
-			gender: obj.gender.value.az,
+			gender: obj.gender.value,
 			grade: obj.academicDegree,
 			status: obj.status,
 			jobStatus: obj.academicName,
@@ -140,13 +140,13 @@ export class TeacherService {
 			id: document.id,
 			series: document.serial,
 			date: document.createDate,
-			type: document.type.value.az
+			type: document.type.value
 		}
 		return doc;
 	}
 	toContact(contact): Contact {
 		let cont: Contact = {
-			name: contact.type.value.az,
+			name: contact.type.value,
 			address: contact.contact
 		}
 		return cont;
@@ -154,7 +154,7 @@ export class TeacherService {
 	toAddress(addr): Address {
 		let adr: Address = {
 			name: addr.name,
-			value: addr.type.value.az
+			value: addr.type.value
 		}
 		return adr;
 	}
@@ -162,7 +162,7 @@ export class TeacherService {
 	// might have to convert into a promise
 	setDefaults(obj) {
 		//console.log('setting defaults in: ', obj)
-		//array of properties that require value.az
+		//array of properties that require value
 		let valueProperties = ["structure", "gender"];
 		// let's only check for properties that we care about
 		for (var i = 0; i < valueProperties.length; i++){

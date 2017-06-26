@@ -52,7 +52,7 @@
 							<img class="student-grid-img" [src]="student.imgUrl" default="assets/images/user.png" alt="">
 							<ul>
 								<li>
-									<p>{{student.name}}</p>
+									<p>{{student.name | translate: currentLang }}</p>
 								</li>
 								<li class="grades">
 									<span class="active-grades"></span>
@@ -61,7 +61,7 @@
 									<span></span>
 								</li>
 								<li>
-									<p>{{student.grade}}/{{student.status}}</p>
+									<p>{{student.grade | translate: currentLang }}/{{student.status | translate: currentLang }}</p>
 								</li>
 							</ul>
 							<div class="short-info-students st-block-style">
@@ -79,8 +79,8 @@
 										<span class="active-grades"></span>
 										<span></span>
 									</div>
-									<h5>{{university.name}}</h5>
-									<h6>{{student.profession}}</h6>
+									<h5>{{university.name | translate: currentLang }}</h5>
+									<h6>{{student.profession | translate: currentLang }}</h6>
 									<a routerLink="/student/{{student.id}}" routerLinkActive="active" class="button rounded-btn
 									hvr-btn">profile kec</a>
 								</div>

@@ -28,16 +28,24 @@
 </div>
 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
 	<div *ngIf="currentState == 'bio'">
-		<teacher-bio [teacher]='teacher'></teacher-bio>
+		<teacher-bio 
+		[teacher]='teacher'
+		[currentLang]="currentLang"></teacher-bio>
 	</div>	
 	<div *ngIf="currentState == 'main-info'">
-		<teacher-main-info [teacher]='teacher'></teacher-main-info>
+		<teacher-main-info 
+		[teacher]='teacher'
+		[currentLang]="currentLang"></teacher-main-info>
 	</div>	
 	<div *ngIf="currentState == 'contact'">
-		<teacher-contact [teacher]='teacher'></teacher-contact>
+		<teacher-contact 
+		[teacher]='teacher'
+		[currentLang]="currentLang"></teacher-contact>
 	</div>					
 	<div *ngIf="currentState == 'docs'">
-		<teacher-docs [teacher]='teacher'></teacher-docs>
+		<teacher-docs 
+		[teacher]='teacher'
+		[currentLang]="currentLang"></teacher-docs>
 	</div>					
 				
 </div>

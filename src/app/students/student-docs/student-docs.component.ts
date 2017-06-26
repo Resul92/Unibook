@@ -8,5 +8,6 @@ import { Student } from '../../shared/student.model';
 }) 
 export class StudentDocsComponent {
 	@Input() student: Student;
+	@Input() currentLang;
 
 }

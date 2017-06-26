@@ -1,9 +1,17 @@
 <header>
-	<a routerLink="{{backUrl}}" routerLinkActive="active" class="header-logo">
+	<a routerLink="/dashboard" routerLinkActive="active" class="header-logo">
 		<img src="assets/img/unibook.png" alt="">
 	</a>
 	<nav class="header-nav">
 		<ul>
+			<li>
+				<div class="dropdown" dropdown [dropdownToggle]="false">
+				    <button class="btn btn-primary" dropdown-open>{{currentLang}}</button>
+				    <ul class="dropdown-menu">
+				        <li *ngFor="let lang of languages" (click)="setLanguage(lang)"><a>{{lang}}</a></li>
+				    </ul>
+				</div>
+			</li>
 			<li class="header-system">
 				<a href="#" class="icon-btn white-color-btn open-popup" data-popup="system-popup" popUp>
 					<img src="assets/img/icons/set_system.svg" alt="">
@@ -15,7 +23,7 @@
 							<li *ngFor="let application of applications">
 								<a routerLink="{{application.url}}" routerLinkActive="active" class="active-system system-btn">
 									<img [src]="application.imgUrl" default="assets/img/school.svg" alt="">
-									<div class="center">{{application.name}}</div>
+									<div class="center">{{application.name | translate: currentLang }}</div>
 								</a>
 							</li>
 						</ul>
@@ -23,7 +31,6 @@
 				</div>
 				<!-- popup end -->
 			</li>
-
 			<li class="header-user">
 				<a class="open-popup" data-popup="login-popup" popUp>
 					<img class="header-profile-image" default="assets/images/user.png" [src]="user.imgUrl" default="assets/images/user.png" alt="">
@@ -39,9 +46,9 @@
 									<img [src]="user.imgUrl" default="assets/images/user.png" alt="">
 								</div>
 								<div class="popup-students-info">
-									<p>{{user.name}}</p>
-									<p>{{user.role}}</p>
-									<p>{{user.structure.name}}</p>
+									<p>{{user.name | translate: currentLang }}</p>
+									<p>{{user.role | translate: currentLang }}</p>
+									<p>{{user.structure.name | translate: currentLang }}</p>
 								</div>
 							</div>
 							<div class="center-popup">

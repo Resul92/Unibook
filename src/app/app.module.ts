@@ -10,6 +10,9 @@ import { LoadersCssModule } from 'angular2-loaders-css';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import {DropdownModule} from "ngx-dropdown";
+
 // services
 import { SpinnerService } from "./core/spinner/spinner.service";
 import { UserService } from './shared/user.service';
@@ -29,6 +32,7 @@ import { CapitalizePipe } from './shared/capitalize.pipe';
 import { FirstLettersPipe } from './shared/firstletters.pipe';
 import { AuthGuard } from './shared/auth.guard';
 import { SearchPipe } from './shared/search.pipe';
+import { TranslatePipe } from './shared/translate.pipe';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 // University components
@@ -115,7 +119,9 @@ export function HttpLoaderFactory(http: Http) {
 		HttpModule,
 		ModalModule.forRoot(),
 		routing,
+	    MultiselectDropdownModule,
 		SelectModule,
+		DropdownModule,
 		LoadersCssModule,
         TranslateModule.forRoot({
             loader: {
@@ -202,7 +208,8 @@ export function HttpLoaderFactory(http: Http) {
 		LoaderComponent,
 		FilterByUniDirective,
 		SpinnerComponent,
-		SearchPipe
+		SearchPipe,
+		TranslatePipe
 	],
 	providers: [
 		AuthGuard,

@@ -53,11 +53,11 @@
 								</li>-->
 							</ul>
 						</div>
-						<p>{{teacher.name}}</p>
+						<p>{{teacher.name | translate: currentLang }}</p>
 						<div class="teachers-profile-tables-bottom">
-							<span>{{teacher.universityName}}</span>
-							<span>{{teacher.title}}</span>
-							<span>{{teacher.faculty}}</span>
+							<span>{{teacher.universityName | translate: currentLang }}</span>
+							<span>{{teacher.title | translate: currentLang }}</span>
+							<span>{{teacher.faculty | translate: currentLang }}</span>
 						</div>
 					</a>
 				</div>

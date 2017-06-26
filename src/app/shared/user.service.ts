@@ -18,7 +18,9 @@ export class UserService {
     public modules;
     private applicationsUrl;
     private modulesUrl;
-    private subModulesUrl;
+    private subModulesUrl; 
+    private currentLanguage = "az";
+    private languages = ["az", "en", "ru"];    
 
     constructor(
         private http: Http,
@@ -33,6 +35,26 @@ export class UserService {
         this.getCurrentUser().then(user => {
             this.router.navigate([url]);
         });
+    }
+    getCurrentLanguage(): Promise<any>{
+        let res = new Promise<any>((resolve, reject) => {
+            console.log('language in getCurrentLanguage: ', this.currentLanguage);
+            resolve(this.currentLanguage);
+        });
+        //console.log('res responses is: ', res);
+        return res;    
+    }
+    setCurrentLanguage(lang): void{
+        this.currentLanguage = lang;     
+        console.log('set the currentLanguage to: ', this.currentLanguage);     
+    }
+    getLanguages(): Promise<any>{
+        let res = new Promise<any>((resolve, reject) => {
+            console.log('languages in getLanguages: ', this.languages);
+            resolve(this.languages);
+        });
+        //console.log('res responses is: ', res);
+        return res;
     }
     getToken(): Promise<any>{
         let res = new Promise<any>((resolve, reject) => {
@@ -61,7 +83,7 @@ export class UserService {
     }
     toApplication(r:any, token){
         let application = {
-            name: r.shortName.az,
+            name: r.shortName,
             url: r.url,
             imgUrl : `assets/img/application-icons/${r.id}.png`
         }
@@ -88,7 +110,7 @@ export class UserService {
     }
     toModule(r:any): any{
         let mod = {
-            name: r.name.az,
+            name: r.name,
             id : r.id,
             active: true
         }
@@ -100,19 +122,19 @@ export class UserService {
             //this.user = user;
             this.user.id = user.id;
             this.user.name = user.person.name + " " + user.person.patronymic + " " + user.person.surname;
-            this.user.role = user.role.value.az;
-            this.user.structure.name = user.structure.name.az;
+            this.user.role = user.role.value;
+            this.user.structure.name = user.structure.name;
             */
     //mapping returned data to teh shorter version of the user model used in the header
     toUser(r:any, token:any) {
         //iterate thorugh the properties of the object
-        //if null, add empty to the property including the .value.az or whatever
+        //if null, add empty to the property including the .value or whatever
         let user = ({
             id: r.id,
             name: r.person.name + " " + r.person.patronymic + " " + r.person.surname,
-            role: r.role.value.az,
+            role: r.role.value,
             structure: {
-                name: r.structure.name.az,
+                name: r.structure.name,
                 id: r.structure.id
             }
         });
@@ -122,7 +144,7 @@ export class UserService {
     //mapping returned data to our model
     toUserDetail(r:any, token:any): User {
         //iterate thorugh the properties of the object
-        //if null, add empty to the property including the .value.az or whatever
+        //if null, add empty to the property including the .value or whatever
         let obj = this.setDefaults(r);
         let user = <User>({
             id: obj.id,
@@ -132,12 +154,12 @@ export class UserService {
             universityId: 0,
             universityName: obj.orgName,
             birthday: obj.birthDate,
-            gender: obj.gender.value.az,
-            grade: obj.eduLevelId.value.az,
-            status: obj.eduTypeId.value.az,
+            gender: obj.gender.value,
+            grade: obj.eduLevelId.value,
+            status: obj.eduTypeId.value,
             jobStatus: '',// unused
             faculty: '', // to be added
-            profession: obj.speciality[0].name.az,
+            profession: obj.speciality[0].name,
             admissionScore: obj.score,
             bio: '', // unused, but should remain
             history: [],// unused, but should remain
@@ -164,7 +186,7 @@ export class UserService {
     // might have to convert into a promise
     setDefaults(obj) {
         //console.log('setting defaults in: ', obj)
-        //array of properties that require value.az
+        //array of properties that require value
         let valueProperties = ["eduLevelId", "eduTypeId", "gender"];
         // let's only check for properties that we care about since they're theons that cause us errors
         for (var i = 0; i < valueProperties.length; i++){
