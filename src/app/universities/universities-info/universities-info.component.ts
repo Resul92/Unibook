@@ -76,7 +76,7 @@ export class UniversitiesInfoComponent implements OnInit, DoCheck {
 					this.university.faculties = faculties;
 					console.log('this university faculties: ', faculties);
 				});
-				this.userService.getCurrentLanguage().then(currentLang => {
+				this.userService.getCurrentLanguage().subscribe(currentLang => {
 					console.log('currentLanguage: ', currentLang);
 					this.currentLang = currentLang;
 				});

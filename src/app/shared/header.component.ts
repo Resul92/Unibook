@@ -39,16 +39,12 @@ export class HeaderComponent implements OnInit {
 				});
 			console.log('lookup result for the current user is', this.user);
 			});
-			this.userService.getCurrentLanguage().then(currentLang => {
+			this.userService.setCurrentLanguage("az");
+			this.userService.getCurrentLanguage().subscribe(currentLang => {
 				console.log('currentLanguage: ', currentLang);
 				this.currentLang = currentLang;
 				this.userService.getLanguages().then(languages => {
 					this.languages = languages;
-					let currentLanguageIndex = this.languages.indexOf(this.currentLang);
-					console.log('languages: ', languages);
-					this.languages.splice(currentLanguageIndex, 1);
-					//console.log('mods in the button: ', this.modules);
-					//console.log('current module: ', this.currentModule);
 				});
 			});
 		});
@@ -56,9 +52,9 @@ export class HeaderComponent implements OnInit {
 	setLanguage(lang){
 		console.log('lang is: ', lang);
 		if(lang !== this.currentLang){
-			this.languages.unshift(this.currentLang);
+			// this.languages.unshift(this.currentLang);
 			let currentLanguageIndex = this.languages.indexOf(lang);
-			this.languages.splice(currentLanguageIndex, 1);
+			// this.languages.splice(currentLanguageIndex, 1);
 			this.currentLang = lang;
 			this.userService.setCurrentLanguage(lang);
 		} else {

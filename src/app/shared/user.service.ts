@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 // importing services for mapping? - wouldn't that create a circular dependency?
 import 'rxjs/add/operator/toPromise';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subject } from 'rxjs/Subject';
 import { User } from './user.model';
 
 @Injectable()
@@ -19,8 +20,7 @@ export class UserService {
     private applicationsUrl;
     private modulesUrl;
     private subModulesUrl; 
-    private currentLanguage = "az";
-    private languages = ["az", "en", "ru"];    
+    private currentLanguage: ReplaySubject<string> = new ReplaySubject<string>();
 
     constructor(
         private http: Http,
@@ -36,22 +36,19 @@ export class UserService {
             this.router.navigate([url]);
         });
     }
-    getCurrentLanguage(): Promise<any>{
-        let res = new Promise<any>((resolve, reject) => {
-            console.log('language in getCurrentLanguage: ', this.currentLanguage);
-            resolve(this.currentLanguage);
-        });
+    getCurrentLanguage(): ReplaySubject<string>{
         //console.log('res responses is: ', res);
-        return res;    
+        return this.currentLanguage;    
     }
     setCurrentLanguage(lang): void{
-        this.currentLanguage = lang;     
+        this.currentLanguage.next(lang);     
         console.log('set the currentLanguage to: ', this.currentLanguage);     
     }
     getLanguages(): Promise<any>{
+        let languages = ["az", "en", "ru"];    
         let res = new Promise<any>((resolve, reject) => {
-            console.log('languages in getLanguages: ', this.languages);
-            resolve(this.languages);
+            console.log('languages in getLanguages: ', languages);
+            resolve(languages);
         });
         //console.log('res responses is: ', res);
         return res;

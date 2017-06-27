@@ -36,7 +36,7 @@ export class StudentProfileComponent {
 				console.log('student: ', student);
 				this.student = student
 			});
-			this.userService.getCurrentLanguage().then(currentLang => {
+			this.userService.getCurrentLanguage().subscribe(currentLang => {
 				console.log('currentLanguage: ', currentLang);
 				this.currentLang = currentLang;
 			});

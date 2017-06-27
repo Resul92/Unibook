@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
 				//console.log('current module: ', this.currentModule);
 			});
 			//console.log('current modules: ', this.modules);
-			this.userService.getCurrentLanguage().then(currentLang => {
+			this.userService.getCurrentLanguage().subscribe(currentLang => {
 				console.log('currentLanguage: ', currentLang);
 				this.currentLang = currentLang;
 			});
