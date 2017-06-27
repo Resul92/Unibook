@@ -251,26 +251,21 @@ export class DashboardComponent implements OnInit {
 			//console.log('no new module selected');
 		}
 	}
-	sortStudentsBy(property: string): void {
-		console.log('sorting students by: ', property);
-		console.log('before sorting: ', this.students);
+	sortStudentsBy(students: Student[]): void {
 		if (this.students){
-			this.students = this.helperService.sort(this.students, property);
-			console.log('after sorting: ', this.students);
+			this.students = students;
 		}
+		console.log('after sorting: ', this.students);
 	}
-	sortTeachersBy(property: string): void {
-		console.log('sorting teachers by: ', property);
-		console.log('before sorting: ', this.teachers);
+	sortTeachersBy(teachers: Teacher[]): void {
 		if (this.teachers){
-			this.teachers = this.helperService.sort(this.teachers, property);
+			this.teachers = teachers;
 		}
 		console.log('after sorting: ', this.teachers);
 	}
 	sortUniversitiesBy(property: string): void {
 		console.log('sorting universities by: ', property);
 		console.log('before sorting: ', this.universities);
-		console.log(this.helperService.sort(this.universities, property));
 		if (this.universities){
 			this.universities = this.helperService.sort(this.universities, property);
 			console.log('after sorting: ', this.universities);

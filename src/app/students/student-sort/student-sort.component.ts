@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import {Student} from '../../shared/student.model';
+import { HelperService } from '../../shared/helper.service';
 declare var $:any;
 
 @Component({
@@ -11,10 +12,12 @@ export class StudentSortComponent {
 	@Output() 
 	select = new EventEmitter();
  	@Input() students: Student[];
+	constructor(private helperService: HelperService){}
 
 	onChangeVal(value) {
 		console.log('onChange value in student-sort component that we are emitting out is :', value);
-    	this.select.emit(value)
+    	let sortedStudents = this.helperService.sort(this.students, value);
+    	this.select.emit(sortedStudents);
 	}
     @ViewChild('sel') el:ElementRef;
 

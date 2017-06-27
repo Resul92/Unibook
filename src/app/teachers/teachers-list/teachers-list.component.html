@@ -1,6 +1,7 @@
 <teacher-charts [university]='university'></teacher-charts>
 <!-- Main Container -->
 <!-- scroll inside of the block is done by these two classes-->
+<main class="main-content">
 <div class="ov-hid">
 	<div class="main-container st-block-style vert-scroll">
 
@@ -38,7 +39,7 @@
 			<div class="grid grid-4">
 				<div class="grid-sizer"></div>
 				<div class="grid-item" *ngFor="let teacher of teachers">
-					<a routerLink="/teacher/{{teacher.id}}" routerLinkActive="active" class="teachers-profile-tables">
+					<a routerLink="/teacher/{{teacher.id}}" routerLinkActive="active" class="teachers-profile-tables" *ngIf="!loading">
 						<div class="teachers-profile-tables-top">
 							<ul class="teachers-profile">
 								<!-- computing first letters of 1000 teachers o the client slows the website down and breaks the chart animations - if you want to add, just return them from the server and include as variables here
@@ -62,7 +63,8 @@
 					</a>
 				</div>
 			</div>
-			<button class="loader-btn" (click)="loadMoreTeachs()">Load More:</button>
+			<button class="loader-btn" (click)="loadMoreTeachs()" *ngIf="!loading">Load More:</button>
 		</div>
 	</div>
 </div>
+</main>

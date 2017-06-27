@@ -53,7 +53,7 @@ export class TeachersListComponent implements OnInit, OnChanges {
 		this.update.emit(results);
 	}
 	onSortChange(value) {
-		console.log('sort change value:', value);
+		console.log('sort change value:', value, "the teachers at the moment: ", this.teachers);
     	this.select.emit(value);
 
 	}

@@ -54,7 +54,8 @@ export class StudentFilterComponent {
 	setFaculty(id){
 		this.faculty_id = id;
 		//console.log('setting uni id and fac id for filtering to', this.faculty_id);
-	}	showModal(){
+	}	
+	showModal(){
 		this.modal.show();
 	}
 	setOrgId(uni_id, faculty_id) {
