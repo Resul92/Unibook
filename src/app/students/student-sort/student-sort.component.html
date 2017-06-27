@@ -1,5 +1,6 @@
 <div #sel name="filter" id="filter" class="new-select-block" placeholder="Siralama">
 	<select #sel (change)="onChangeVal(sel.value)" name="studentSort" id="studentSort" class="new-select" placeholder="Siralama">
+	    <option value="" disabled selected>Siralama</option>
 		<option value="name">A-z siralama</option>
 		<option value="-name">Z-a siralama</option>
 		<option value="courseYear">Course year</option>
