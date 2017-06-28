@@ -50,7 +50,7 @@ export class UserService {
             console.log('languages in getLanguages: ', languages);
             resolve(languages);
         });
-        //console.log('res responses is: ', res);
+        console.log('res responses is: ', res);
         return res;
     }
     getToken(): Promise<any>{
@@ -58,7 +58,7 @@ export class UserService {
             console.log('token in getToken: ', JSON.parse(localStorage.getItem('currentUser')));
             resolve(JSON.parse(localStorage.getItem('currentUser')).token);
         });
-        //console.log('res responses is: ', res);
+        console.log('res responses is: ', res);
         return res;
     }
     //get applications list to be shown in the header

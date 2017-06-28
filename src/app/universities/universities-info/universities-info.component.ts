@@ -118,21 +118,6 @@ export class UniversitiesInfoComponent implements OnInit, DoCheck {
 	navSelect(state): void {
 		this.currentState = state;
 	}
-	sortStudentsBy(property: string): void {
-		if (this.students){
-			this.helperService.sort(this.students, property);
-		}
-		console.log('this students after sorting: ', this.students);
-	}
-	sortTeachersBy(property: string): void {
-		if (this.teachers){
-			console.log('sortBy in the universities component started, trying to sort TEACHERS by: ', property);
-			this.helperService.sort(this.teachers, property);
-			console.log('this teachers after sorting: ', this.teachers);
-		} else {
-			console.log('no teachers found');
-		}
-	}
 	changeView(state) {
 		console.log('current state is: ', this.currentState);
 		this.currentState =state;

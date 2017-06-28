@@ -43,7 +43,7 @@
 
 			<div class="row grid grid-4">
 				<div class="grid-sizer"></div>
-				<div class="grid-item" *ngFor="let student of students">
+				<div class="grid-item" *ngFor="let student of students | sort:sortByProperty">
 					<div class="students-grid-block"  *ngIf="!loading">
 						<div class="student-grid-inner">
 							<a href="#" class="more-btn">

@@ -68,7 +68,7 @@ export class UniversityService {
 			return this.http.get(this.realDepartmentByIdUrl)
 			.toPromise()
 			.then(response => {
-				//console.log('response.json().data for getting department by id', response.json().data);
+				console.log('response.json().data for getting department by id', response.json().data);
 				return this.mapDepartments(response, token);
 			})
             .catch(this.handleError);
@@ -83,7 +83,7 @@ export class UniversityService {
 			return this.http.get(this.realFacultyByIdUrl)
 			.toPromise()
 			.then(response => {
-				//console.log('response.json().data for getting faculty by id', response.json().data);
+				console.log('response.json().data for getting faculty by id', response.json().data);
 				return this.mapFaculties(response, token);
 			})
             .catch(this.handleError);

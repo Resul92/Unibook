@@ -17,7 +17,6 @@ export class TeacherSortComponent {
 
 	onChange(value) {
 		console.log('onChange value in teacher-sort component that we are emitting out is :', value);
-    	let sortedStudents = this.helperService.sort(this.teachers, value);
-    	this.select.emit(sortedStudents);
+    	this.select.emit(value);
 	}
 }

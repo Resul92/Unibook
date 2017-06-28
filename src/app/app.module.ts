@@ -33,6 +33,7 @@ import { FirstLettersPipe } from './shared/firstletters.pipe';
 import { AuthGuard } from './shared/auth.guard';
 import { SearchPipe } from './shared/search.pipe';
 import { TranslatePipe } from './shared/translate.pipe';
+import { SortPipe } from './shared/sort.pipe';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 // University components
@@ -209,7 +210,8 @@ export function HttpLoaderFactory(http: Http) {
 		FilterByUniDirective,
 		SpinnerComponent,
 		SearchPipe,
-		TranslatePipe
+		TranslatePipe,
+		SortPipe
 	],
 	providers: [
 		AuthGuard,

@@ -38,7 +38,7 @@
 			<h1 class="no-data" *ngIf="teachers.length === 0 && !loading">No data to show.</h1>
 			<div class="grid grid-4">
 				<div class="grid-sizer"></div>
-				<div class="grid-item" *ngFor="let teacher of teachers">
+				<div class="grid-item" *ngFor="let teacher of teachers | sort:sortByProperty">
 					<a routerLink="/teacher/{{teacher.id}}" routerLinkActive="active" class="teachers-profile-tables" *ngIf="!loading">
 						<div class="teachers-profile-tables-top">
 							<ul class="teachers-profile">

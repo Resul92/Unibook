@@ -21,6 +21,7 @@ export class StudentsListComponent implements OnInit,OnChanges {
 	@Input() loading: boolean;
 	@Input() universities: University[];
 	@Input() currentLang;
+	@Input() sortByProperty;
 
 	constructor(
 		private studentService: StudentService) {
@@ -54,8 +55,10 @@ export class StudentsListComponent implements OnInit,OnChanges {
 		this.update.emit(results);
 	}
 	onSortChange(value) {
-		console.log('sort by: ', value);
-    	this.select.emit(value)
+		//console.log('sort change value:', value, "the teachers at the moment: ", this.teachers);
+    	this.select.emit(value);
+    	//this.sortByProperty = value;
+    	console.log('sortByProperty', this.sortByProperty);
 	}
 	loadMoreStuds(){
 		this.loading = true;

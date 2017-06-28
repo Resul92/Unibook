@@ -15,9 +15,8 @@ export class StudentSortComponent {
 	constructor(private helperService: HelperService){}
 
 	onChangeVal(value) {
-		console.log('onChange value in student-sort component that we are emitting out is :', value);
-    	let sortedStudents = this.helperService.sort(this.students, value);
-    	this.select.emit(sortedStudents);
+		console.log('onChange value in student-sort component that we are emitting out is :', this.students);
+    	this.select.emit(value);
 	}
     @ViewChild('sel') el:ElementRef;
 

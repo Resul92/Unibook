@@ -70,6 +70,7 @@
 				[loading]="loading"
 				[currentLang]="currentLang"
 				[students]='students'
+				[sortByProperty]="sortStudentsByProperty"
 				(select)="sortStudentsBy($event)"
 				(update)="searchStudents($event)"
 				(loadMoreStudents)='loadMoreStudents()'
@@ -83,6 +84,7 @@
 				[loading]="loading"
 				[currentLang]="currentLang"
 				[teachers]='teachers'
+				[sortByProperty]="sortTeachersByProperty"
 				(select)="sortTeachersBy($event)"
 				(update)="searchTeachers($event)"
 				(loadMoreTeachers)='loadMoreTeachers()'

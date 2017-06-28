@@ -44,6 +44,8 @@ export class DashboardComponent implements OnInit {
 	studentModulesList: Array<any>;
 	orgId;
 	currentLang;
+	sortTeachersByProperty;
+	sortStudentsByProperty;
 
 	constructor(
 		private userService: UserService,
@@ -251,17 +253,11 @@ export class DashboardComponent implements OnInit {
 			//console.log('no new module selected');
 		}
 	}
-	sortStudentsBy(students: Student[]): void {
-		if (this.students){
-			this.students = students;
-		}
-		console.log('after sorting: ', this.students);
+	sortStudentsBy(value): void {
+		this.sortStudentsByProperty = value;
 	}
-	sortTeachersBy(teachers: Teacher[]): void {
-		if (this.teachers){
-			this.teachers = teachers;
-		}
-		console.log('after sorting: ', this.teachers);
+	sortTeachersBy(value): void {
+		this.sortTeachersByProperty = value;
 	}
 	sortUniversitiesBy(property: string): void {
 		console.log('sorting universities by: ', property);
