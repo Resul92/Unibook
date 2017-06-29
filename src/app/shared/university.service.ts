@@ -31,7 +31,7 @@ export class UniversityService {
 	constructor(private http: Http,
 		private userService: UserService) { }
 	/// connect to the real api
-	getRealUniversities(page, subModules?): Promise<any> {
+	getUniversities(page, subModules?): Promise<any> {
 		if(subModules){ this.subModulesList = subModules};
 		return this.userService.getToken().then(token =>{
 			console.log('current user token: ', token);			
@@ -46,7 +46,7 @@ export class UniversityService {
 			.catch(this.handleError);
 		});
 	}
-	getRealUniversityById(id): Promise<any> {
+	getUniversityById(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.realUniversityByIdUrl = `http://192.168.1.78:8082/UnibookHsisRest/structures/${id}?token=${token}`;		
 			console.log('realUniversityByIdURL', this.realUniversityByIdUrl);
@@ -60,7 +60,7 @@ export class UniversityService {
 		});
 	}
 	// gets a list of faculties that belong to a specific university id
-	getRealDepartmentById(id): Promise<any> {
+	getDepartmentById(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.realDepartmentByIdUrl	= `http://192.168.1.78:8082/UnibookHsisRest/structures/org/${id}/type/K?token=${token}`
 			//console.log('current user token: ', token);
@@ -75,7 +75,7 @@ export class UniversityService {
 		});
 	}
 	// gets a list of faculties that belong to a specific university id
-	getRealFacultyById(id): Promise<any> {
+	getFacultyById(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.realFacultyByIdUrl	= `http://192.168.1.78:8082/UnibookHsisRest/structures/org/${id}/type/F?token=${token}`
 			//console.log('current user token: ', token);
@@ -90,7 +90,7 @@ export class UniversityService {
 		});
 	}
 	// gets a list of faculties that belong to a specific university id
-	getRealSpecialtyById(id): Promise<any> {
+	getSpecialtyById(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.realSpecialtyByIdUrl	= `http://192.168.1.78:8082/UnibookHsisRest/structures/org/${id}/type/I?token=${token}`
  			//console.log('current user token: ', token);
@@ -104,7 +104,7 @@ export class UniversityService {
             .catch(this.handleError);
 		});
 	}
-	getRealUniversityStats(id): Promise<any> {
+	getUniversityStats(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.realUniversityStatsUrl = `http://192.168.1.78:8082/ReportingRest/reports/org/${id}?token=${token}`;
 			console.log('realUniversityStatsURL', this.realUniversityStatsUrl);

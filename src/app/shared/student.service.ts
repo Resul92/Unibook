@@ -35,7 +35,7 @@ export class StudentService {
 
 	//////////// need to build methods that would successfully 
 	/// connect to the real api
-	getRealStudents(page, subModules?, orgId?): Promise<any> {
+	getStudents(page, subModules?, orgId?): Promise<any> {
 		if(subModules){ this.subModulesList = subModules};
 		if(orgId) { this.orgId = orgId};
 		return this.userService.getToken().then(token =>{
@@ -46,13 +46,13 @@ export class StudentService {
 			return this.http.get(realStudentsUrl)
 			.toPromise()
 			.then(response => {
-				console.log('getRealStudents response', response.json());
+				console.log('getStudents response', response.json());
 				return this.mapStudents(response, token);
 			})
 			.catch(this.handleError);
 		});
 	}
-	getRealStudentById(id): Promise<any>  {
+	getStudentById(id): Promise<any>  {
 		return this.userService.getToken().then(token =>{
 			this.realStudentByIdUrl = `http://192.168.1.78:8082/UnibookHsisRest/students/${id}?token=${token}`;
 			console.log('realStudentByIdURL', this.realStudentByIdUrl);
@@ -65,7 +65,7 @@ export class StudentService {
             .catch(this.handleError);
 		});
 	}
-	getRealStudentsByUniversityId(id): Promise<any> {
+	getStudentsByUniversityId(id): Promise<any> {
 		return this.userService.getToken().then(token =>{
 			this.realStudentsByUniUrl = `http://192.168.1.78:8082/UnibookHsisRest/students?token=${token}&orgId=${id}&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046`;
 			return this.http.get(this.realStudentsByUniUrl)
@@ -77,16 +77,39 @@ export class StudentService {
 			.catch(this.handleError);
 		});
 	}
-	mapStudents(response:Response, token: string): Student[]{
+	mapStudents(response:Response, token: string) {
 		console.log('mapStudents response data: ', response.json().data);
 		console.log('token in mapStudents: ', token)
 		if(response.json().data.studentCount === 0){
 			return [];
 		} else {
-			return response.json().data.list.map(student => this.toStudent(student, token));
+			let list = response.json().data.list.map(student => this.toStudent(student, token));
+			let allStudents = response.json().data.allStudents;
+			let bakalavr = response.json().data.bakalavr;
+			let doktorant = response.json().data.doktorant;
+			let magistr = response.json().data.magistr;
+			let paidStudents = response.json().data.odenisli;
+			let unpaidStudents = response.json().data.odenissiz;
+			let eyani = response.json().data.eyani;
+			let qiyabi = response.json().data.qiyabi;
+			let maleStudents = response.json().data.kisi;
+			let femaleStudents = response.json().data.qadin;
+			return {
+				list: list,
+				allStudents: allStudents,
+				bakalavr: bakalavr,
+				doktorant: doktorant,
+				magistr: magistr,
+				paidStudents: paidStudents,
+				unpaidStudents: unpaidStudents,
+				eyani: eyani,
+				qiyabi: qiyabi,
+				maleStudents: maleStudents,
+				femaleStudents: femaleStudents
+			};
 		}
 	}
-	toStudent(r:any, token:any) {
+	toStudent(r:any, token:any):Student {
 		//iterate thorugh the properties of the object
 		//if null, add empty to the property including the .value or whatever
 		let obj = this.setDefaults(r);

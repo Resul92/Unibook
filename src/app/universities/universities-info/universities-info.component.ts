@@ -46,11 +46,11 @@ export class UniversitiesInfoComponent implements OnInit, DoCheck {
 		this.route.params.forEach((params: Params) => {
 			let id = +params['id'];
 			// getting the university by its id from the server
-			this.universityService.getRealUniversityById(id)
+			this.universityService.getUniversityById(id)
 			.then(university => {
 				this.university = university;
 				console.log('this university: ', university);
-				this.universityService.getRealUniversityStats(id)
+				this.universityService.getUniversityStats(id)
 				.then(response =>{
 					console.log('uni stats: ', response);
 					this.university.specialtyCount = response.specialityCount;
@@ -59,19 +59,19 @@ export class UniversitiesInfoComponent implements OnInit, DoCheck {
 					//this.university.teacherCount = response.teacherCount;
 				});
 				// getting departments / kafedras list
-				this.universityService.getRealDepartmentById(id)
+				this.universityService.getDepartmentById(id)
 				.then(departments => {
 					this.university.departments = departments;
 					console.log('this university departments: ', departments);
 				});
 				// getting specialties list
-				this.universityService.getRealSpecialtyById(id)
+				this.universityService.getSpecialtyById(id)
 				.then(specialties => {
 					this.university.specialties = specialties;
 					console.log('this university specialties: ', specialties);
 				});
 				// getting faculty list
-				this.universityService.getRealFacultyById(id)
+				this.universityService.getFacultyById(id)
 				.then(faculties => {
 					this.university.faculties = faculties;
 					console.log('this university faculties: ', faculties);

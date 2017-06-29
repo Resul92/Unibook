@@ -26,7 +26,7 @@ export class TeacherService {
 
 	//////////// need to build methods that would successfully 
 	/// connectto the real api
-	getRealTeachers(page, subModules?, orgId?): Promise<any> {
+	getTeachers(page, subModules?, orgId?): Promise<any> {
 		if(subModules){ this.subModulesList = subModules};
 		if(orgId) { this.orgId = orgId};
 		return this.userService.getToken().then(token =>{
@@ -37,13 +37,13 @@ export class TeacherService {
 			return this.http.get(this.realTeachersUrl)
 			.toPromise()
 			.then(response => {
-					console.log('getRealTeachers response.json().data', response.json().data);
+					console.log('getTeachers response.json().data', response.json().data);
 					return this.mapTeachers(response, token);
 			})
 			.catch(this.handleError);
 		});
 	}
-	getRealTeacherById(id) {
+	getTeacherById(id) {
 		return this.userService.getToken().then(token =>{
 			this.realTeacherByIdUrl = `http://192.168.1.78:8082/UnibookHsisRest/teachers/${id}?token=${token}`;
 			console.log('realTeacherByIdURL', this.realTeacherByIdUrl);
@@ -56,7 +56,7 @@ export class TeacherService {
             .catch(this.handleError);
 		});
 	}
-	getRealTeachersByUniversityId(id){
+	getTeachersByUniversityId(id){
 		return this.userService.getToken().then(token =>{
 			// getting teachers from the backend
 			this.realTeachersByUniUrl = `http://192.168.1.78:8082/UnibookHsisRest/teachers?token=${token}&orgId=${id}&subModuleId=1000050%2C1000051%2C1000062%2C1000061`;
@@ -69,17 +69,30 @@ export class TeacherService {
 			.catch(this.handleError);
 		});
 	}
-	mapTeachers(response:Response, token: string): Teacher[]{
+	mapTeachers(response:Response, token: string): any{
 		// The response of the API has a results
 		// property with the actual results
 		console.log('mapTeachers response data: ', response.json().data);
 		if(response.json().data.teacherCount === 0){
 			return [];
 		} else {
-			return response.json().data.list.map(teacher => this.toTeacher(teacher, token));
+			let list = response.json().data.list.map(teacher => this.toTeacher(teacher, token));
+			let allEmployees = response.json().data.allEmployee;
+			let mainEmployees = response.json().data.esasHeyet;
+			let men = response.json().data.kisi;
+			let women = response.json().data.qadin;
+			let nonStateEmplyees = response.json().data.statdanKenar;
+			return {
+				list: list,
+				allEmployees: allEmployees,
+				mainEmployees: mainEmployees,
+				maleEmployees: men,
+				femaleEmployees: women,
+				nonStateEmployees: nonStateEmplyees
+			};
 		}
 	}
-	toTeacher(r:any, token: any) {
+	toTeacher(r:any, token: any): Teacher {
 		//iterate thorugh the properties of the object
 		//if null, add empty to the property including the .value or whatever
 		let obj = this.setDefaults(r);

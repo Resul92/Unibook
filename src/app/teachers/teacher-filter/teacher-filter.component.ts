@@ -39,7 +39,7 @@ export class TeacherFilterComponent implements OnInit {
 		//console.log('getting faculties by university id: ', id);
 		this.disabled = true;
 		this.uni_id = id;
-		this.universityService.getRealFacultyById(id).then( faculties => {
+		this.universityService.getFacultyById(id).then( faculties => {
 			this.faculties = faculties.map( faculty => {
 				let res = {
 					label: faculty.name,

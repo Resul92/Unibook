@@ -40,7 +40,7 @@ export class UniversitySearchComponent implements OnInit, OnChanges {
 	}
 
 	getUniversities(): void {
-		this.universityService.getRealUniversities(1)
+		this.universityService.getUniversities(1)
 		.then(universities => {
 			this.universities = universities;
 			this.update.emit(this.universities);

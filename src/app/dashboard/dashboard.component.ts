@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
 		this.userService.getCurrentUser().then(user => { 
 			this.user = user;
 			//console.log('current user in dashboard component: ', this.user)
-			this.universityService.getRealUniversityById(this.user.structure.id)
+			this.universityService.getUniversityById(this.user.structure.id)
 			.then(university => {
 				this.university = university;
 				console.log('this university', this.university);
@@ -97,13 +97,13 @@ export class DashboardComponent implements OnInit {
 			// we are just requesting things with other filters
 			//setting counter to one because we are filtering universities
 			this.universityPageCounter = 1;
-			this.universityService.getRealUniversities(this.universityPageCounter, mods).then(universities => {
+			this.universityService.getUniversities(this.universityPageCounter, mods).then(universities => {
 				this.universities = universities;
 				this.loading = false;
 			});
 		} else {
 			this.universityPageCounter++;
-			this.universityService.getRealUniversities(this.universityPageCounter)
+			this.universityService.getUniversities(this.universityPageCounter)
 			.then(universities => {
 				this.universities = this.universities.concat(universities);
 				this.allUniversities = this.allUniversities.concat(universities);
@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
 		} else if(!counter && !mods) {
 			this.studentPageCounter++;
 		}
-		//if id is present load them from getRealStudentById method instead of getRealStudentsMethod
+		//if id is present load them from getStudentById method instead of getStudentsMethod
 		if (id){
 			this.orgId = id;
 		}
@@ -135,8 +135,9 @@ export class DashboardComponent implements OnInit {
 		// we are just requesting things with other filters
 		// if the request comes from pagination append new students to existing ones
 		console.log('student page counter: ', counter, this.studentPageCounter);
-		this.studentService.getRealStudents(this.studentPageCounter, this.studentModulesList, this.orgId)
-		.then(students => {
+		this.studentService.getStudents(this.studentPageCounter, this.studentModulesList, this.orgId)
+		.then(obj => {
+			let students = obj.list;
 			if(mods || counter || id){
 				this.students = students;
 				this.loading = false;
@@ -163,7 +164,7 @@ export class DashboardComponent implements OnInit {
 		} else if(!counter && !mods) {
 			this.teacherPageCounter++;
 		}
-		//if id is present load them from getRealTeacherById method instead of getRealTeachersMethod
+		//if id is present load them from getTeacherById method instead of getTeachersMethod
 		if (id){
 			this.orgId = id;
 		}
@@ -173,8 +174,9 @@ export class DashboardComponent implements OnInit {
 		// we are just requesting things with other filters
 		// if the request comes from pagination append new students to existing ones
 		console.log('teacher page counter: ', counter, this.teacherPageCounter);
-		this.teacherService.getRealTeachers(this.teacherPageCounter, this.teacherModulesList, this.orgId)
-		.then(teachers => {
+		this.teacherService.getTeachers(this.teacherPageCounter, this.teacherModulesList, this.orgId)
+		.then(obj => {
+			let teachers = obj.list;
 			if(mods || counter || id){
 				this.teachers = teachers;
 				this.loading = false;

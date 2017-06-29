@@ -24,7 +24,7 @@ export class TeacherTedrisComponent {
 	ngOnInit(): void {
 		this.route.params.forEach((params: Params) => {
 			let id = +params['id'];
-			this.teacherService.getRealTeacherById(id)
+			this.teacherService.getTeacherById(id)
 			.then(teacher => this.teacher = teacher);
 		});
 	}
