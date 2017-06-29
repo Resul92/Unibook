@@ -46,6 +46,8 @@ export class DashboardComponent implements OnInit {
 	currentLang;
 	sortTeachersByProperty;
 	sortStudentsByProperty;
+	studentStats;
+	teacherStats;
 
 	constructor(
 		private userService: UserService,
@@ -138,6 +140,7 @@ export class DashboardComponent implements OnInit {
 		this.studentService.getStudents(this.studentPageCounter, this.studentModulesList, this.orgId)
 		.then(obj => {
 			let students = obj.list;
+			this.studentStats = obj;
 			if(mods || counter || id){
 				this.students = students;
 				this.loading = false;
@@ -177,6 +180,7 @@ export class DashboardComponent implements OnInit {
 		this.teacherService.getTeachers(this.teacherPageCounter, this.teacherModulesList, this.orgId)
 		.then(obj => {
 			let teachers = obj.list;
+			this.teacherStats = obj;
 			if(mods || counter || id){
 				this.teachers = teachers;
 				this.loading = false;

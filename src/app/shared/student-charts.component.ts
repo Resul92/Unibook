@@ -11,7 +11,7 @@ declare var Chart:any;
 	template: ''
 })
 export class StudentChartsComponent { 
-	@Input() university: University;
+	@Input() studentStats;
 
 	ngAfterViewInit() {
 		var studentType = document.getElementById("studentTypeChart");
@@ -20,7 +20,7 @@ export class StudentChartsComponent {
 		    data: {
 		        labels: ["Eyani", "Qiyabi"],
 		        datasets: [{
-		            data: [this.university.eyaniStudentCount, this.university.qiyabiStudentCount],
+		            data: [this.studentStats.eyani, this.studentStats.qiyabi],
 		            backgroundColor: [
 		                'rgba(165,183,205,1)',
 		                'rgba(46, 186, 238, 1)'
@@ -57,7 +57,7 @@ export class StudentChartsComponent {
 		    data: {
 		        labels: ["Bakalavr", "Doktorant", "Magistr"],
 		        datasets: [{
-		            data: [this.university.bachelorStudentCount, this.university.doctorsStudentCount, this.university.mastersStudentCount],
+		            data: [this.studentStats.bakalavr, this.studentStats.doktorant, this.studentStats.magistr],
 		            backgroundColor: [
 		                'rgba(165,183,205,1)',
 		                'rgba(46, 186, 238, 1)',
@@ -97,7 +97,7 @@ export class StudentChartsComponent {
 		    data: {
 		        labels: ["Kishi", "Qadin"],
 		        datasets: [{
-		            data: [this.university.kishiStudentCount, this.university.qadinStudentCount],
+		            data: [this.studentStats.maleStudents, this.studentStats.femaleStudents],
 		            backgroundColor: [
 		                'rgba(124,255,209,1)',
 		                'rgba(255, 153, 153, 1)'

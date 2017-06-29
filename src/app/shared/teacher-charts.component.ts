@@ -11,16 +11,17 @@ declare var Chart:any;
 	template: ''
 })
 export class TeacherChartsComponent { 
-	@Input() university: University;
+	@Input() teacherStats;
 
 	ngAfterViewInit() {
+		console.log('teacher stats', this.teacherStats);
 		var teacherType = document.getElementById("teacherTypeChart");
 		var teacherTypeChart = new Chart(teacherType, {
 		    type: 'pie',
 		    data: {
-		        labels: ["Eyani", "Qiyabi"],
+		        labels: ["Esas Heyet", "Statdan Kenar"],
 		        datasets: [{
-		            data: [this.university.eyaniTeacherCount, this.university.qiyabiTeacherCount],
+		            data: [this.teacherStats.mainEmployees, this.teacherStats.nonStateEmployees],
 		            backgroundColor: [
 		                'rgba(165,183,205,1)',
 		                'rgba(46, 186, 238, 1)'
@@ -57,7 +58,7 @@ export class TeacherChartsComponent {
 		    data: {
 		        labels: ["Bakalavr", "Doktorant", "Magistr"],
 		        datasets: [{
-		            data: [this.university.bachelorTeacherCount, this.university.doctorsTeacherCount, this.university.mastersTeacherCount],
+		            data: [this.teacherStats.bakalavr, this.teacherStats.doktorant, this.teacherStats.magistr],
 		            backgroundColor: [
 		                'rgba(165,183,205,1)',
 		                'rgba(46, 186, 238, 1)',
@@ -97,7 +98,7 @@ export class TeacherChartsComponent {
 		    data: {
 		        labels: ["Kishi", "Qadin"],
 		        datasets: [{
-		            data: [this.university.kishiTeacherCount, this.university.qadinTeacherCount],
+		            data: [this.teacherStats.maleEmployees, this.teacherStats.femaleEmployees],
 		            backgroundColor: [
 		                'rgba(124,255,209,1)',
 		                'rgba(255, 153, 153, 1)'

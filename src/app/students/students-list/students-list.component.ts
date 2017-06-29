@@ -22,6 +22,7 @@ export class StudentsListComponent implements OnInit,OnChanges {
 	@Input() universities: University[];
 	@Input() currentLang;
 	@Input() sortByProperty;
+	@Input() studentStats;
 
 	constructor(
 		private studentService: StudentService) {
