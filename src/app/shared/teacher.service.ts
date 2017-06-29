@@ -76,7 +76,12 @@ export class TeacherService {
 		if(response.json().data.teacherCount === 0){
 			return [];
 		} else {
-			let list = response.json().data.list.map(teacher => this.toTeacher(teacher, token));
+			let list;
+			if(response.json().data.list){
+				list = response.json().data.list.map(teacher => this.toTeacher(teacher, token));
+			} else {
+				list = response.json().data.employeeList.map(teacher => this.toTeacher(teacher, token));
+			}
 			let allEmployees = response.json().data.allEmployee;
 			let mainEmployees = response.json().data.esasHeyet;
 			let men = response.json().data.kisi;
@@ -199,7 +204,7 @@ export class TeacherService {
 		return this.http
 			.get(searchUrl)
 			.map((r: Response) => {
-				this.mapTeachers(r, this.authToken);
+				this.mapTeachers(r.json(), this.authToken);
 				console.log('response: ', r);
 		});
 	}

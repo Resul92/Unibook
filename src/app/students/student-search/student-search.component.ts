@@ -16,7 +16,7 @@ export class StudentSearchComponent implements OnInit {
 	@Input() students: Student[];
 	@Output() update = new EventEmitter();
  	@Input() allStudents: Student[];
-	studentsObservable: Observable<Student[]>;
+	studentsObservable: Observable<any>;
 	private searchTerms = new Subject<string>();
 	anyErrors : Error;
 	@Output() loading = new EventEmitter();
@@ -54,7 +54,9 @@ export class StudentSearchComponent implements OnInit {
 			});
 		let subscription = this.studentsObservable.subscribe(
 			value => {
-				this.update.emit(value);
+				console.log('search data: ', value.list);
+				let students: Student[] = value.list;
+				this.update.emit(students);
 			},
 			error => this.anyErrors = error
 		);

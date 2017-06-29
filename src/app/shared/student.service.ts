@@ -83,7 +83,12 @@ export class StudentService {
 		if(response.json().data.studentCount === 0){
 			return [];
 		} else {
-			let list = response.json().data.list.map(student => this.toStudent(student, token));
+			let list;
+			if(response.json().data.list){
+				list = response.json().data.list.map(student => this.toStudent(student, token));
+			} else {
+				list = response.json().data.studentList.map(student => this.toStudent(student, token));
+			}
 			let allStudents = response.json().data.allStudents;
 			let bakalavr = response.json().data.bakalavr;
 			let doktorant = response.json().data.doktorant;
@@ -210,7 +215,7 @@ export class StudentService {
 			let property = valueProperties[i];
 		// if the obj.propert in array of the ones we need value fo
 			if (obj[property] === null && valueProperties.indexOf(property) > -1) {
-				console.log(property, "equal null");
+				//console.log(property, "equal null");
 				obj[property] = {value: {az : null}};
 			}
 		}
@@ -225,7 +230,7 @@ export class StudentService {
 		let searchUrl = `http://192.168.1.78:8082/UnibookHsisRest/students?token=${this.authToken}&keyword=${term}&genderId=1000035&orgId=&uniName=&uniOrg=&statusId=&status=&actionTypeId=&genderName=&actionName=&statusName=&subModuleId=1000048%2C1000047%2C1000058%2C1000059%2C1000057%2C1000046`;
 		console.log('getting students for', term," from ", searchUrl);
 		return this.http.get(searchUrl).map((r: Response) => {
-			console.log(r);
+			console.log(r.json());
 			return this.mapStudents(r, this.authToken);
 		});
 	}

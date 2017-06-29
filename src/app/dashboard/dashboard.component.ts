@@ -225,6 +225,7 @@ export class DashboardComponent implements OnInit {
 		this.loading = false;
 	}
 	searchStudents(results: Student[]): void {
+		//console.log('students after search: ', results);
 		this.students = results;
 		this.loading = false;
 	}

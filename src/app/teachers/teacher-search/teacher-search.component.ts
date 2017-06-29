@@ -13,7 +13,7 @@ import { Teacher } from '../../shared/teacher.model';
 })
 
 export class TeacherSearchComponent implements OnInit {
-	teachersObservable: Observable<Teacher[]>;
+	teachersObservable: Observable<any>;
 	@Input() teachers: Teacher[];
 	private searchTerms = new Subject<string>();
 	@Output() update = new EventEmitter();
@@ -54,7 +54,8 @@ export class TeacherSearchComponent implements OnInit {
 			});
 		let subscription = this.teachersObservable.subscribe(
 			value => {
-				this.update.emit(value);
+				let teachers: Teacher[] = value.list;
+				this.update.emit(teachers);
 			},
 			error => this.anyErrors = error
 			);
