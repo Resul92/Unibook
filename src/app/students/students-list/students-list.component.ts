@@ -53,7 +53,9 @@ export class StudentsListComponent implements OnInit,OnChanges {
 		});
 	}
 	search(results: Student[]): void {
-		this.update.emit(results);
+		this.students = results;
+		this.loading = false;
+		console.log('students after search: ', this.students, this.loading);
 	}
 	onSortChange(value) {
 		//console.log('sort change value:', value, "the teachers at the moment: ", this.teachers);
@@ -64,8 +66,5 @@ export class StudentsListComponent implements OnInit,OnChanges {
 	loadMoreStuds(){
 		this.loading = true;
 		this.loadMoreStudents.emit();
-	}
-	setLoading(){
-		this.loading = true;
 	}
 }

@@ -220,15 +220,6 @@ export class DashboardComponent implements OnInit {
 	searchUniversities(results: University[]): void {
 		this.universities = results;
 	}
-	searchTeachers(results: Teacher[]): void {
-		this.teachers = results;
-		this.loading = false;
-	}
-	searchStudents(results: Student[]): void {
-		//console.log('students after search: ', results);
-		this.students = results;
-		this.loading = false;
-	}
 	gotoInfo(university: University): void { 
 		let link = ['/info', university.id];
 		this.router.navigate(link);

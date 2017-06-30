@@ -52,7 +52,9 @@ export class TeachersListComponent implements OnInit, OnChanges {
 		});
 	}
 	search(results: Teacher[]): void {
-		this.update.emit(results);
+		this.teachers = results;
+		this.loading = false;
+		console.log('students after search: ', this.teachers, this.loading);
 	}
 	onSortChange(value) {
 		//console.log('sort change value:', value, "the teachers at the moment: ", this.teachers);
