@@ -30,6 +30,7 @@
 				<student-search 
 				[allStudents]='allStudents' 
 				(update)="search($event)"
+				(load)="load()"
 				[students]="students"></student-search> -
 				<student-sort
 					(select)="onSortChange($event)"

@@ -52,6 +52,9 @@ export class StudentsListComponent implements OnInit,OnChanges {
 			});
 		});
 	}
+	load(){
+		this.loading = true;
+	}
 	search(results: Student[]): void {
 		this.students = results;
 		this.loading = false;

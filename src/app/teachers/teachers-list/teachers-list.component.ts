@@ -62,7 +62,7 @@ export class TeachersListComponent implements OnInit, OnChanges {
     	//this.sortByProperty = value;
     	console.log('sortByProperty', this.sortByProperty);
 	}
-	setLoading(){
+	load(){
 		this.loading = true;
 	}
 	loadMoreTeachs(){

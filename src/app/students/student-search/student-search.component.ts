@@ -19,6 +19,7 @@ export class StudentSearchComponent implements OnInit {
 	studentsObservable: Observable<any>;
 	private searchTerms = new Subject<string>();
 	anyErrors : Error;
+	@Output() load = new EventEmitter();
 
 	constructor(
 		private studentService: StudentService,
@@ -28,8 +29,10 @@ export class StudentSearchComponent implements OnInit {
 	search(term: string): void {
 		// if the term is empty, get the default list of students from the database
 		if (term == ''){
+			this.load.emit();
 			this.update.emit(this.allStudents);
 		} else {
+			this.load.emit();
 			this.searchTerms.next(term);
 		}
 	}
