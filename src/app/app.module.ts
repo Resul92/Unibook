@@ -108,6 +108,8 @@ import { LoaderComponent } from './shared/loader.component'
 import { FilterByUniDirective } from './shared/filter-by-uni.directive';
 import { SelectModule } from 'ng-select';
 
+import { LangButtonDirective } from './shared/lang-button.directive';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http);
@@ -211,7 +213,8 @@ export function HttpLoaderFactory(http: Http) {
 		SpinnerComponent,
 		SearchPipe,
 		TranslatePipe,
-		SortPipe
+		SortPipe,
+		LangButtonDirective
 	],
 	providers: [
 		AuthGuard,

@@ -48,19 +48,9 @@ const appRoutes: Routes = [
 		canActivate: [AuthGuard]
 	},
 	{
-		path: '#',
-		redirectTo: '/dashboard',
-		pathMatch: 'full'
-	},
-	{
-		path: '',
-		redirectTo: '/dashboard',
-		pathMatch: 'full'
-	},
-	{
 		path: 'AdministrationSystemView',
 		component: AuthComponent
 	}
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, {useHash: true});
